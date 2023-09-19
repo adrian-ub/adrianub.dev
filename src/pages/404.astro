@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+
+import BaseHead from "@/components/common/BaseHead.astro";
+import Footer from "@/components/footer/Footer.astro";
+import Header from "@/components/header/Header.astro";
+import Button from "@/components/ui/Button.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/consts";
+import NotFound from "@/assets/404.png";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="flex-1">
+        <div
+          class="container mx-auto flex flex-col px-2 py-20 md:px-4 2xl:px-10"
+        >
+          <div
+            class="flex w-full flex-row flex-wrap items-center md:flex-nowrap"
+          >
+            <div class="relative mb-5 h-64 w-full md:mb-0 md:h-108 md:w-1/2">
+              <span
+                style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:absolute;top:0;left:0;bottom:0;right:0"
+              >
+                <Image
+                  src={NotFound}
+                  alt="404"
+                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: contain; object-position: center center;"
+                  format="avif"
+                />
+              </span>
+            </div>
+            <div
+              class="flex w-full flex-col items-center text-center md:w-1/2 md:items-start md:text-left"
+            >
+              <h2 class="mb-8 text-7xl font-extrabold text-slate-400">404</h2>
+              <p class="mb-2 text-3xl font-bold text-slate-100">¡Ups!</p>
+              <p class="mb-3 text-3xl font-bold text-slate-100">
+                Página no encontrada
+              </p>
+              <p class="mb-8 text-xl text-slate-400">
+                ¡Esta página no existe o fue eliminada!<br /> Le sugerimos que
+                regrese al inicio.
+              </p>
+              <Button variant="outline">
+                <a href="/">Llevame al Inicio</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

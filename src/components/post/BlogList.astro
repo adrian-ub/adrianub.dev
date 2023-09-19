@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import Separator from "@/components/ui/Separator.astro";
+import PostPreviewCard from "./PostPreviewCard.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts = [] } = Astro.props;
+---
+
+<div class="blog-articles-area mx-auto py-10 bg-primary-foreground">
+  <div
+    class="blog-articles-container container mx-auto grid grid-cols-1 gap-10 px-4 py-4 md:grid-cols-2 lg:grid-cols-3 xl:py-10 xl:px-10 2xl:px-24 2xl:py-5"
+  >
+    {posts.map((post) => <PostPreviewCard post={post} />)}
+    {
+      posts.length >= 9 && (
+        <div class="col-span-1 flex flex-row justify-center py-10 md:col-span-2 lg:col-span-3">
+          <button
+            class="rounded-full border border-transparent font-medium disabled:opacity-50 hover:bg-slate-700 flex flex-row items-center focus:outline-none w-full justify-center px-4 py-2 text-lg text-blue-500"
+            type="button"
+          >
+            <>
+              <span>Load more</span>
+              <svg class="ml-3 h-5 w-5 fill-current" viewBox="0 0 448 512">
+                <path d="M443.5 162.6l-7.1-7.1c-4.7-4.7-12.3-4.7-17 0L224 351 28.5 155.5c-4.7-4.7-12.3-4.7-17 0l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l211 211.1c4.7 4.7 12.3 4.7 17 0l211-211.1c4.8-4.7 4.8-12.3.1-17z" />
+              </svg>
+            </>
+          </button>
+        </div>
+      )
+    }
+  </div>
+</div>
+<Separator />

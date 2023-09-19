@@ -1,0 +1,34 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a">;
+
+const { href, class: className, ...props } = Astro.props;
+
+const { pathname } = Astro.url;
+const isActive = href === pathname || href === pathname.replace(/\/$/, "");
+---
+
+<a
+  href={href}
+  class:list={[
+    className,
+    "flex items-center justify-center px-2 capitalize flex-col",
+  ]}
+  {...props}
+>
+  <span
+    class="blog-nav-text mb-2 block rounded-lg px-2 py-1 transition-colors duration-150 text-primary hover:bg-secondary font-semibold"
+  >
+    <slot />
+  </span>
+  <div
+    class="border-b-2 w-full px-4"
+    transition:name={isActive ? "active-nav" : ""}
+    class:list={[
+      { "border-secondary-foreground": isActive },
+      { "border-transparent": !isActive },
+    ]}
+  >
+  </div>
+</a>

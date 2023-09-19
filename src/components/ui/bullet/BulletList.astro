@@ -1,0 +1,13 @@
+---
+interface Props {
+  columns?: number;
+}
+
+const { columns } = Astro.props;
+---
+
+<ul
+  class={`mb-4 mt-12 grid grid-cols-1 gap-x-4 gap-y-2 pl-0 md:grid-cols-${columns}`}
+>
+  <slot />
+</ul>

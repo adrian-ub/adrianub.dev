@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import BaseHead from "@/components/common/BaseHead.astro";
+import Footer from "@/components/footer/Footer.astro";
+import Header from "@/components/header/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/consts";
+
+type Props = CollectionEntry<"pages">;
+
+const {
+  data: { title = SITE_TITLE, description = SITE_DESCRIPTION, heroImage },
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <BaseHead title={title} description={description} image={heroImage?.src} />
+  </head>
+  <body>
+    <Header />
+    <div class="blog-page-area mx-auto min-h-screen px-4 py-8 md:w-2/3 md:p-10">
+      <div class="blog-page-card pb-32">
+        <div
+          class="blog-page-content prose prose-lg mx-auto break-words tracking-tight prose-invert xl:prose-xl"
+        >
+          <slot />
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </body>
+</html>

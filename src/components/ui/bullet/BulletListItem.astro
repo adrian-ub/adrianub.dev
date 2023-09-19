@@ -1,0 +1,26 @@
+---
+import { Icon } from "astro-icon";
+
+interface Props {
+  type: "check" | "cross";
+}
+
+const { type } = Astro.props;
+
+const className = {
+  check: "text-green-500",
+  cross: "text-red-500",
+}[type];
+
+const icon = {
+  check: "check",
+  cross: "cross",
+}[type];
+---
+
+<li class="flex max-w-2xl items-start space-x-4">
+  <span class:list={[className]} style={{ flex: "0 0 1.5rem" }}>
+    <Icon class="w-6 h-6" name={icon} />
+  </span>
+  <span class="leading-normal prose-p:my-0"><slot /></span>
+</li>

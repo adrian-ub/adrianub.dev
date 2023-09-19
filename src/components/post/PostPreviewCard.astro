@@ -1,0 +1,77 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+import noContent from "@/assets/no-content.png";
+
+interface Props {
+  showSummary?: boolean;
+  class?: string;
+  post: CollectionEntry<"blog">;
+  imageLoading?: "lazy" | "eager";
+}
+
+const {
+  post,
+  showSummary = false,
+  class: className = "",
+  imageLoading,
+} = Astro.props;
+---
+
+<div class:list={[className, "col-span-1"]}>
+  <a
+    aria-label={post.data.title}
+    class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 border-slate-800 bg-slate-800"
+    href={post.slug}
+  >
+    <span
+      style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative"
+    >
+      <span
+        style="box-sizing:border-box;display:block;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;padding-top:52.5%"
+      ></span>
+      {
+        post.data.heroImage && (
+          <>
+            <Image
+              src={post.data.heroImage}
+              alt={post.data.title}
+              class="blog-article-card-cover block w-full"
+              style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              loading={imageLoading}
+              transition:name={`post-hero-image-${post.slug}`}
+              format="avif"
+            />
+          </>
+        )
+      }
+      {
+        !post.data.heroImage && (
+          <>
+            <Image
+              src={noContent}
+              alt={post.data.title}
+              class="blog-article-card-cover block w-full"
+              style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+          </>
+        )
+      }
+    </span>
+  </a>
+  <h1
+    class="blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75 text-slate-100"
+  >
+    <a href={post.slug}>
+      {post.data.title}
+    </a>
+  </h1>
+  {
+    showSummary && (
+      <p class="blog-article-card-brief mx-4 mb-3 break-words text-lg leading-snug hover:opacity-75 text-slate-400">
+        <a href={post.slug}>{post.data.description}</a>
+      </p>
+    )
+  }
+</div>

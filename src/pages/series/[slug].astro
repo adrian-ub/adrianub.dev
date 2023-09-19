@@ -1,0 +1,78 @@
+---
+import { type CollectionEntry } from "astro:content";
+
+import { staticPaths } from "@/lib/series";
+import { SITE_DESCRIPTION } from "@/lib/consts";
+import BaseHead from "@/components/common/BaseHead.astro";
+import Header from "@/components/header/Header.astro";
+import Footer from "@/components/footer/Footer.astro";
+import PostCard from "@/components/post/PostCard.astro";
+
+type Props = CollectionEntry<"series"> & {
+  posts: CollectionEntry<"blog">[];
+};
+
+export const getStaticPaths = staticPaths;
+
+const {
+  data: { title, heroImage },
+  render,
+  posts,
+} = Astro.props;
+const { Content } = await render();
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <BaseHead title={title} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="blog-content-area feed-width mx-auto md:w-2/3 mt-12">
+        <div class="blog-series-card mt-12 mb-16 px-4 lg:px-16">
+          <div class="flex flex-col-reverse flex-wrap items-start md:flex-row">
+            <div class="pr-8 w-full" class:list={[heroImage ? "md:w-1/2" : ""]}>
+              <span
+                class="blog-series-label mb-2 font-semibold uppercase tracking-tight text-slate-600 dark:text-slate-400"
+              >
+                Series
+              </span>
+              <h1
+                class="blog-series-title mb-2 font-heading text-3xl font-bold text-slate-900 dark:text-white md:text-4xl xl:text-5xl"
+              >
+                {title}
+              </h1>
+              <div class="blog-series-desc prose prose-lg mb-5 prose-invert">
+                <Content />
+              </div>
+            </div>
+            {
+              heroImage && (
+                <div class="blog-series-cover-container mb-5 w-full md:mb-0 md:w-1/2">
+                  <div
+                    class="blog-series-cover h-32 w-full rounded-lg border bg-cover bg-center bg-no-repeat border-slate-800"
+                    style={`background-image:url('${heroImage.src}');width:100%;padding-top:52.5%`}
+                  />
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        <div class="my-10 flex flex-col items-center justify-center">
+          <hr class="w-full border-t border-slate-800" />
+          <p class="-mt-5 p-2 font-medium text-slate-400 bg-primary-foreground">
+            Artículos con esta etiqueta
+          </p>
+        </div>
+
+        <div class="blog-posts-wrapper mt-10">
+          {posts.map((post) => <PostCard {...post} />)}
+        </div>
+      </section>
+      <Footer />
+    </main>
+  </body>
+</html>

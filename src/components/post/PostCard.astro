@@ -1,0 +1,88 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+
+import FormattedDate from "@/components/format/FormattedDate.astro";
+
+type Props = CollectionEntry<"blog">;
+
+const { data, slug, render } = Astro.props;
+const {
+  remarkPluginFrontmatter: { minutesRead },
+} = await render();
+---
+
+<div class="blog-post-card mb-16 px-4 lg:px-16">
+  <section class="blog-post-card-wrapper flex flex-wrap items-start flex-row">
+    <div class="lg:w-3/5">
+      <h1
+        class="blog-post-card-title mb-3 break-words font-heading text-2xl font-bold leading-tight text-white lg:text-3xl"
+      >
+        <a aria-label={data.title} href={`/${slug}`}>
+          {data.title}
+        </a>
+      </h1>
+      <div
+        class="blog-post-card-meta mb-3 flex flex-row flex-wrap items-center font-heading text-sm font-medium text-slate-400"
+      >
+        <a
+          aria-label={data.title}
+          class="blog-post-card-time mr-4"
+          href={`/${slug}`}
+        >
+          <FormattedDate date={data.pubDate} />
+        </a>
+        <span class="mr-4 flex flex-row items-center">
+          <Icon class="mr-1 h-4 w-4 fill-current" name="bi:book" />
+          <span>{minutesRead}</span>
+        </span>
+      </div>
+      <p
+        class="blog-post-card-brief block w-full break-words text-lg leading-snug text-slate-400"
+      >
+        <a aria-label={data.title} href={`/${slug}`}>
+          {data.description}
+        </a>
+      </p>
+    </div>
+    <div class="blog-post-card-cover mt-6 w-full lg:mt-0 lg:w-2/5 lg:pl-8">
+      <a
+        class="block overflow-hidden rounded-lg border border-slate-800"
+        aria-label={data.title}
+        href={`/${slug}`}
+      >
+        <span
+          style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative"
+        >
+          <span
+            style="box-sizing:border-box;display:block;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;padding-top:52.5%"
+          ></span>
+          <Image
+            alt={data.title}
+            src={data.heroImage!}
+            class="post-cover"
+            style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            transition:name={`post-hero-image-${slug}`}
+          />
+          <noscript>
+            <Image
+              alt={data.title}
+              data-nimg="responsive"
+              style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%"
+              class="post-cover"
+              src={data.heroImage!}
+              transition:name={`post-hero-image-${slug}`}
+            />
+          </noscript>
+        </span>
+        <Image
+          alt=""
+          class="hidden"
+          src={data.heroImage!}
+          transition:name={`post-hero-image-${slug}`}
+        />
+      </a>
+    </div>
+  </section>
+</div>

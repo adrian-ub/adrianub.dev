@@ -1,0 +1,160 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getEntries } from "astro:content";
+import { Icon } from "astro-icon";
+
+import BaseHead from "@/components/common/BaseHead.astro";
+import Header from "@/components/header/Header.astro";
+import FormattedDate from "@/components/format/FormattedDate.astro";
+import Comments from "@/components/post/Comments.astro";
+import Tags from "@/components/post/Tags.astro";
+import TableOfContents from "@/components/post/TableOfContents.astro";
+import { Image } from "astro:assets";
+
+type Props = CollectionEntry<"blog">;
+
+const {
+  data: {
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    heroImage,
+    categories: categoriesPosts = [],
+    tableOfContents,
+  },
+  slug,
+  render,
+} = Astro.props;
+
+const {
+  headings,
+  remarkPluginFrontmatter: { minutesRead },
+} = await render();
+
+const categories: CollectionEntry<"tags">[] = await getEntries(categoriesPosts);
+---
+
+<html lang="es" class="scroll-smooth">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <Header showBackButton={true} showMenuButton={true} hideLinks={true} />
+    <div class="blog-post-area relative z-40">
+      <main class="blog-post-detail-card pb-24">
+        <article>
+          <div
+            class="blog-article-page container relative mx-auto grid grid-cols-8"
+          >
+            <div class="col-span-full lg:col-span-6 lg:col-start-2">
+              {
+                heroImage && (
+                  <div class="relative">
+                    <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                      <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 52.5% 0px 0px;" />
+                      <Image
+                        alt={title}
+                        src={heroImage}
+                        class="mb-0 block w-full"
+                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                        transition:name={`post-hero-image-${slug}`}
+                        format="avif"
+                      />
+                      <noscript />
+                    </span>
+                  </div>
+                )
+              }
+
+              <div
+                class="col-span-full lg:col-span-6 lg:col-start-2 items-center text-center"
+              >
+                <div
+                  class="mt-6 break-words px-4 text-center font-heading text-3xl font-extrabold md:mt-10 md:px-5 md:text-4xl lg:px-8 xl:px-20 xl:text-5xl mb-5"
+                >
+                  <h1
+                    class="leading-snug"
+                    data-query="post-title"
+                    transition:name={`post-title-${slug}`}
+                  >
+                    {title}
+                  </h1>
+                </div>
+
+                <div
+                  class="mb-8 px-4 text-center md:mb-14 md:px-5 lg:px-8 xl:px-20"
+                >
+                  <h2
+                    class="text-2xl leading-snug text-muted-foreground md:text-3xl xl:text-3xl"
+                    transition:name={`post-description-${slug}`}
+                  >
+                    {description}
+                  </h2>
+                </div>
+
+                <div
+                  class="relative z-20 mb-8 flex flex-row flex-wrap items-center justify-center px-4 md:-mt-7 md:mb-14 md:text-lg last:md:mb-10"
+                >
+                  <div
+                    class="mb-5 flex w-full flex-row items-center justify-center md:mb-0 md:w-auto md:justify-start space-x-4"
+                  >
+                    <div class="inline-flex">
+                      <span class="rounded-2xl py-1.5 text-muted-foreground">
+                        <FormattedDate date={pubDate} />
+                      </span>
+                    </div>
+                    {
+                      updatedDate && (
+                        <div class="inline-flex">
+                          Ultima actualización en
+                          <span class="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">
+                            <FormattedDate date={updatedDate} />
+                          </span>
+                        </div>
+                      )
+                    }
+                  </div>
+
+                  <div
+                    class="mb-5 flex w-full flex-row items-center justify-center md:mb-0 md:w-auto md:justify-start"
+                  >
+                    <span class="mx-3 block font-bold text-muted-foreground">
+                      ·
+                    </span>
+                    <p class="flex flex-row items-center text-muted-foreground">
+                      <Icon class="mr-2 h-5 w-5 opacity-75" name="bi:book" />
+                      <span>{minutesRead}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="blog-content-wrapper article-main-wrapper container relative z-30 mx-auto grid grid-flow-row grid-cols-8 xl:gap-6 2xl:grid-cols-10"
+          >
+            <section
+              class="blog-content-main z-20 col-span-8 mb-10 px-4 md:z-10 lg:col-span-6 lg:col-start-2 lg:px-0 xl:col-span-6 xl:col-start-2 2xl:col-span-6 2xl:col-start-3"
+            >
+              <div class="relative">
+                {tableOfContents && <TableOfContents headings={headings} />}
+                <div class="relative mb-10 pb-14">
+                  <div
+                    class="prose prose-lg mx-auto mb-10 min-h-30 break-words prose-invert xl:prose-xl"
+                  >
+                    <slot />
+                  </div>
+                  <Tags categories={categories} />
+                </div>
+              </div>
+              <Comments />
+            </section>
+          </div>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

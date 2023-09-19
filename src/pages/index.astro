@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import BaseHead from "@/components/common/BaseHead.astro";
+import Header from "@/components/header/Header.astro";
+import Footer from "@/components/footer/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/lib/consts";
+import { posts } from "@/lib/post";
+import FeaturedPosts from "@/components/post/FeaturedPosts.astro";
+import BlogList from "@/components/post/BlogList.astro";
+import BlogAuthorContent from "@/components/author/BlogAuthorContent.astro";
+
+const featuredPost = posts.filter((post) => !!post.data.featured).splice(0, 3);
+
+const otherPosts = posts.reduce((acc: CollectionEntry<"blog">[], curr) => {
+  if (!featuredPost.includes(curr)) {
+    acc.push(curr);
+  }
+  return acc;
+}, []);
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <FeaturedPosts posts={featuredPost} />
+      <BlogAuthorContent />
+      <BlogList posts={otherPosts} />
+    </main>
+    <Footer />
+  </body>
+</html>

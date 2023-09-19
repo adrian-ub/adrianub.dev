@@ -1,0 +1,30 @@
+<div class="xl:-mx-40">
+  <div
+    class="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900 shadow-lg shadow-gray-900 mb-8"
+  >
+    <div data-orientation="horizontal">
+      <div
+        role="tablist"
+        aria-orientation="horizontal"
+        dir="ltr"
+        aria-label="Select file to view"
+        class="flex flex-nowrap overflow-x-auto"
+        tabindex="0"
+        data-orientation="horizontal"
+        style="outline: none;"
+      >
+        <div
+          class="flex h-10 items-center space-x-1.5 border-r border-b px-4 border-gray-900"
+        >
+          <span class="h-3 w-3 rounded-full bg-red-500"></span>
+          <span class="h-3 w-3 rounded-full bg-amber-500"></span>
+          <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        </div>
+        <div class="grow border-b border-gray-900"></div>
+      </div>
+      <div class="max-h-[600px] overflow-y-auto">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

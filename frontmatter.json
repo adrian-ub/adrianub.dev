@@ -1,0 +1,150 @@
+{
+  "$schema": "https://beta.frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.experimental": true,
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.dashboard.openOnStart": true,
+  "frontMatter.site.baseURL": "https://adrianub.dev",
+  "frontMatter.website.host": "https://adrianub.dev",
+  "frontMatter.git.enabled": true,
+  "frontMatter.git.submodule.push": true,
+  "frontMatter.git.submodule.branch": "main",
+  "frontMatter.git.submodule.folder": ".frontmatter",
+  "frontMatter.dashboard.content.pagination": true,
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "blog",
+      "path": "[[workspace]]/.frontmatter/content/blog",
+      "contentTypes": ["blog"]
+    },
+    {
+      "title": "pages",
+      "path": "[[workspace]]/.frontmatter/content/pages",
+      "contentTypes": ["page"]
+    },
+    {
+      "title": "tags",
+      "path": "[[workspace]]/.frontmatter/content/tags",
+      "contentTypes": ["tag"],
+      "previewPath": "/tag/"
+    },
+    {
+      "title": "series",
+      "path": "[[workspace]]/.frontmatter/content/series",
+      "contentTypes": ["series"],
+      "previewPath": "/series/"
+    }
+  ],
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "tag",
+      "fileType": "mdx",
+      "pageBundle": true,
+      "previewPath": "'tag'",
+      "filePrefix": null,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "series",
+      "fileType": "mdx",
+      "pageBundle": true,
+      "previewPath": "'series'",
+      "filePrefix": null,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Content preview",
+          "name": "heroImage",
+          "type": "image",
+          "isPreviewImage": true
+        }
+      ]
+    },
+    {
+      "name": "blog",
+      "fileType": "mdx",
+      "pageBundle": true,
+      "previewPath": "",
+      "filePrefix": null,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string",
+          "single": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "pubDate",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
+        },
+        {
+          "title": "Content preview",
+          "name": "heroImage",
+          "type": "image",
+          "isPreviewImage": true
+        },
+        {
+          "title": "Featured",
+          "name": "featured",
+          "type": "boolean"
+        },
+        {
+          "title": "Author",
+          "name": "author",
+          "type": "string",
+          "single": true
+        },
+        {
+          "title": "Categories",
+          "name": "categories",
+          "type": "contentRelationship",
+          "contentTypeName": "tag",
+          "contentTypeValue": "slug",
+          "multiple": true
+        },
+        {
+          "title": "Serie",
+          "name": "serie",
+          "type": "contentRelationship",
+          "contentTypeName": "series",
+          "contentTypeValue": "slug",
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "name": "page",
+      "fileType": "mdx",
+      "pageBundle": true,
+      "previewPath": "",
+      "filePrefix": null,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "frontMatter.taxonomy.customTaxonomy": []
+}

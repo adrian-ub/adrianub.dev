@@ -1,0 +1,134 @@
+---
+import { Icon } from "astro-icon";
+
+import HeaderLink from "./HeaderLink.astro";
+import { GITHUB_URL, SITE_TITLE, X_URL } from "@/lib/consts";
+import Button from "@/components/ui/Button.astro";
+import BackToHomeButton from "./BackToHomeButton.astro";
+import { ub } from "@/utils/ub";
+
+interface Props {
+  showBackButton?: boolean;
+  showMenuButton?: boolean;
+  hideLinks?: boolean;
+  class?: string;
+}
+
+const {
+  showBackButton = false,
+  showMenuButton = false,
+  hideLinks = false,
+  class: className,
+} = Astro.props;
+
+// import { MenuToggle } from "./MenuToggle";
+---
+
+<header
+  class={ub(
+    "z-50 w-full border-b relative bg-background bg-opacity-70 border-white/10",
+    className
+  )}
+>
+  <div class="container mx-auto px-2 md:px-4 2xl:px-10">
+    <div
+      class="relative z-40 flex flex-row items-center justify-between pt-8 pb-2 md:mb-4"
+    >
+      <div class="flex flex-row items-center py-1">
+        {showBackButton && <BackToHomeButton />}
+        <div class=`${!showMenuButton ? 'md:hidden' : ''}`>
+          <!-- <MenuToggle client:load /> -->
+        </div>
+
+        <div class="hidden md:block">
+          <h1
+            class="text-xl md:text-2xl text-left break-words font-heading font-semibold leading-snug md:font-bold"
+          >
+            <a
+              href="/"
+              aria-label="Adrián UB"
+              class="flex flex-row items-center"
+              transition:name={`blog-name`}
+            >
+              {SITE_TITLE}
+            </a>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex flex-row items-center"></div>
+    </div>
+
+    <div
+      class="mx-auto my-5 flex w-2/3 flex-row items-center justify-center md:hidden"
+    >
+      <h1
+        class="blog-title text-2xl text-center break-words font-heading font-semibold leading-snug md:font-bold text-white"
+      >
+        <a href="/" aria-label="Adrián UB" class="flex flex-row items-center">
+          {SITE_TITLE}
+        </a>
+      </h1>
+    </div>
+
+    <div>
+      <div
+        class={"mb-2 flex w-full flex-col-reverse items-center md:mx-0 md:flex-row md:justify-between" +
+          (hideLinks ? " md:hidden" : "")}
+      >
+        <div
+          class="blog-social-media-section flex flex-row flex-wrap gap-y-2 justify-center text-slate-300"
+        >
+          <a
+            href={GITHUB_URL}
+            aria-label="Find me on Github"
+            target="_blank"
+            rel="me noopener"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              name="github"
+              aria-label="github"
+            >
+              <Icon name="simple-icons:github" class="h-5 w-5" />
+            </Button>
+          </a>
+          <a
+            href={X_URL}
+            aria-label="Find me on X"
+            target="_blank"
+            rel="me noopener"
+          >
+            <Button variant="ghost" size="icon" name="x" aria-label="x">
+              <Icon name="x" class="h-5 w-5" />
+            </Button>
+          </a>
+          <a
+            href="/rss.xml"
+            aria-label="Blog's XML Feed"
+            target="_blank"
+            rel="me noopener"
+          >
+            <Button variant="ghost" size="icon" name="rss" aria-label="rss">
+              <Icon name="simple-icons:rss" class="h-5 w-5" />
+            </Button>
+          </a>
+        </div>
+      </div>
+
+      {
+        !hideLinks && (
+          <div class="relative mt-8 hidden flex-row items-center justify-center overflow-hidden text-base md:flex">
+            <div class="overflow-hidden">
+              <nav class="relative flex flex-row flex-nowrap items-end whitespace-nowrap">
+                <HeaderLink href="/">Inicio</HeaderLink>
+                <HeaderLink href="/sobre-mi">Sobre mí</HeaderLink>
+              </nav>
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</header>

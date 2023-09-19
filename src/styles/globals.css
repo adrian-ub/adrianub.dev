@@ -1,0 +1,15 @@
+@import "./vars.css";
+@import "tailwindcss/base";
+@import "./syntax-highlighting.css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-primary-foreground text-secondary-foreground;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
