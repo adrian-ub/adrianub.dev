@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import Badge from "@/components/ui/Badge.astro";
+
 interface Props {
   categories: CollectionEntry<"tags">[];
 }
@@ -12,11 +14,8 @@ const { categories } = Astro.props;
   !!categories.length && (
     <div class="mb-5 flex w-full flex-row flex-wrap justify-center md:mb-0">
       {categories.map((category) => (
-        <a
-          class="mb-2 mr-3 rounded-lg border px-2 py-1 text-base font-medium  border-slate-800 bg-slate-800 text-slate-100 hover:bg-slate-700"
-          href={"/tag/" + category.slug}
-        >
-          <span>{category.data.title}</span>
+        <a href={"/tag/" + category.slug}>
+          <Badge>{category.data.title}</Badge>
         </a>
       ))}
     </div>

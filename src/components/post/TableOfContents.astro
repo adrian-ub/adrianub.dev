@@ -11,7 +11,9 @@ const { headings } = Astro.props;
 <div class="relative mb-10 w-full overflow-hidden rounded-2xl border p-4 pt-0">
   <div class="max-h-full">
     <div class="pt-4">
-      <h3 class="py-2 px-[18px] text-sm font-medium uppercase text-slate-400">
+      <h3
+        class="py-2 px-[18px] text-sm font-medium uppercase text-muted-foreground"
+      >
         <span>TABLA DE CONTENIDO</span>
       </h3>
     </div>
@@ -22,7 +24,7 @@ const { headings } = Astro.props;
             <li class="py-0.5 px-2 align-middle">
               <div class="flex items-center gap-2 rounded-lg hover:underline">
                 <a
-                  class="w-full py-2.5 pr-2.5 text-sm font-medium text-slate-100 pl-3"
+                  class="w-full py-2.5 pr-2.5 text-sm font-medium text-secondary-foreground pl-3"
                   href={"#" + heading.slug}
                   aria-label={heading.text}
                 >

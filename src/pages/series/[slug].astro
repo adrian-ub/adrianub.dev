@@ -35,12 +35,12 @@ const { Content } = await render();
           <div class="flex flex-col-reverse flex-wrap items-start md:flex-row">
             <div class="pr-8 w-full" class:list={[heroImage ? "md:w-1/2" : ""]}>
               <span
-                class="blog-series-label mb-2 font-semibold uppercase tracking-tight text-slate-600 dark:text-slate-400"
+                class="blog-series-label mb-2 font-semibold uppercase tracking-tight text-muted-foreground"
               >
                 Series
               </span>
               <h1
-                class="blog-series-title mb-2 font-heading text-3xl font-bold text-slate-900 dark:text-white md:text-4xl xl:text-5xl"
+                class="blog-series-title mb-2 font-heading text-3xl font-bold md:text-4xl xl:text-5xl"
               >
                 {title}
               </h1>
@@ -52,7 +52,7 @@ const { Content } = await render();
               heroImage && (
                 <div class="blog-series-cover-container mb-5 w-full md:mb-0 md:w-1/2">
                   <div
-                    class="blog-series-cover h-32 w-full rounded-lg border bg-cover bg-center bg-no-repeat border-slate-800"
+                    class="blog-series-cover h-32 w-full rounded-lg border bg-cover bg-center bg-no-repeat"
                     style={`background-image:url('${heroImage.src}');width:100%;padding-top:52.5%`}
                   />
                 </div>
@@ -62,8 +62,10 @@ const { Content } = await render();
         </div>
 
         <div class="my-10 flex flex-col items-center justify-center">
-          <hr class="w-full border-t border-slate-800" />
-          <p class="-mt-5 p-2 font-medium text-slate-400 bg-primary-foreground">
+          <hr class="w-full border-t" />
+          <p
+            class="-mt-5 p-2 font-medium text-muted-foreground bg-primary-foreground"
+          >
             Artículos con esta etiqueta
           </p>
         </div>

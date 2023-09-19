@@ -22,7 +22,7 @@ const {
 <div class:list={[className, "col-span-1"]}>
   <a
     aria-label={post.data.title}
-    class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 border-slate-800 bg-slate-800"
+    class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 bg-card"
     href={post.slug}
   >
     <span
@@ -61,7 +61,7 @@ const {
     </span>
   </a>
   <h1
-    class="blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75 text-slate-100"
+    class="blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75"
   >
     <a href={post.slug}>
       {post.data.title}
@@ -69,7 +69,7 @@ const {
   </h1>
   {
     showSummary && (
-      <p class="blog-article-card-brief mx-4 mb-3 break-words text-lg leading-snug hover:opacity-75 text-slate-400">
+      <p class="blog-article-card-brief mx-4 mb-3 break-words text-lg leading-snug hover:opacity-75 text-muted-foreground">
         <a href={post.slug}>{post.data.description}</a>
       </p>
     )

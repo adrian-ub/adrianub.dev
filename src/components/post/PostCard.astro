@@ -17,14 +17,14 @@ const {
   <section class="blog-post-card-wrapper flex flex-wrap items-start flex-row">
     <div class="lg:w-3/5">
       <h1
-        class="blog-post-card-title mb-3 break-words font-heading text-2xl font-bold leading-tight text-white lg:text-3xl"
+        class="blog-post-card-title mb-3 break-words font-heading text-2xl font-bold leading-tight lg:text-3xl"
       >
         <a aria-label={data.title} href={`/${slug}`}>
           {data.title}
         </a>
       </h1>
       <div
-        class="blog-post-card-meta mb-3 flex flex-row flex-wrap items-center font-heading text-sm font-medium text-slate-400"
+        class="blog-post-card-meta mb-3 flex flex-row flex-wrap items-center font-heading text-sm font-medium text-muted-foreground"
       >
         <a
           aria-label={data.title}
@@ -33,13 +33,17 @@ const {
         >
           <FormattedDate date={data.pubDate} />
         </a>
-        <span class="mr-4 flex flex-row items-center">
+        <a
+          aria-label={data.title}
+          href={`/${slug}`}
+          class="mr-4 flex flex-row items-center"
+        >
           <Icon class="mr-1 h-4 w-4 fill-current" name="bi:book" />
           <span>{minutesRead}</span>
-        </span>
+        </a>
       </div>
       <p
-        class="blog-post-card-brief block w-full break-words text-lg leading-snug text-slate-400"
+        class="blog-post-card-brief block w-full break-words text-lg leading-snug text-muted-foreground"
       >
         <a aria-label={data.title} href={`/${slug}`}>
           {data.description}
@@ -48,7 +52,7 @@ const {
     </div>
     <div class="blog-post-card-cover mt-6 w-full lg:mt-0 lg:w-2/5 lg:pl-8">
       <a
-        class="block overflow-hidden rounded-lg border border-slate-800"
+        class="block overflow-hidden rounded-lg border"
         aria-label={data.title}
         href={`/${slug}`}
       >

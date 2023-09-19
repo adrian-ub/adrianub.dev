@@ -34,17 +34,17 @@ const { data, slug, posts } = Astro.props;
           >
             <div class="mb-5 w-full min-w-0 xl:mb-0 xl:flex-1 xl:pr-8">
               <span
-                class="blog-series-label mb-2 font-semibold uppercase tracking-tight text-slate-400"
+                class="blog-series-label mb-2 font-semibold uppercase tracking-tight text-muted-foreground"
               >
                 Etiqueta
               </span>
               <div class="truncate">
                 <h1
-                  class="blog-series-title mb-2 pb-px font-heading text-3xl font-bold text-white md:text-4xl"
+                  class="blog-series-title mb-2 pb-px font-heading text-3xl font-bold md:text-4xl"
                 >
                   {data.title}
                 </h1>
-                <p class="text-lg text-slate-400">
+                <p class="text-lg text-muted-foreground">
                   #{slug}
                 </p>
               </div>
@@ -53,8 +53,10 @@ const { data, slug, posts } = Astro.props;
         </div>
 
         <div class="my-10 flex flex-col items-center justify-center">
-          <hr class="w-full border-t border-slate-800" />
-          <p class="-mt-5 p-2 font-medium text-slate-400 bg-primary-foreground">
+          <hr class="w-full border-t" />
+          <p
+            class="-mt-5 p-2 font-medium text-muted-foreground bg-primary-foreground"
+          >
             Artículos con esta etiqueta
           </p>
         </div>
