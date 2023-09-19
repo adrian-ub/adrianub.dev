@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { ub } from "@/utils/ub";
 
 type Props = HTMLAttributes<"a">;
 
@@ -11,10 +12,10 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 
 <a
   href={href}
-  class:list={[
+  class={ub(
     className,
-    "flex items-center justify-center px-2 capitalize flex-col",
-  ]}
+    "flex items-center justify-center px-2 capitalize flex-col"
+  )}
   {...props}
 >
   <span
