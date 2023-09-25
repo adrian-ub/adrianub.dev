@@ -1,6 +1,7 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { getEntries } from "astro:content";
+import { type CollectionEntry, getEntries } from "astro:content";
+import { Image } from "astro:assets";
+
 import { Icon } from "astro-icon";
 
 import BaseHead from "@/components/common/BaseHead.astro";
@@ -9,9 +10,13 @@ import FormattedDate from "@/components/format/FormattedDate.astro";
 import Comments from "@/components/post/Comments.astro";
 import Tags from "@/components/post/Tags.astro";
 import TableOfContents from "@/components/post/TableOfContents.astro";
-import { Image } from "astro:assets";
 
-type Props = CollectionEntry<"blog">;
+import { posts } from "@/lib/post";
+import { components } from "@/lib/components";
+
+export async function getStaticPaths() {
+  return posts.map((post) => ({ params: { post: post.slug }, props: post }));
+}
 
 const {
   data: {
@@ -20,21 +25,23 @@ const {
     pubDate,
     updatedDate,
     heroImage,
-    categories: categoriesPosts = [],
+    categories = [],
     tableOfContents,
   },
   slug,
   render,
 } = Astro.props;
 
+const tags: CollectionEntry<"tags">[] = await getEntries(categories);
+
 const {
+  Content,
   headings,
   remarkPluginFrontmatter: { minutesRead },
 } = await render();
-
-const categories: CollectionEntry<"tags">[] = await getEntries(categoriesPosts);
 ---
 
+<!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
     <BaseHead title={title} description={description} />
@@ -145,9 +152,9 @@ const categories: CollectionEntry<"tags">[] = await getEntries(categoriesPosts);
                   <div
                     class="prose prose-lg mx-auto mb-10 min-h-30 break-words prose-invert xl:prose-xl"
                   >
-                    <slot />
+                    <Content {components} />
                   </div>
-                  <Tags categories={categories} />
+                  <Tags categories={tags} />
                 </div>
               </div>
               <Comments />

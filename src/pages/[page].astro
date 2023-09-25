@@ -1,16 +1,25 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 
 import BaseHead from "@/components/common/BaseHead.astro";
 import Footer from "@/components/footer/Footer.astro";
 import Header from "@/components/header/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/consts";
+import { pages } from "@/lib/page";
 
-type Props = CollectionEntry<"pages">;
+import { components } from "@/lib/components";
+
+export async function getStaticPaths() {
+  return pages.map((page) => ({ params: { page: page.slug }, props: page }));
+}
+
+export type Props = CollectionEntry<"pages">;
 
 const {
   data: { title = SITE_TITLE, description = SITE_DESCRIPTION, heroImage },
+  render,
 } = Astro.props;
+const { Content } = await render();
 ---
 
 <!doctype html>
@@ -25,7 +34,7 @@ const {
         <div
           class="blog-page-content prose prose-lg mx-auto break-words tracking-tight prose-invert xl:prose-xl"
         >
-          <slot />
+          <Content {components} />
         </div>
       </div>
     </div>
