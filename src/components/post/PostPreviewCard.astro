@@ -24,7 +24,7 @@ const {
   <a
     aria-label={post.data.title}
     class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 bg-card"
-    href={post.slug}
+    href={post.slug + "/"}
   >
     <span
       style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative"
@@ -64,14 +64,14 @@ const {
   <h1
     class="blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75"
   >
-    <a href={post.slug}>
+    <a href={post.slug + "/"}>
       {post.data.title}
     </a>
   </h1>
   {
     showSummary && (
       <p class="blog-article-card-brief mx-4 mb-3 break-words text-lg leading-snug hover:opacity-75 text-muted-foreground">
-        <a href={post.slug}>{post.data.description}</a>
+        <a href={post.slug + "/"}>{post.data.description}</a>
       </p>
     )
   }
