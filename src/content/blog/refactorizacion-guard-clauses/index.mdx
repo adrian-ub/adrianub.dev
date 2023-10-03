@@ -1,0 +1,224 @@
+---
+title: "Refactorización: Guard Clauses"
+description: La refactorización comienza desde el punto más elemental, un simple `if`.
+featured: true
+pubDate: "2021-10-01"
+heroImage: ./assets/hero.webp
+author: adrianub
+categories: []
+tableOfContents: false
+---
+
+Es probable que en algún momento de su carrera de programación haya escrito declaraciones lógicas condicionales masivas con muchos niveles de declaraciones `if` y `else if` anidadas. Al principio puede parecer una gran idea, ya que encaja perfectamente con la lógica que está tratando de hacer cumplir, pero luego pasa un mes y necesita hacer cambios en ese bloque condicional masivo. Lo más probable es que le haya llevado mucho tiempo analizar y comprender la lógica condicional, ya que estaba llena de múltiples niveles de anidamiento y sus nuevos cambios probablemente eran muy propensos a errores. Puede parecer que no hay forma de evitar este problema, pero ahí es donde entran en juego las cláusulas de protección.
+
+Los principales problemas que aparecen en el código en el que no se aplica la técnica de las cláusulas de protección son los siguientes:
+
+<BulletList columns="1">
+<BulletListItem type="cross">
+**Indentación excesiva** — el uso excesivo de la estructura de control si está anidada significa que hay un alto nivel de indentación que dificulta la lectura del código.
+</BulletListItem>
+
+<BulletListItem type="cross">
+  **Relación entre if-else** — cuando hay una gran cantidad de fragmentos de
+  código separados entre if-else, que están conceptualmente relacionados entre
+  sí, es necesario realizar la lectura del código saltando entre las diferentes
+  partes.
+</BulletListItem>
+
+<BulletListItem type="cross">
+**Esfuerzo mental** — una consecuencia de los diferentes saltos en el código fuente provoca que se genere un esfuerzo extra en la generación de código.
+</BulletListItem>
+</BulletList>
+
+## Aplicaciones prácticas
+
+La aplicación práctica de una cláusula de guarda es el siguiente caso:
+
+```ts
+function doSomething() {
+  if (everythingIsGood()) {
+    /**
+     * ¡¡¡Mucho código aquí !!!
+     */
+    return SOME_VALUE;
+  } else {
+    return ANOTHER_VALUE; // un caso especial
+  }
+}
+```
+
+En este caso, y la mayoría de las veces, debe invertir la lógica para evitar usar la palabra reservada `else`. El código anterior se reescribiría de la siguiente manera:
+
+```ts
+function doSomething() {
+  if (!everythingIsGood()) {
+    // esta es su cláusula de protección
+    return ANOTHER_VALUE;
+  }
+
+  /**
+   * ¡¡¡Mucho código aquí !!!
+   */
+  return SOME_VALUE;
+}
+```
+
+Por tanto, los casos particulares que provoquen una salida del método se colocarían al inicio del método y actuarían como guardas de forma que se evite continuar por el flujo satisfactorio del método.
+
+De esta forma, el método es de fácil lectura ya que los casos particulares se encuentran al inicio del mismo y el caso de uso de flujo satisfactorio es el cuerpo del método.
+
+Echemos un vistazo a un ejemplo un poco más complejo sobre el cálculo de los deducibles del seguro.
+
+```ts
+function getInsuranceDeductible(insurance) {
+  if (insurance.covered) {
+    if (insurance.majorRepair) {
+      return 500;
+    } else if (insurance.mediumRepair) {
+      return 300;
+    } else {
+      return 100;
+    }
+  } else {
+    return 0;
+  }
+}
+```
+
+Esta es una función muy simple, pero la lógica anidada `if`/`else if` es difícil de seguir a primera vista. Para limpiar esto, podemos usar nuevamente cláusulas de protección.
+
+```ts
+function getInsuranceDeductible(insurance) {
+  if (!insurance.covered) return 0;
+  if (insurance.majorRepair) return 500;
+  if (insurance.mediumRepair) return 300;
+
+  return 100;
+}
+```
+
+Esta función es mucho más corta que la función anterior y mucho más fácil de entender, ya que toda la lógica es autónoma y no está anidada entre sí.
+
+---
+
+Imagina que tienes que crear un método que calcule el costo del seguro médico en el que se recibe el ID de usuario como parámetro.
+
+Se realiza una búsqueda en una base de datos utilizando este ID para recuperar un usuario. Si el usuario no existe, se lanzará una excepción llamada `UserNotFoundException`. Si el usuario existe en el sistema, el siguiente paso es verificar que el seguro médico del usuario corresponda a alguno de los que son válidos para este algoritmo: Allianz o AXA. Si el seguro no es válido, se debe devolver una excepción llamada `UserInsuranceNotFoundException`. Finalmente, este algoritmo solo es válido para usuarios que sean de nacionalidad colombiana. Por lo tanto, debe verificar nuevamente si el usuario es colombiano para realizar el cálculo del seguro o devolver una excepción llamada `UserIsNotColombianException`.
+
+```ts /UserNotFoundException/#pink /UserInsuranceNotFoundException/#yellow /UserIsNotColombianException/#purple
+function calculateInsurance(userId: number) {
+  const user = myDb.findOne(userId);
+
+  if (user) {
+    if (user.insurance === "Allianz" || user.insurance === "AXA") {
+      if (user.nationality === "Colombian") {
+        const value = any;
+        /**
+         * Algoritmo complejo
+         */
+        return value;
+      } else {
+        throw new UserIsNotColombianException(user);
+      }
+    } else {
+      throw new UserInsuranceNotFoundException(user);
+    }
+  } else {
+    throw new UserNotFoundException("User NotFound");
+  }
+}
+```
+
+Como puede ver, el código tiene muchos niveles de indentación. A continuación se muestra la misma versión del algoritmo anterior, pero se ha aplicado la técnica de las cláusulas de protección. Esta técnica permite que el código sea más legible. Tenga en cuenta que se han aplicado tres cláusulas de protección que permiten generar rutas alternativas (lanzar excepciones) que no interfieren en el resultado del algoritmo.
+
+```ts /UserNotFoundException/#pink /UserInsuranceNotFoundException/#yellow /UserIsNotColombianException/#purple
+function calculateInsurance(userId: number) {
+  const user = myDb.findOne(userId);
+
+  if (!user) {
+    throw new UserNotFoundException("User NotFound");
+  }
+
+  if (!(user.insurance === "Allianz" || user.insurance === "AXA")) {
+    throw new UserInsuranceNotFoundException(user);
+  }
+
+  if (user.nationality !== "Colombian") {
+    throw new UserIsNotColombianException(user);
+  }
+
+  const value = any;
+  /**
+   * Algoritmo complejo
+   */
+  return value;
+}
+```
+
+Algunas cuestiones que deben resolverse:
+
+- ¿Por qué no hay casos de if-else if?
+
+¡Deja de pensar! Si su código requiere casos como el `else if`, es porque está incumpliendo el Principio de Responsabilidad Única y el código toma decisiones de nivel superior, que deben refactorizarse.
+
+- Las condiciones negativas no se comprenden bien.
+
+Para ello contamos con otra técnica de refactorización llamada método extract, que consiste en extraer código en funciones para su reutilización o comprensión lectora. En el siguiente ejemplo, modificamos el ejemplo anterior para crear métodos que permitan una mejor lectura y comprensión del código.
+
+En el uso de una cláusula de protección, la lógica de las condiciones normalmente se invierte y, dependiendo de la complejidad de la condición, es bastante complejo entender qué se está evaluando en esa condición.
+
+Por eso es una buena práctica extraer la lógica de las condiciones en pequeñas funciones que permitan una mayor legibilidad del código (y, por supuesto, encontrar errores en ellas) ya que la responsabilidad de evaluar la condición se está delegando a una función específica.
+
+Para nuestro ejemplo de seguro médico podemos generar los siguientes métodos:
+
+```ts
+function isValidInsurance({ insurance }: User): boolean {
+  return insurance === "Allianz" || insurance === "AXA";
+}
+
+function isColombian({ nationality }: User): boolean {
+  return nationality === "Colombian";
+}
+```
+
+No es necesario crear una función para comprobar si el usuario existe, ya que basta con comprobar que el usuario es diferente de nulo o indefinido. Por tanto, el código resultante sería el siguiente:
+
+```ts
+function calculateInsurance(userId: number) {
+  const user = myDb.findOne(userId);
+
+  if (!user) {
+    throw new UserNotFoundException("User NotFound");
+  }
+
+  if (!isValidInsurance(user)) {
+    throw new UserInsuranceNotFoundException(user);
+  }
+
+  if (!isColombian(user)) {
+    throw new UserIsNotColombianException(user);
+  }
+
+  const value = any;
+  /**
+   * Algoritmo complejo
+   */
+  return value;
+}
+```
+
+### Resumen
+
+Existen muchas prácticas para mejorar la calidad del código. Lo más importante que hay que aprender a la hora de aplicar técnicas de refactorización es que deben centrarse en dos puntos, principalmente:
+
+<BulletList columns="1">
+<BulletListItem type="check">
+**Desacoplar el código** — esto permite pequeños cambios que no causan grandes cambios encadenados en todo el proyecto de software.
+</BulletListItem>
+
+<BulletListItem type="check">
+**Legibilidad** — es muy importante que los desarrolladores comprendan que la mayor parte del tiempo de su trabajo se basa en la lectura de código y, probablemente, en código escrito por otro desarrollador. Es muy beneficioso en costo/desarrollo que un desarrollador no pierda tiempo entendiendo la lógica elemental porque no es fácil de leer.
+</BulletListItem>
+</BulletList>
+
+La refactorización comienza desde el punto más elemental, un simple `if`, hasta un patrón de arquitectura. Es importante cuidar todos los aspectos de nuestro desarrollo de software.

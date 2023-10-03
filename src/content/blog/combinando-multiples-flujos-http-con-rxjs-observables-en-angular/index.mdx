@@ -1,0 +1,249 @@
+---
+title: Múltiples flujos con RxJS en Angular
+description: >-
+  Los RxJS Observables, en comparación con las antiguas Promesas en Angular 1,
+  parecen ser más complicados de entender, pero son mucho más flexibles.
+featured: true
+pubDate: "2021-04-15"
+heroImage: ./assets/hero.webp
+author: adrianub
+categories:
+  - angular
+  - typescript
+---
+
+Una mejor práctica, de hecho, es mantener toda la lógica de manipulación del flujo dentro de nuestro servicio y devolver el Observable, que el controlador puede suscribir.
+
+A continuación, se muestra un ejemplo básico de servicio con una llamada `Http`:
+
+```ts
+@Injectable()
+export class AuthorService {
+  constructor(private http: HttpClient) {}
+
+  get(id: number): Observable<any> {
+    return this.http.get("/api/authors/" + id);
+  }
+}
+```
+
+El controlador debe llamar al servicio, así:
+
+```ts
+@Component({
+  selector: "app-author",
+  templateUrl: "./author.component.html",
+})
+export class AuthorComponent implements OnInit {
+  constructor(private authorService: AuthorService) {}
+
+  ngOnInit() {
+    this.authorService.get(1).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+}
+
+/* Will return:
+{
+  id: 1,
+  first_name: 'Adrián',
+  last_name: 'UB'
+}
+*/
+```
+
+Ok, ahora veamos algo más avanzado.
+
+## Combinando Observables en paralelo
+
+Desde la versión 5.5 de RxJs, necesitamos usar la función `pipe` para combinar Observables. Acepta tantos operadores pipetables como necesitemos, separados por una coma.
+
+Imagine que desea obtener los datos de un autor y sus libros, pero para obtener los libros debe llamar a un punto final diferente, como `/authors/1/books`. Debe realizar las dos llamadas y combinarlas en una sola respuesta.
+
+Para hacer eso, podemos usar el operador `forkJoin` de RxJS, que es similar al antiguo `$q.all()` de Angular 1 y te permite ejecutar dos o más Observables en paralelo:
+
+```ts /forkJoin/#yellow /pipe/#pink
+getAuthorWithBooks(id: number) {
+  return forkJoin([
+    this.http.get('/api/authors/' + id),
+    this.http.get('/api/authors/' + id + '/books')
+  ]).pipe(
+    map((data: any[]) => {
+      let author: any = data[0];
+      let books: any[] = data[1];
+      return author.books = books;
+    })
+  );
+}
+
+/* Will return:
+{
+  id: 1,
+  first_name: 'Adrián',
+  last_name: 'UB'
+  books: [{
+    id: 10,
+    title: 'Awesome book',
+    author_id: 1
+  },
+  ...
+  ]
+}
+*/
+```
+
+Como puede ver en el ejemplo, `forkJoin` devuelve una matriz con los resultados de los Observables unidos. Podemos componerlos como necesitemos, para devolver solo un objeto.
+
+## Combinando Observables en serie
+
+¿Qué pasa si necesitamos, por ejemplo, obtener la información del autor de un libro? Deberíamos obtener los datos del libro primero y, solo cuando los obtengamos, podemos llamar al punto final del autor con la identificación del autor.
+
+En este caso, tendremos que usar el operador `switchMap` de RxJS, que es similar al operador `map` de RxJS habitual. La diferencia es que le permite encadenar dos Observables, devolviendo un nuevo Observable:
+
+```ts /switchMap/#yellow
+getBookAuthor(id: number) {
+  return this.http.get(`/api/books/${id}`)
+    .pipe(
+        switchMap((book: any) => this.http.get('/api/authors/' + book.author_id))
+    );
+}
+
+/* Will return:
+{
+  id: 1,
+  first_name: 'Adrián',
+  last_name: 'UB'
+}
+*/
+```
+
+En este caso, lo que obtendremos es solo la información del autor. ¿Y si queremos también el objeto libro? Como antes, tenemos que componer nuestros objetos:
+
+```ts /switchMap/#yellow /map/#pink
+getBookWithAuthor(id: number) {
+  return this.http.get('/api/books/' + id).pipe(
+    switchMap((book: any) => this.http.get('/api/authors/' + book.author_id).pipe(
+      map((author: any) => {
+        book.author = author;
+        return book;
+      })
+    ))
+  );
+}
+
+/* Will return:
+{
+  id: 10,
+  title: 'Awesome book',
+  author_id: 1
+  author: {
+    id: 1,
+    first_name: 'Adrián',
+    last_name: 'UB'
+  }
+}
+*/
+```
+
+## Combinando Observables en serie y en paralelo
+
+¿Qué pasa si ahora quisiéramos hacer lo mismo (obtener el libro con su autor), pero para varios libros a la vez? Podemos combinar `forkJoin` y `switchMap`:
+
+```ts /forkJoin/#yellow /switchMap/#pink
+getBooksWithAuthor() {
+  return this.http.get('/api/books/').pipe(
+    switchMap((books: any[]) => {
+      if (books.length > 0) {
+        return forkJoin(
+          books.map((book: any) => {
+            return this.http.get('/api/authors/' + book.author_id).pipe(
+              map((author: any) => {
+                book.author = author;
+                return book;
+              })
+            )
+          })
+        );
+      }
+      return of([]);
+    })
+  )
+}
+
+/* Will return:
+[{
+  id: 10,
+  title: 'Awesome book',
+  author_id: 1
+  author: {
+    id: 1,
+    first_name: 'Adrián',
+    last_name: 'UB'
+  }
+},
+{
+  id: 11,
+  title: 'Another awesome book',
+  author_id: 2
+  author: {
+    id: 2,
+    first_name: 'Linneth',
+    last_name: 'BS'
+  }
+}]
+*/
+```
+
+Parece complicado, pero es bastante fácil: después de obtener la lista de libros, usamos el `switchMap`, para fusionar la llamada anterior con el resultado de `forkJoin`, que se llama solo si tenemos algunos libros, de lo contrario solo devolvemos un Observable que contiene una matriz vacía.
+
+Quizás se esté preguntando por qué estamos usando `forkJoin` aquí, ya que solo hay una llamada. Pero, si se ve mejor, habrá tantas llamadas como libros recibamos. De hecho, estamos haciendo un bucle en la matriz de libros con la función `Array.map`, que no es lo mismo que el operador `map` de RxJS.
+
+Luego, por la llamada de cada autor, combinamos nuestros objetos y devolvemos el libro, que es lo que queremos. ¡Fácil!
+
+Otro ejemplo puede ser obtener información sobre el autor y el editor de un solo libro:
+
+```ts /switchMap/#yellow /forkJoin/#pink /map/#purple
+getBookWithDetails(id: number) {
+  return this.http.get('/api/books/' + id).pipe(
+    switchMap((book: any) => {
+      return forkJoin(
+        of(book),
+        this.http.get('/api/authors/' + book.author_id),
+        this.http.get('/api/editors/' + book.editor_id)
+      ).pipe(
+        map((data: any[]) => {
+          let book = data[0];
+          let author = data[1];
+          let editor = data[2];
+          book.author = author;
+          book.editor = editor;
+          return book;
+        })
+      );
+    })
+  );
+}
+
+/* Will return:
+{
+  id: 10,
+  title: 'Awesome book',
+  author_id: 1,
+  editor_id: 42
+  author: {
+    id: 1,
+    first_name: 'Adrián',
+    last_name: 'UB'
+  },
+  editor: {
+    id: 42,
+    name: 'Universe Editor'
+  }
+}
+*/
+```
+
+Como podemos ver, `forkJoin` devuelve una matriz con el resultado de cada Observable, que podemos componer para devolver el objeto final. Nótese que estamos uniendo el propio objeto libro, convirtiéndolo en un Observable gracias al operador `of` RxJS, para que podamos acceder a él en el siguiente `map`.
+
+**¡Espero que el operador RxJS sea más claro ahora! ¡Disfrutar!**

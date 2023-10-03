@@ -1,5 +1,0 @@
-[submodule ".frontmatter"]
-	path = .frontmatter
-	url = https://github.com/adrian-ub/site-content.git
-	branch = main
-	update = merge

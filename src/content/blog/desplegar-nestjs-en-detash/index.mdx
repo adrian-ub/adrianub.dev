@@ -1,0 +1,105 @@
+---
+title: "Como desplegar NestJS en Deta.sh 🚀"
+description: "Deta es una nube gratuita diseñada pensando en la experiencia del desarrollador y del usuario."
+pubDate: "2022-02-27"
+heroImage: ./assets/hero.webp
+author: adrianub
+serie: desplegando-en-deta
+---
+
+## ¿Que es Deta.sh?
+
+[Deta](https://deta.sh) es una nube gratuita diseñada pensando en la experiencia del desarrollador y del usuario, nos ayuda crear implementaciones de nuestras ideas en la nube más amigable con los desarrolladores, es totalmente gratuita y para siempre.
+
+En esta podemos desplegar aplicaciones hecha con [NodeJs](https://nodejs.org/) y [Python](https://www.python.org/), donde nos proveen un [Micro](https://docs.deta.sh/docs/micros/about) por cada aplicación desplegada.
+
+## Creación del proyecto NestJS
+
+Para comenzar a crear nuestro clonaremos el starter de [NestJS](https://nestjs.com)
+
+```sh
+git clone https://github.com/nestjs/typescript-starter
+```
+
+Instalamos las dependencias y vemos que nuestro proyecto corra sin ningun error.
+
+## Configurar proyecto
+
+Primero crearemos nuestro punto de entrada en `src/index.ts`:
+
+```ts
+import { NestFactory } from "@nestjs/core";
+import { ExpressAdapter } from "@nestjs/platform-express";
+import { AppModule } from "./app.module";
+
+const createNestServer = async (expressInstance) => {
+  const app = await NestFactory.create(
+    AppModule,
+    new ExpressAdapter(expressInstance)
+  );
+
+  return app.init();
+};
+
+export default createNestServer;
+```
+
+Crearemos un archivo llamado `index.js` en el root de nuestra aplicación:
+
+```js
+const express = require("express");
+const createServer = require("./dist/index").default;
+
+const app = express();
+let nest;
+
+app.use(async (req, res) => {
+  if (!nest) {
+    nest = express();
+    await createServer(nest);
+  }
+  return nest(req, res);
+});
+
+module.exports = app;
+```
+
+## Desplegar proyecto
+
+Para poder desplegar nuestra aplicación necesitamos correr los siguientes comandos.
+
+### Compilar
+
+Escribe el siguiente comando en la terminal para compilar tu proyecto:
+
+```sh
+yarn build
+```
+
+### Iniciar sesión en Deta
+
+Para iniciar sesión en Deta necesitamos correr el siguiente comando:
+
+```sh
+deta login
+```
+
+### Crear un Micro
+
+Creamos un nuevo micro desde una carpeta anterior a nuestro proyecto:
+
+```sh
+deta new --node nombre-del-proyecto
+```
+
+### Deploy 🚀
+
+Y por ultimo desplegamos el proyecto ejecutando el siguiente comando en el root de la aplicación:
+
+```sh
+deta deploy
+```
+
+Luego puedes visitar la url creada por Deta y sacar provecho
+
+Ejemplo: [https://7dug2x.deta.dev/](https://7dug2x.deta.dev/)
