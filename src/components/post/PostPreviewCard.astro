@@ -16,7 +16,7 @@ const {
   post,
   showSummary = false,
   class: className = "",
-  imageLoading,
+  imageLoading = "lazy",
 } = Astro.props;
 ---
 
@@ -26,40 +26,14 @@ const {
     class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 bg-card"
     href={post.slug + "/"}
   >
-    <span
-      style="box-sizing:border-box;display:block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative"
-    >
-      <span
-        style="box-sizing:border-box;display:block;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;padding-top:52.5%"
-      ></span>
-      {
-        post.data.heroImage && (
-          <>
-            <Image
-              src={post.data.heroImage}
-              alt={post.data.title}
-              class="blog-article-card-cover block w-full"
-              style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-              loading={imageLoading}
-              transition:name={`post-hero-image-${post.slug}`}
-              format="avif"
-            />
-          </>
-        )
-      }
-      {
-        !post.data.heroImage && (
-          <>
-            <Image
-              src={noContent}
-              alt={post.data.title}
-              class="blog-article-card-cover block w-full"
-              style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            />
-          </>
-        )
-      }
-    </span>
+    <Image
+      src={post.data.heroImage ?? noContent}
+      alt={post.data.title}
+      class="blog-article-card-cover block w-full"
+      loading={imageLoading}
+      transition:name={`post-hero-image-${post.slug}`}
+      format="avif"
+    />
   </a>
   <h1
     class="blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75"
