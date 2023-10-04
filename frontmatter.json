@@ -8,31 +8,27 @@
   "frontMatter.site.baseURL": "https://adrianub.dev",
   "frontMatter.website.host": "https://adrianub.dev",
   "frontMatter.git.enabled": true,
-  "frontMatter.git.submodule.push": true,
-  "frontMatter.git.submodule.pull": true,
-  "frontMatter.git.submodule.branch": "main",
-  "frontMatter.git.submodule.folder": ".frontmatter",
   "frontMatter.dashboard.content.pagination": true,
   "frontMatter.content.pageFolders": [
     {
       "title": "blog",
-      "path": "[[workspace]]/.frontmatter/content/blog",
+      "path": "[[workspace]]/src/content/blog",
       "contentTypes": ["blog"]
     },
     {
       "title": "pages",
-      "path": "[[workspace]]/.frontmatter/content/pages",
+      "path": "[[workspace]]/src/content/pages",
       "contentTypes": ["page"]
     },
     {
       "title": "tags",
-      "path": "[[workspace]]/.frontmatter/content/tags",
+      "path": "[[workspace]]/src/content/tags",
       "contentTypes": ["tag"],
       "previewPath": "/tag/"
     },
     {
       "title": "series",
-      "path": "[[workspace]]/.frontmatter/content/series",
+      "path": "[[workspace]]/src/content/series",
       "contentTypes": ["series"],
       "previewPath": "/series/"
     }
