@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 
 import { ub } from "@/utils/ub";
 import noContent from "@/assets/no-content.png";
@@ -26,13 +26,14 @@ const {
     class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 bg-card"
     href={post.slug + "/"}
   >
-    <Image
+    <Picture
       src={post.data.heroImage ?? noContent}
       alt={post.data.title}
       class="blog-article-card-cover block w-full"
       loading={imageLoading}
       transition:name={`post-hero-image-${post.slug}`}
-      format="avif"
+      formats={["avif", "webp"]}
+      densities={[1.5, 2]}
     />
   </a>
   <h1

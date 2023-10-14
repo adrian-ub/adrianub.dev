@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import { Icon } from "astro-icon";
 
 import FormattedDate from "@/components/format/FormattedDate.astro";
@@ -20,7 +20,7 @@ const {
       <h1
         class="blog-post-card-title mb-3 break-words font-heading text-2xl font-bold leading-tight lg:text-3xl"
       >
-        <a aria-label={data.title} href={`/${slug}`}>
+        <a aria-label={data.title} href={`/${slug}/`}>
           {data.title}
         </a>
       </h1>
@@ -30,13 +30,13 @@ const {
         <a
           aria-label={data.title}
           class="blog-post-card-time mr-4"
-          href={`/${slug}`}
+          href={`/${slug}/`}
         >
           <FormattedDate date={data.pubDate} />
         </a>
         <a
           aria-label={data.title}
-          href={`/${slug}`}
+          href={`/${slug}/`}
           class="mr-4 flex flex-row items-center"
         >
           <Icon class="mr-1 h-4 w-4 fill-current" name="bi:book" />
@@ -46,7 +46,7 @@ const {
       <p
         class="blog-post-card-brief block w-full break-words text-lg leading-snug text-muted-foreground"
       >
-        <a aria-label={data.title} href={`/${slug}`}>
+        <a aria-label={data.title} href={`/${slug}/`}>
           {data.description}
         </a>
       </p>
@@ -56,13 +56,15 @@ const {
       <a
         class="block overflow-hidden rounded-lg border"
         aria-label={data.title}
-        href={`/${slug}`}
+        href={`/${slug}/`}
       >
-        <Image
+        <Picture
           alt={data.title}
           src={data.heroImage ?? noContent}
           class="post-cover"
           transition:name={`post-hero-image-${slug}`}
+          formats={["avif", "webp"]}
+          densities={[1.5, 2]}
         />
       </a>
     </div>

@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, getEntries } from "astro:content";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 import { Icon } from "astro-icon";
 
@@ -63,18 +63,14 @@ const {
               {
                 heroImage && (
                   <div class="relative">
-                    <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                      <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 52.5% 0px 0px;" />
-                      <Image
-                        alt={title}
-                        src={heroImage}
-                        class="mb-0 block w-full"
-                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                        transition:name={`post-hero-image-${slug}`}
-                        format="avif"
-                      />
-                      <noscript />
-                    </span>
+                    <Picture
+                      alt={title}
+                      src={heroImage}
+                      class="mb-0 block w-full"
+                      transition:name={`post-hero-image-${slug}`}
+                      formats={["avif", "webp"]}
+                      densities={[1.5, 2]}
+                    />
                   </div>
                 )
               }
