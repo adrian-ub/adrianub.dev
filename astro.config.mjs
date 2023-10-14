@@ -45,9 +45,4 @@ export default defineConfig({
     partytown(),
     critters(),
   ],
-  vite: {
-    resolve: {
-      preserveSymlinks: true,
-    },
-  },
 });
