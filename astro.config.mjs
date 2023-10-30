@@ -19,6 +19,9 @@ const options = {
 export default defineConfig({
   site: "https://adrianub.dev",
   trailingSlash: "always",
+  experimental: {
+    devOverlay: true,
+  },
   integrations: [
     sitemap(),
     tailwind({
