@@ -13,6 +13,7 @@ import TableOfContents from "@/components/post/TableOfContents.astro";
 
 import { posts } from "@/lib/post";
 import { components } from "@/lib/components";
+import CopyButton from "@/components/post/CopyButton.astro";
 
 export async function getStaticPaths() {
   return posts.map((post) => ({ params: { post: post.slug }, props: post }));
@@ -163,5 +164,7 @@ const {
         </article>
       </main>
     </div>
+
+    <CopyButton />
   </body>
 </html>
