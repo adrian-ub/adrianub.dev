@@ -20,6 +20,7 @@
 
       codeBlock.setAttribute("tabindex", "0");
       codeBlock.appendChild(copyButton);
+
       codeBlock.parentNode?.insertBefore(wrapper, codeBlock);
       wrapper.appendChild(codeBlock);
 
@@ -47,15 +48,9 @@
   document.addEventListener("astro:after-swap", () => {
     initCopyCodeButton();
   });
-  document.addEventListener(
-    "astro:page-load",
-    () => {
-      initCopyCodeButton();
-    },
-    { once: true }
-  );
 </script>
-<style>
+<style is:inline>
+  /* critters:include start */
   .button-copy-code {
     width: 28px;
     height: 28px;
@@ -74,4 +69,5 @@
   .button-copy-code > svg.check-icon {
     color: #10b981;
   }
+  /* critters:include start */
 </style>
