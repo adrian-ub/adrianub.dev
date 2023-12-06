@@ -8,8 +8,9 @@ import partytown from "@astrojs/partytown";
 import { remarkReadingTime } from "./plugins/reading-time";
 import theme from "./theme/moonlight-ii.json?raw";
 
-/** @type {import('rehype-pretty-code').Options} */
 import critters from "astro-critters";
+
+/** @type {import('rehype-pretty-code').Options} */
 const options = {
   keepBackground: true,
   theme: JSON.parse(theme),
@@ -19,32 +20,30 @@ const options = {
 export default defineConfig({
   site: "https://adrianub.dev",
   trailingSlash: "always",
-  experimental: {
-    devOverlay: true,
+  markdown: {
+    syntaxHighlight: false,
+    remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [
+      [rehypePrettyCode, options],
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+          rel: ["noreferrer noopener"],
+          content: {
+            type: "text",
+            value: "↗",
+          },
+        },
+      ],
+    ],
   },
   integrations: [
     sitemap(),
     tailwind({
       applyBaseStyles: false,
     }),
-    mdx({
-      syntaxHighlight: false,
-      remarkPlugins: [remarkReadingTime],
-      rehypePlugins: [
-        [rehypePrettyCode, options],
-        [
-          rehypeExternalLinks,
-          {
-            target: "_blank",
-            rel: ["noreferrer noopener"],
-            content: {
-              type: "text",
-              value: "↗",
-            },
-          },
-        ],
-      ],
-    }),
+    mdx(),
     partytown(),
     critters(),
   ],
