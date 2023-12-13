@@ -10,14 +10,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.0",
+    "@astrojs/mdx": "^2.0.1",
     "@astrojs/partytown": "^2.0.2",
-    "@astrojs/rss": "^4.0.0",
+    "@astrojs/rss": "^4.0.1",
     "@astrojs/sitemap": "^3.0.3",
     "@astrojs/tailwind": "^5.0.3",
     "@fontsource-variable/inter": "^5.0.13",
     "@tailwindcss/typography": "^0.5.10",
-    "astro": "^4.0.1",
+    "astro": "^4.0.4",
     "astro-critters": "^2.0.11",
     "astro-icon": "^0.8.2",
     "cal-sans": "^1.0.1",
