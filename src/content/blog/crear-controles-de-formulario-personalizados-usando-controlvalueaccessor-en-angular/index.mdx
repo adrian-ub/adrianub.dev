@@ -126,7 +126,7 @@ Veamos qué está haciendo cada uno de los métodos. Una vez que tengamos claro 
 
 Una vez que implementamos estas funciones, el siguiente paso es proporcionar el token `NG_VALUE_ACCESSOR` en la matriz de proveedores del componente así:
 
-```ts /CONTROL_VALUE_ACCESSOR/#pink
+```ts /CONTROL_VALUE_ACCESSOR/
 const CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => RatingInputComponent),
@@ -237,7 +237,7 @@ export class RatingInputComponent implements ControlValueAccessor {
 
 Ahora puede desactivar los controles del input, agregar un `[(ngModel)]` o un `formControlName`:
 
-```html /[disabled]/#yellow /[(ngModel)]/#yellow /formControlName/#yellow
+```html "[disabled]" "[(ngModel)]" "formControlName"
 <app-rating-input [disabled]="true"></app-rating-input>
 
 <app-rating-input [(ngModel)]="rating"></app-rating-input>

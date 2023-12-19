@@ -105,7 +105,7 @@ Imagina que tienes que crear un método que calcule el costo del seguro médico 
 
 Se realiza una búsqueda en una base de datos utilizando este ID para recuperar un usuario. Si el usuario no existe, se lanzará una excepción llamada `UserNotFoundException`. Si el usuario existe en el sistema, el siguiente paso es verificar que el seguro médico del usuario corresponda a alguno de los que son válidos para este algoritmo: Allianz o AXA. Si el seguro no es válido, se debe devolver una excepción llamada `UserInsuranceNotFoundException`. Finalmente, este algoritmo solo es válido para usuarios que sean de nacionalidad colombiana. Por lo tanto, debe verificar nuevamente si el usuario es colombiano para realizar el cálculo del seguro o devolver una excepción llamada `UserIsNotColombianException`.
 
-```ts /UserNotFoundException/#pink /UserInsuranceNotFoundException/#yellow /UserIsNotColombianException/#purple
+```ts /UserNotFoundException/ /UserInsuranceNotFoundException/ /UserIsNotColombianException/
 function calculateInsurance(userId: number) {
   const user = myDb.findOne(userId);
 
@@ -131,7 +131,7 @@ function calculateInsurance(userId: number) {
 
 Como puede ver, el código tiene muchos niveles de indentación. A continuación se muestra la misma versión del algoritmo anterior, pero se ha aplicado la técnica de las cláusulas de protección. Esta técnica permite que el código sea más legible. Tenga en cuenta que se han aplicado tres cláusulas de protección que permiten generar rutas alternativas (lanzar excepciones) que no interfieren en el resultado del algoritmo.
 
-```ts /UserNotFoundException/#pink /UserInsuranceNotFoundException/#yellow /UserIsNotColombianException/#purple
+```ts /UserNotFoundException/ /UserInsuranceNotFoundException/ /UserIsNotColombianException/
 function calculateInsurance(userId: number) {
   const user = myDb.findOne(userId);
 

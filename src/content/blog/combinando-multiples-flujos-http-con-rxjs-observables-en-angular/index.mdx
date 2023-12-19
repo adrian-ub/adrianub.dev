@@ -63,7 +63,7 @@ Imagine que desea obtener los datos de un autor y sus libros, pero para obtener 
 
 Para hacer eso, podemos usar el operador `forkJoin` de RxJS, que es similar al antiguo `$q.all()` de Angular 1 y te permite ejecutar dos o más Observables en paralelo:
 
-```ts /forkJoin/#yellow /pipe/#pink
+```ts /forkJoin/ /pipe/
 getAuthorWithBooks(id: number) {
   return forkJoin([
     this.http.get('/api/authors/' + id),
@@ -101,7 +101,7 @@ Como puede ver en el ejemplo, `forkJoin` devuelve una matriz con los resultados 
 
 En este caso, tendremos que usar el operador `switchMap` de RxJS, que es similar al operador `map` de RxJS habitual. La diferencia es que le permite encadenar dos Observables, devolviendo un nuevo Observable:
 
-```ts /switchMap/#yellow
+```ts /switchMap/
 getBookAuthor(id: number) {
   return this.http.get(`/api/books/${id}`)
     .pipe(
@@ -120,7 +120,7 @@ getBookAuthor(id: number) {
 
 En este caso, lo que obtendremos es solo la información del autor. ¿Y si queremos también el objeto libro? Como antes, tenemos que componer nuestros objetos:
 
-```ts /switchMap/#yellow /map/#pink
+```ts /switchMap/ /map/
 getBookWithAuthor(id: number) {
   return this.http.get('/api/books/' + id).pipe(
     switchMap((book: any) => this.http.get('/api/authors/' + book.author_id).pipe(
@@ -150,7 +150,7 @@ getBookWithAuthor(id: number) {
 
 ¿Qué pasa si ahora quisiéramos hacer lo mismo (obtener el libro con su autor), pero para varios libros a la vez? Podemos combinar `forkJoin` y `switchMap`:
 
-```ts /forkJoin/#yellow /switchMap/#pink
+```ts /forkJoin/ /switchMap/
 getBooksWithAuthor() {
   return this.http.get('/api/books/').pipe(
     switchMap((books: any[]) => {
@@ -203,7 +203,7 @@ Luego, por la llamada de cada autor, combinamos nuestros objetos y devolvemos el
 
 Otro ejemplo puede ser obtener información sobre el autor y el editor de un solo libro:
 
-```ts /switchMap/#yellow /forkJoin/#pink /map/#purple
+```ts /switchMap/ /forkJoin/ /map/
 getBookWithDetails(id: number) {
   return this.http.get('/api/books/' + id).pipe(
     switchMap((book: any) => {
