@@ -24,7 +24,7 @@ export default defineConfig({
           rel: ["noreferrer noopener"],
           content: {
             type: "text",
-            value: "↗",
+            value: " ↗",
           },
         },
       ],

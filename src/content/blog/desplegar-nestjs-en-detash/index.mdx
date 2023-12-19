@@ -9,9 +9,9 @@ serie: desplegando-en-deta
 
 ## ¿Que es Deta.sh?
 
-[Deta](https://deta.sh) es una nube gratuita diseñada pensando en la experiencia del desarrollador y del usuario, nos ayuda crear implementaciones de nuestras ideas en la nube más amigable con los desarrolladores, es totalmente gratuita y para siempre.
+[Deta](https://deta.space) es una nube gratuita diseñada pensando en la experiencia del desarrollador y del usuario, nos ayuda crear implementaciones de nuestras ideas en la nube más amigable con los desarrolladores, es totalmente gratuita y para siempre.
 
-En esta podemos desplegar aplicaciones hecha con [NodeJs](https://nodejs.org/) y [Python](https://www.python.org/), donde nos proveen un [Micro](https://docs.deta.sh/docs/micros/about) por cada aplicación desplegada.
+En esta podemos desplegar aplicaciones hecha con [NodeJs](https://nodejs.org/) y [Python](https://www.python.org/), donde nos proveen un [Micro](https://deta.space/docs/en/build/fundamentals/the-space-runtime/micros) por cada aplicación desplegada.
 
 ## Creación del proyecto NestJS
 
@@ -35,7 +35,7 @@ import { AppModule } from "./app.module";
 const createNestServer = async (expressInstance) => {
   const app = await NestFactory.create(
     AppModule,
-    new ExpressAdapter(expressInstance)
+    new ExpressAdapter(expressInstance),
   );
 
   return app.init();
@@ -102,4 +102,4 @@ deta deploy
 
 Luego puedes visitar la url creada por Deta y sacar provecho
 
-Ejemplo: [https://7dug2x.deta.dev/](https://7dug2x.deta.dev/)
+Ejemplo: [https://7dug2x.deta.dev](https://7dug2x.deta.dev/)

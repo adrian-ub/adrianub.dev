@@ -11,7 +11,7 @@ categories:
   - angular
 ---
 
-[ControlValueAccessor](https://angular.io/api/forms/ControlValueAccessor) es una interfaz incluida en Angular. Actúa como un puente entre los elementos DOM y la API de forma angular.
+[ControlValueAccessor](https://angular.dev/api/forms/ControlValueAccessor) es una interfaz incluida en Angular. Actúa como un puente entre los elementos DOM y la API de forma angular.
 
 Entonces, si tiene un elemento personalizado que le gustaría conectar a su formulario, debe hacer uso de ControlValueAccessor para que el elemento sea compatible con la API de Angular Forms. Hacerlo permitirá que el elemento se conecte usando `ngModel` (Formularios controlados por plantillas) o `formControl` (Formularios reactivos).
 
@@ -119,10 +119,10 @@ interface ControlValueAccessor {
 
 Veamos qué está haciendo cada uno de los métodos. Una vez que tengamos claro cómo están las cosas, podemos sumergirnos en la implementación.
 
-- `writeValue()` - la API de formularios llama a esta función para actualizar el valor del elemento. Cuando el valor de ngModel o formControl cambia, se llama a esta función y se pasa el último valor como argumento de la función. Podemos utilizar el último valor y realizar cambios en el componente. ([referencia](https://angular.io/api/forms/ControlValueAccessor#writevalue))
-- `registerOnChange()` - obtenemos acceso a una función en el argumento que se puede guardar en una variable local. Entonces esta función se puede llamar cuando hay algún cambio en el valor de nuestro control de formulario personalizado. ([referencia](https://angular.io/api/forms/ControlValueAccessor#registerOnChange))
-- `registerOnTouched()` - obtenemos acceso a otra función que se puede utilizar para actualizar el estado del formulario ha sido tocado (`touched`). Entonces, cuando el usuario interactúa con nuestro elemento de formulario personalizado, podemos llamar a la función guardada para que Angular sepa que se ha interactuado con el elemento. ([referencia](https://angular.io/api/forms/ControlValueAccessor#registerOnTouched))
-- `setDisabledState()` - esta función será llamada por la API de formularios cuando se cambie el estado deshabilitado (`disabled`). Podemos obtener el estado actual y actualizar el estado del control de formulario personalizado. ([referencia](https://angular.io/api/forms/ControlValueAccessor#setDisabledState))
+- `writeValue()` - la API de formularios llama a esta función para actualizar el valor del elemento. Cuando el valor de ngModel o formControl cambia, se llama a esta función y se pasa el último valor como argumento de la función. Podemos utilizar el último valor y realizar cambios en el componente. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#writevalue))
+- `registerOnChange()` - obtenemos acceso a una función en el argumento que se puede guardar en una variable local. Entonces esta función se puede llamar cuando hay algún cambio en el valor de nuestro control de formulario personalizado. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#registerOnChange))
+- `registerOnTouched()` - obtenemos acceso a otra función que se puede utilizar para actualizar el estado del formulario ha sido tocado (`touched`). Entonces, cuando el usuario interactúa con nuestro elemento de formulario personalizado, podemos llamar a la función guardada para que Angular sepa que se ha interactuado con el elemento. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#registerOnTouched))
+- `setDisabledState()` - esta función será llamada por la API de formularios cuando se cambie el estado deshabilitado (`disabled`). Podemos obtener el estado actual y actualizar el estado del control de formulario personalizado. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#setDisabledState))
 
 Una vez que implementamos estas funciones, el siguiente paso es proporcionar el token `NG_VALUE_ACCESSOR` en la matriz de proveedores del componente así:
 

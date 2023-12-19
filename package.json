@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@11ty/eleventy-fetch": "^4.0.0",
     "@astrojs/mdx": "^2.0.1",
     "@astrojs/partytown": "^2.0.2",
     "@astrojs/rss": "^4.0.1",
@@ -24,6 +25,7 @@
     "cal-sans": "^1.0.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "linkedom": "^0.16.5",
     "markdown-it": "^13.0.2",
     "mdast-util-to-string": "^4.0.0",
     "reading-time-estimator": "^1.9.0",
