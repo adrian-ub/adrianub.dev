@@ -1,0 +1,13 @@
+---
+import { ub } from "@/utils/ub";
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"div">;
+---
+
+<div
+  class={ub("flex flex-col space-y-1.5", Astro.props.class)}
+  {...Astro.props}
+>
+  <slot />
+</div>

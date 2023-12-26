@@ -1,0 +1,197 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import BaseHead from "@/components/common/BaseHead.astro";
+import Section from "@/components/ui/Section.astro";
+import Badge from "@/components/ui/Badge.astro";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Resume } from "@/utils/resume";
+import ProjectCard from "@/components/curriculum/ProjectCard.astro";
+import Button from "@/components/ui/Button.astro";
+import author from "@/assets/author.png";
+import Header from "@/components/header/Header.astro";
+
+const curriculum = await fetch(
+  "https://gist.githubusercontent.com/adrian-ub/cc2a544633b46e0d9d1126bc5fd4504e/raw/5fef11e6dd7659efcd0697452ffb12b96800745d/resume.json",
+).then((res) => res.json() as Resume);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title="Curriculum" description="" />
+  </head>
+  <body>
+    <main
+      class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16"
+    >
+      <section class="mx-auto w-full max-w-2xl space-y-8 print:space-y-6">
+        <div class="flex items-center justify-between">
+          <div class="flex-1 space-y-1.5">
+            <h1 class="text-2xl font-bold">{curriculum.basics!.name}</h1>
+            <p
+              class="max-w-md text-pretty font-mono text-sm text-muted-foreground"
+            >
+              {curriculum.basics!.label}
+            </p>
+            <p
+              class="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground"
+            >
+              <a
+                class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
+                href={"https://www.google.com/maps/place/" +
+                  curriculum.basics!.location!.address}
+                target="_blank"
+              >
+                <Icon name="lucide:globe" class="h-3 w-3" />
+                {curriculum.basics!.location!.address}
+              </a>
+            </p>
+            <div
+              class="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden"
+            >
+              {
+                curriculum.basics!.profiles!.map((profile) => {
+                  return (
+                    <a href={profile.url}>
+                      <Button class="h-8 w-8" variant="outline" size="icon">
+                        <Icon
+                          name={
+                            "simple-icons:" + profile.network?.toLowerCase()
+                          }
+                          class="h-4 w-4"
+                        />
+                      </Button>
+                    </a>
+                  );
+                })
+              }
+            </div>
+            <div
+              class="hidden flex-col gap-x-1 font-mono text-sm text-muted-foreground print:flex"
+            >
+            </div>
+          </div>
+
+          <span
+            class="relative flex shrink-0 overflow-hidden rounded-xl h-28 w-28"
+          >
+            <Image
+              src={author}
+              class="aspect-square h-full w-full"
+              alt="Adrián UB"
+            />
+          </span>
+        </div>
+        <Section>
+          <h2 class="text-xl font-bold">Sobre mí</h2>
+          <p
+            class="text-pretty font-mono text-sm text-muted-foreground"
+            set:text={curriculum.basics!.summary}
+          />
+        </Section>
+
+        <Section>
+          <h2 class="text-xl font-bold">Experiencia laboral</h2>
+          {
+            curriculum.work!.map((work) => {
+              return (
+                <Card class="bg-transparent">
+                  <CardHeader>
+                    <div class="flex items-center justify-between gap-x-2 text-base">
+                      <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                        <a class="hover:underline" href={work.url}>
+                          {work.name}
+                        </a>
+
+                        <span class="inline-flex gap-x-1">
+                          {work.highlights!.map((badge) => (
+                            <Badge
+                              variant="secondary"
+                              class="align-middle text-xs"
+                            >
+                              {badge}
+                            </Badge>
+                          ))}
+                        </span>
+                      </h3>
+                      <div class="text-sm tabular-nums text-gray-500">
+                        {work.startDate}
+                        {work.startDate && work.endDate ? "-" : ""}{" "}
+                        {work.endDate}
+                      </div>
+                    </div>
+
+                    <h4 class="font-mono text-sm leading-none">
+                      {work.position}
+                    </h4>
+                  </CardHeader>
+                  <CardContent class="mt-2 text-xs" set:text={work.summary} />
+                </Card>
+              );
+            })
+          }
+        </Section>
+
+        <Section>
+          <h2 class="text-xl font-bold">Educación</h2>
+          {
+            curriculum.education!.map((education) => {
+              return (
+                <Card class="bg-transparent">
+                  <CardHeader>
+                    <div class="flex items-center justify-between gap-x-2 text-base">
+                      <h3 class="font-semibold leading-none">
+                        {education.institution}
+                      </h3>
+                      <div class="text-sm tabular-nums text-gray-500">
+                        {education.startDate}
+                        {education.startDate && education.endDate
+                          ? "-"
+                          : ""}{" "}
+                        {education.endDate}
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent class="mt-2">{education.area}</CardContent>
+                </Card>
+              );
+            })
+          }
+        </Section>
+
+        <Section>
+          <h2 class="text-xl font-bold">Habilidades</h2>
+          <div class="flex flex-wrap gap-1">
+            {
+              curriculum.skills!.map((skill) => {
+                return <Badge>{skill.name}</Badge>;
+              })
+            }
+          </div>
+        </Section>
+
+        <Section class="print-force-new-page scroll-mb-16">
+          <h2 class="text-xl font-bold">Proyectos</h2>
+          <div
+            class="-mx-3 grid grid-cols-1 gap-3 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {
+              curriculum.projects!.map((project) => {
+                return (
+                  <ProjectCard
+                    title={project.name!}
+                    description={project.summary!}
+                    tags={[]}
+                    link={project.url!}
+                  />
+                );
+              })
+            }
+          </div>
+        </Section>
+      </section>
+    </main>
+  </body>
+</html>

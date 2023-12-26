@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { Picture } from "astro:assets";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 
 import FormattedDate from "@/components/format/FormattedDate.astro";
 import noContent from "@/assets/no-content.png";
@@ -39,7 +39,7 @@ const {
           href={`/${slug}/`}
           class="mr-4 flex flex-row items-center"
         >
-          <Icon class="mr-1 h-4 w-4 fill-current" name="bi:book" />
+          <Icon class="mr-1 h-4 w-4 fill-current" name="lucide:book-open" />
           <span>{minutesRead}</span>
         </a>
       </div>

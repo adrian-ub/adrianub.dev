@@ -8,6 +8,7 @@ import { remarkReadingTime } from "./plugins/reading-time";
 
 import critters from "astro-critters";
 import expressiveCode from "astro-expressive-code";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,6 +32,7 @@ export default defineConfig({
     ],
   },
   integrations: [
+    icon(),
     sitemap(),
     tailwind({
       applyBaseStyles: false,

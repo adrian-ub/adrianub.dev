@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   type: "check" | "cross";
@@ -13,8 +13,8 @@ const className = {
 }[type];
 
 const icon = {
-  check: "check",
-  cross: "cross",
+  check: "lucide:check",
+  cross: "lucide:x",
 }[type];
 ---
 

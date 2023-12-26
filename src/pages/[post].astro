@@ -2,7 +2,7 @@
 import { type CollectionEntry, getEntries } from "astro:content";
 import { Picture } from "astro:assets";
 
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 
 import BaseHead from "@/components/common/BaseHead.astro";
 import Header from "@/components/header/Header.astro";
@@ -131,7 +131,10 @@ const {
                       ·
                     </span>
                     <p class="flex flex-row items-center text-muted-foreground">
-                      <Icon class="mr-2 h-5 w-5 opacity-75" name="bi:book" />
+                      <Icon
+                        class="mr-2 h-5 w-5 opacity-75"
+                        name="lucide:book-open"
+                      />
                       <span>{minutesRead}</span>
                     </p>
                   </div>
