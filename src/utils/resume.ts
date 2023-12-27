@@ -345,7 +345,7 @@ export interface Project extends Occupation {
    *
    * For example: Collated works of 2017.
    */
-  summary?: string;
+  description?: string;
 
   /** What the individual achieved during the project. */
   highlights?: string[];

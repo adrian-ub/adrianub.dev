@@ -6,14 +6,14 @@ import BaseHead from "@/components/common/BaseHead.astro";
 import Section from "@/components/ui/Section.astro";
 import Badge from "@/components/ui/Badge.astro";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Resume } from "@/utils/resume";
+import type { Resume } from "@/utils/resume";
 import ProjectCard from "@/components/curriculum/ProjectCard.astro";
 import Button from "@/components/ui/Button.astro";
 import author from "@/assets/author.png";
-import Header from "@/components/header/Header.astro";
+import { formatDate } from "@/utils/format-date";
 
 const curriculum = await fetch(
-  "https://gist.githubusercontent.com/adrian-ub/cc2a544633b46e0d9d1126bc5fd4504e/raw/5fef11e6dd7659efcd0697452ffb12b96800745d/resume.json",
+  "https://raw.githubusercontent.com/adrian-ub/resume/main/resume.json",
 ).then((res) => res.json() as Resume);
 ---
 
@@ -41,11 +41,11 @@ const curriculum = await fetch(
               <a
                 class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
                 href={"https://www.google.com/maps/place/" +
-                  curriculum.basics!.location!.address}
+                  curriculum.basics!.location!.region}
                 target="_blank"
               >
                 <Icon name="lucide:globe" class="h-3 w-3" />
-                {curriculum.basics!.location!.address}
+                {curriculum.basics!.location!.region}
               </a>
             </p>
             <div
@@ -88,7 +88,7 @@ const curriculum = await fetch(
           <h2 class="text-xl font-bold">Sobre mí</h2>
           <p
             class="text-pretty font-mono text-sm text-muted-foreground"
-            set:text={curriculum.basics!.summary}
+            set:text={curriculum.basics!.summary?.toString()}
           />
         </Section>
 
@@ -117,9 +117,19 @@ const curriculum = await fetch(
                         </span>
                       </h3>
                       <div class="text-sm tabular-nums text-gray-500">
-                        {work.startDate}
+                        {work.startDate &&
+                          formatDate(work.startDate, {
+                            year: "numeric",
+                            month: "short",
+                            day: undefined,
+                          })}
                         {work.startDate && work.endDate ? "-" : ""}{" "}
-                        {work.endDate}
+                        {work.endDate &&
+                          formatDate(work.endDate, {
+                            year: "numeric",
+                            month: "short",
+                            day: undefined,
+                          })}
                       </div>
                     </div>
 
@@ -146,11 +156,19 @@ const curriculum = await fetch(
                         {education.institution}
                       </h3>
                       <div class="text-sm tabular-nums text-gray-500">
-                        {education.startDate}
-                        {education.startDate && education.endDate
-                          ? "-"
-                          : ""}{" "}
-                        {education.endDate}
+                        {education.startDate &&
+                          formatDate(education.startDate, {
+                            year: "numeric",
+                            month: "short",
+                            day: undefined,
+                          })}
+                        {education.startDate && education.endDate ? "-" : ""}{" "}
+                        {education.endDate &&
+                          formatDate(education.endDate, {
+                            year: "numeric",
+                            month: "short",
+                            day: undefined,
+                          })}
                       </div>
                     </div>
                   </CardHeader>
@@ -182,7 +200,7 @@ const curriculum = await fetch(
                 return (
                   <ProjectCard
                     title={project.name!}
-                    description={project.summary!}
+                    description={project.description!}
                     tags={[]}
                     link={project.url!}
                   />
