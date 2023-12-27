@@ -123,13 +123,14 @@ const curriculum = await fetch(
                             month: "short",
                             day: undefined,
                           })}
-                        {work.startDate && work.endDate ? "-" : ""}{" "}
-                        {work.endDate &&
-                          formatDate(work.endDate, {
-                            year: "numeric",
-                            month: "short",
-                            day: undefined,
-                          })}
+                        -
+                        {work.endDate
+                          ? formatDate(work.endDate, {
+                              year: "numeric",
+                              month: "short",
+                              day: undefined,
+                            })
+                          : "presente"}
                       </div>
                     </div>
 
