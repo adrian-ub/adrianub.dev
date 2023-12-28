@@ -12,7 +12,7 @@ const { categories } = Astro.props;
 
 {
   !!categories.length && (
-    <div class="mb-5 flex w-full flex-row flex-wrap justify-center md:mb-0">
+    <div class="mb-5 flex w-full flex-row flex-wrap justify-center md:mb-0 space-x-2">
       {categories.map((category) => (
         <a href={"/tag/" + category.slug + "/"}>
           <Badge>{category.data.title}</Badge>
