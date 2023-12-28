@@ -1,10 +1,15 @@
+import { fileURLToPath } from "node:url";
+import { dirname, relative } from "node:path";
+import { spawn } from "node:child_process";
+
 import { defineConfig } from "astro/config";
-import rehypeExternalLinks from "rehype-external-links";
+
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 
+import rehypeExternalLinks from "rehype-external-links";
 import critters from "astro-critters";
 import icon from "astro-icon";
 
@@ -98,10 +103,10 @@ export default defineConfig({
     mdx(),
     partytown(),
     critters(),
-    () => ({
+    {
+      name: "pagefind",
       hooks: {
         "astro:build:done": ({ dir }) => {
-          if (!userConfig.pagefind) return;
           const targetDir = fileURLToPath(dir);
           const cwd = dirname(fileURLToPath(import.meta.url));
           const relativeDir = relative(cwd, targetDir);
@@ -114,6 +119,6 @@ export default defineConfig({
           });
         },
       },
-    }),
+    },
   ],
 });
