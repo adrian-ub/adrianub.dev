@@ -25,13 +25,14 @@ En el padre, los valores se tomarán y usarán para parchear el formulario. Esto
 
 Primero, cree un nuevo `RatingInputComponent`. Esto se puede lograr con `@angular/cli`:
 
-```sh
+```sh title="Crear proyecto"
 ng generate component rating-input --inline-template --inline-style
 ```
 
 Esto agregará el nuevo componente a las `declarations` de la aplicación y producirá un archivo `rating-input.component.ts`:
 
-```ts title="rating-input.component.ts"
+```ts
+// rating-input.component.ts
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -48,7 +49,8 @@ export class RatingInputComponent implements OnInit {
 
 Agregamos la plantilla, los estilos y la lógica:
 
-```ts title="rating-input.component.ts"
+```ts
+// rating-input.component.ts
 import { Component } from "@angular/core";
 
 @Component({
@@ -92,13 +94,14 @@ Podemos obtener el `value` del componente (`0` a `5`) y establecer el valor del 
 
 Puede agregar el componente a la aplicación: `src/app/app.component.html`
 
-```html title="app.component.html"
+```html
+<!-- app.component.html -->
 <app-rating-input></app-rating-input>
 ```
 
 Y ejecute la aplicación:
 
-```sh
+```sh title="Ejecutar aplicación"
 ng serve
 ```
 
@@ -126,7 +129,8 @@ Veamos qué está haciendo cada uno de los métodos. Una vez que tengamos claro 
 
 Una vez que implementamos estas funciones, el siguiente paso es proporcionar el token `NG_VALUE_ACCESSOR` en la matriz de proveedores del componente así:
 
-```ts title="rating-input.component.ts" /CONTROL_VALUE_ACCESSOR/
+```ts /CONTROL_VALUE_ACCESSOR/
+// rating-input.component.ts
 const CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => RatingInputComponent),
@@ -149,7 +153,8 @@ Aquí creé una constante de proveedor y luego la pasé a los providers. Es nece
 
 Volvamos a `rating-input.component.ts` en el editor de código y realicemos los siguientes cambios:
 
-```ts title="rating-input.component.ts"
+```ts
+// rating-input.component.ts
 import { Component, forwardRef, HostBinding, Input } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -241,7 +246,8 @@ export class RatingInputComponent implements ControlValueAccessor {
 
 Ahora puede desactivar los controles del input, agregar un `[(ngModel)]` o un `formControlName`:
 
-```html title="app.component.html" "[disabled]" "[(ngModel)]" "formControlName"
+```html "[disabled]" "[(ngModel)]" "formControlName"
+<!-- app.component.html -->
 <app-rating-input [disabled]="true"></app-rating-input>
 
 <app-rating-input [(ngModel)]="rating"></app-rating-input>

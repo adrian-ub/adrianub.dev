@@ -10,13 +10,15 @@ author: adrianub
 categories: []
 ---
 
+import { Tabs, TabItem } from "@/components/tabs";
+
 Hola desarrolladores, vamos a ver cómo configurar de manera manual un entorno de desarrollo con Laravel 8 y TailwindCSS 2.
 
 ## Crear un nuevo proyecto
 
 Siguiendo la documentación de laravel crearemos un nuevo proyecto con `composer`
 
-```sh
+```sh title="Creando proyecto..."
 composer create-project laravel/laravel laravel-tailwind
 ```
 
@@ -24,19 +26,28 @@ composer create-project laravel/laravel laravel-tailwind
 
 Luego de crear nuestro proyecto seguiremos a instalar nuestras dependencias para el desarrollo a través de `npm`:
 
-```sh
+<Tabs>
+  <TabItem label="npm">
+
+```sh title="Instalando dependencias..."
 npm i -D tailwindcss autoprefixer postcss sass sass-loader
 ```
 
-o si está usando `yarn` cómo administrador de paquetes:
+  </TabItem>
 
-```sh
+  <TabItem label="yarn">
+
+```sh title="Instalando dependencias..."
 yarn add -D tailwindcss autoprefixer postcss sass sass-loader
 ```
 
+  </TabItem>
+</Tabs>
+
 Al momento de escribir este artículo las versiones instaladas en las dependencias son las siguientes:
 
-```json title="package.json"
+```json
+// package.json
 "devDependencies": {
    "autoprefixer": "^10.2.1",
    "laravel-mix": "^6.0.6",
@@ -51,13 +62,14 @@ Al momento de escribir este artículo las versiones instaladas en las dependenci
 
 A continuación, genera tu archivo `tailwind.config.js`:
 
-```sh
+```sh title="Inicializar tailwindcss"
 npx tailwindcss init
 ```
 
 Esto creará un archivo `tailwind.config.js` mínimo en la raíz de su proyecto:
 
-```js title="tailwind.config.js"
+```js
+// tailwind.config.js
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -73,7 +85,8 @@ module.exports = {
 
 Configuremos Tailwind para eliminar los estilos no utilizados en producción:
 
-```js title="tailwind.config.js" {1,19}
+```js {1,19}
+// tailwind.config.js
 module.exports = (isProd) => ({
   purge: [],
   purge: {
@@ -97,7 +110,8 @@ module.exports = (isProd) => ({
 
 ### Configuración para AlpineJs
 
-```js title="tailwind.config.js" {1-13,22}
+```js {1-13,22}
+// tailwind.config.js
 module.exports = (isProd) => ({
   purge: {
     enabled: isProd,
@@ -126,7 +140,8 @@ module.exports = (isProd) => ({
 
 Vamos a la ruta `resources/sass`y creamos un archivo llamado `app.scss`:
 
-```css title="app.scss"
+```css
+// app.scss
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -136,7 +151,8 @@ Vamos a la ruta `resources/sass`y creamos un archivo llamado `app.scss`:
 
 En su `webpack.mix.js`, agregue `tailwindcss`:
 
-```javascript title="webpack.mix.js"
+```javascript
+// webpack.mix.js
 const mix = require("laravel-mix");
 const tailwindcss = require("tailwindcss");
 const isProd = mix.inProduction();
@@ -158,12 +174,22 @@ if (isProd) {
 
 Ahora solo falta correr el comando:
 
-```sh
-# Desarrollo
+<Tabs>
+<TabItem label="Desarrollo">
+
+```sh title="Levantar aplicación en modo desarrollo"
 npm run development
-# Producción
+```
+
+</TabItem>
+<TabItem label="Producción">
+
+```sh title="Compilar aplicación para producción"
 npm run production
 ```
+
+</TabItem>
+</Tabs>
 
 Agregar los estilos a tu aplicación:
 
