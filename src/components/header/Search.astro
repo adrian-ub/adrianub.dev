@@ -6,12 +6,19 @@ import Button from "../ui/Button.astro";
 ---
 
 <site-search>
-  <Button data-open-modal disabled variant="ghost" size="icon" name="search">
+  <Button
+    data-open-modal
+    disabled
+    variant="ghost"
+    size="icon"
+    id="search"
+    aria-label="Buscar"
+  >
     <Icon name="lucide:search" class="h-5 w-5" />
   </Button>
 
   <dialog style="padding:0" aria-label="Buscar">
-    <div class="dialog-frame sl-flex">
+    <div class="dialog-frame flex">
       <button data-close-modal class="flex md:hidden"> Cancelar</button>
       {
         import.meta.env.DEV ? (
