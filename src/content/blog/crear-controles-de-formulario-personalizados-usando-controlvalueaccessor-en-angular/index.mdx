@@ -31,7 +31,7 @@ ng generate component rating-input --inline-template --inline-style
 
 Esto agregará el nuevo componente a las `declarations` de la aplicación y producirá un archivo `rating-input.component.ts`:
 
-```ts
+```ts title="rating-input.component.ts"
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -48,7 +48,7 @@ export class RatingInputComponent implements OnInit {
 
 Agregamos la plantilla, los estilos y la lógica:
 
-```ts
+```ts title="rating-input.component.ts"
 import { Component } from "@angular/core";
 
 @Component({
@@ -92,7 +92,7 @@ Podemos obtener el `value` del componente (`0` a `5`) y establecer el valor del 
 
 Puede agregar el componente a la aplicación: `src/app/app.component.html`
 
-```html
+```html title="app.component.html"
 <app-rating-input></app-rating-input>
 ```
 
@@ -126,7 +126,7 @@ Veamos qué está haciendo cada uno de los métodos. Una vez que tengamos claro 
 
 Una vez que implementamos estas funciones, el siguiente paso es proporcionar el token `NG_VALUE_ACCESSOR` en la matriz de proveedores del componente así:
 
-```ts /CONTROL_VALUE_ACCESSOR/
+```ts title="rating-input.component.ts" /CONTROL_VALUE_ACCESSOR/
 const CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => RatingInputComponent),
@@ -145,7 +145,7 @@ export class RatingInputComponent {}
 
 Volvamos a `rating-input.component.ts` en el editor de código y realicemos los siguientes cambios:
 
-```ts
+```ts title="rating-input.component.ts"
 import { Component, forwardRef, HostBinding, Input } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -237,7 +237,7 @@ export class RatingInputComponent implements ControlValueAccessor {
 
 Ahora puede desactivar los controles del input, agregar un `[(ngModel)]` o un `formControlName`:
 
-```html "[disabled]" "[(ngModel)]" "formControlName"
+```html title="app.component.html" "[disabled]" "[(ngModel)]" "formControlName"
 <app-rating-input [disabled]="true"></app-rating-input>
 
 <app-rating-input [(ngModel)]="rating"></app-rating-input>

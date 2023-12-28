@@ -12,6 +12,7 @@ const linkHeadingStyles = {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  darkMode: ["class", '[data-theme="dark"]'],
   theme: {
     container: {
       center: true,
@@ -105,12 +106,6 @@ module.exports = {
                 borderBottomColor: `${colors.cyan[200]} !important`,
                 background: colors.cyan[200],
               },
-            },
-            code: {
-              color: "#86e1fc",
-              "&::before": { content: `"" !important` },
-              "&::after": { content: `"" !important` },
-              fontWeight: "normal",
             },
           },
         },

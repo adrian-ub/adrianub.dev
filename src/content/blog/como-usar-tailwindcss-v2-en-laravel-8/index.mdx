@@ -36,7 +36,7 @@ yarn add -D tailwindcss autoprefixer postcss sass sass-loader
 
 Al momento de escribir este artículo las versiones instaladas en las dependencias son las siguientes:
 
-```json
+```json title="package.json"
 "devDependencies": {
    "autoprefixer": "^10.2.1",
    "laravel-mix": "^6.0.6",
@@ -57,7 +57,7 @@ npx tailwindcss init
 
 Esto creará un archivo `tailwind.config.js` mínimo en la raíz de su proyecto:
 
-```js
+```js title="tailwind.config.js"
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -73,7 +73,7 @@ module.exports = {
 
 Configuremos Tailwind para eliminar los estilos no utilizados en producción:
 
-```js {1,19}
+```js title="tailwind.config.js" {1,19}
 module.exports = (isProd) => ({
   purge: [],
   purge: {
@@ -97,7 +97,7 @@ module.exports = (isProd) => ({
 
 ### Configuración para AlpineJs
 
-```js {1-13,22}
+```js title="tailwind.config.js" {1-13,22}
 module.exports = (isProd) => ({
   purge: {
     enabled: isProd,
@@ -126,7 +126,7 @@ module.exports = (isProd) => ({
 
 Vamos a la ruta `resources/sass`y creamos un archivo llamado `app.scss`:
 
-```css
+```css title="app.scss"
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -136,7 +136,7 @@ Vamos a la ruta `resources/sass`y creamos un archivo llamado `app.scss`:
 
 En su `webpack.mix.js`, agregue `tailwindcss`:
 
-```javascript
+```javascript title="webpack.mix.js"
 const mix = require("laravel-mix");
 const tailwindcss = require("tailwindcss");
 const isProd = mix.inProduction();

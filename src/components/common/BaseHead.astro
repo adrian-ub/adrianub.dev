@@ -6,6 +6,7 @@ import "@fontsource-variable/inter";
 import "cal-sans";
 
 import defaultOg from "@/assets/default-og.png";
+import { ThemeProvider } from "../theme";
 
 interface Props {
   title: string;
@@ -58,4 +59,5 @@ let { title, description, image } = Astro.props;
   src="https://static.cloudflareinsights.com/beacon.min.js"
   data-cf-beacon='{"token": "ec08c32d183049fca02b6850b6b667be"}'></script>
 
-<ViewTransitions fallback="swap" />
+<!-- <ViewTransitions fallback="swap" /> -->
+<ThemeProvider />
