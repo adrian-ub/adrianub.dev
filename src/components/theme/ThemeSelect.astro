@@ -4,14 +4,26 @@ import Button from "../ui/Button.astro";
 ---
 
 <starlight-theme-select>
-  <div class="dark:block hidden">
-    <Button id="select-light" size="icon" variant="ghost" name="selectlight">
+  <div class="dark:block hidden transition duration-100 ease-in-out">
+    <Button
+      id="select-light"
+      size="icon"
+      variant="ghost"
+      name="selectlight"
+      class="blog-theme-switcher"
+    >
       <Icon name="lucide:sun" class="h-5 w-5" />
     </Button>
   </div>
 
-  <div class="dark:hidden block">
-    <Button id="select-dark" size="icon" variant="ghost" name="selectdark">
+  <div class="dark:hidden block transition duration-100 ease-in-out">
+    <Button
+      id="select-dark"
+      size="icon"
+      variant="ghost"
+      name="selectdark"
+      class="blog-theme-switcher"
+    >
       <Icon name="lucide:moon" class="w-5 h-5" />
     </Button>
   </div>

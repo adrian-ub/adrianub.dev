@@ -88,3 +88,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(240deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.blog-theme-switcher {
+  animation: rotate 5s infinite;
+}
