@@ -141,7 +141,11 @@ const CONTROL_VALUE_ACCESSOR: Provider = {
 export class RatingInputComponent {}
 ```
 
-> Nota: Aquí creé una constante de proveedor y luego la pasé a los providers. También puede ver el uso de forwardRef aquí (referencia). Es necesario porque nos referimos a la clase RatingInputComponent que no está definida antes de su referencia. Entonces, ahora que sabemos lo que hace cada una de estas funciones, podemos comenzar a implementar nuestro elemento de formulario personalizado.
+:::note
+
+Aquí creé una constante de proveedor y luego la pasé a los providers. Es necesario porque nos referimos a la clase RatingInputComponent que no está definida antes de su referencia. Entonces, ahora que sabemos lo que hace cada una de estas funciones, podemos comenzar a implementar nuestro elemento de formulario personalizado.
+
+:::
 
 Volvamos a `rating-input.component.ts` en el editor de código y realicemos los siguientes cambios:
 

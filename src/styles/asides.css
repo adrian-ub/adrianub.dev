@@ -1,0 +1,49 @@
+.ub-aside {
+  padding: 1rem;
+  border-inline-start: 0.25rem solid;
+  color: var(--ub-color-white);
+}
+.ub-aside--note {
+  --ub-color-asides-text-accent: var(--ub-color-blue-high);
+  border-color: var(--ub-color-blue);
+  background-color: var(--ub-color-blue-low);
+}
+.ub-aside--tip {
+  --ub-color-asides-text-accent: var(--ub-color-purple-high);
+  border-color: var(--ub-color-purple);
+  background-color: var(--ub-color-purple-low);
+}
+.ub-aside--caution {
+  --ub-color-asides-text-accent: var(--ub-color-orange-high);
+  border-color: var(--ub-color-orange);
+  background-color: var(--ub-color-orange-low);
+}
+.ub-aside--danger {
+  --ub-color-asides-text-accent: var(--ub-color-red-high);
+  border-color: var(--ub-color-red);
+  background-color: var(--ub-color-red-low);
+}
+
+.ub-aside__title {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: var(--ub-text-h5);
+  font-weight: 600;
+  line-height: var(--ub-line-height-headings);
+  color: var(--ub-color-asides-text-accent);
+}
+
+.ub-aside__icon {
+  font-size: 1.333em;
+  width: 1em;
+  height: 1em;
+}
+
+.ub-aside__title + .ub-aside__content {
+  margin-top: 0.5rem;
+}
+
+.ub-aside__content a {
+  color: var(--ub-color-asides-text-accent);
+}

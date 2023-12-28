@@ -13,6 +13,7 @@ import { remarkReadingTime } from "./plugins/reading-time";
 
 import { pageFind } from "./integrations/pagefind";
 import { expressiveCode } from "./integrations/expressive-code";
+import { asides } from "./integrations/asides";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +21,7 @@ export default defineConfig({
   trailingSlash: "always",
   markdown: {
     syntaxHighlight: false,
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [remarkReadingTime, ...asides()],
     rehypePlugins: [
       [
         rehypeExternalLinks,

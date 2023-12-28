@@ -3,6 +3,7 @@
 @import "tailwindcss/utilities";
 @import "./props.css";
 @import "./shiki.css";
+@import "./asides.css";
 
 :root {
   color-scheme: dark;
