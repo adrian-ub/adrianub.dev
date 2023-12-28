@@ -1,16 +1,60 @@
-<script
-  src="https://giscus.app/client.js"
-  id="comments"
-  data-repo="adrian-ub/adrianub-comments"
-  data-repo-id="R_kgDOJfx1UA="
-  data-category="Comments"
-  data-category-id="DIC_kwDOJfx1UM4CWUIe"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactionsenabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="dark"
-  data-lang="es"
-  crossorigin="anonymous"
-  async></script>
+<div class="blog-post-comment"></div>
+<script is:inline>
+  function getGiscusTheme() {
+    const localTheme = localStorage.getItem("theme");
+    const giscusTheme = localTheme === "dark" ? "dark" : "light";
+    return giscusTheme;
+  }
+
+  function sendMessage(message) {
+    const iframe = document.querySelector("iframe.giscus-frame");
+    if (!iframe) return;
+    iframe.contentWindow.postMessage({ giscus: message }, "https://giscus.app");
+  }
+
+  function setGiscusTheme() {
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(),
+      },
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const giscusAttributes = {
+      src: "https://giscus.app/client.js",
+      id: "comments",
+      "data-repo": "adrian-ub/adrianub-comments",
+      "data-repo-id": "R_kgDOJfx1UA:",
+      "data-category": "Comments",
+      "data-category-id": "DIC_kwDOJfx1UM4CWUIe",
+      "data-mapping": "pathname",
+      "data-strict": "1",
+      "data-reactionsenabled": "1",
+      "data-emit-metadata": "0",
+      "data-input-position": "top",
+      "data-theme": getGiscusTheme(),
+      "data-lang": "es",
+      crossorigin: "anonymous",
+      async: "",
+    };
+
+    const giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusScript.setAttribute(key, value),
+    );
+    document
+      .getElementsByClassName("blog-post-comment")[0]
+      .appendChild(giscusScript);
+
+    const lightButton = document.querySelector("#select-light");
+    if (lightButton) {
+      lightButton.addEventListener("click", setGiscusTheme);
+    }
+
+    const darkButton = document.querySelector("#select-dark");
+    if (darkButton) {
+      darkButton.addEventListener("click", setGiscusTheme);
+    }
+  });
+</script>

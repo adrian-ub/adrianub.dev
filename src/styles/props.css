@@ -1,0 +1,187 @@
+:root,
+::backdrop {
+  /* Colors (dark mode) */
+  --ub-color-white: hsl(0, 0%, 100%); /* “white” */
+  --ub-color-gray-1: hsl(224, 20%, 94%);
+  --ub-color-gray-2: hsl(224, 6%, 77%);
+  --ub-color-gray-3: hsl(224, 6%, 56%);
+  --ub-color-gray-4: hsl(224, 7%, 36%);
+  --ub-color-gray-5: hsl(224, 10%, 23%);
+  --ub-color-gray-6: hsl(224, 14%, 16%);
+  --ub-color-black: hsl(224, 10%, 10%);
+
+  --ub-hue-orange: 41;
+  --ub-color-orange-low: hsl(var(--ub-hue-orange), 39%, 22%);
+  --ub-color-orange: hsl(var(--ub-hue-orange), 82%, 63%);
+  --ub-color-orange-high: hsl(var(--ub-hue-orange), 82%, 87%);
+  --ub-hue-green: 101;
+  --ub-color-green-low: hsl(var(--ub-hue-green), 39%, 22%);
+  --ub-color-green: hsl(var(--ub-hue-green), 82%, 63%);
+  --ub-color-green-high: hsl(var(--ub-hue-green), 82%, 80%);
+  --ub-hue-blue: 234;
+  --ub-color-blue-low: hsl(var(--ub-hue-blue), 54%, 20%);
+  --ub-color-blue: hsl(var(--ub-hue-blue), 100%, 60%);
+  --ub-color-blue-high: hsl(var(--ub-hue-blue), 100%, 87%);
+  --ub-hue-purple: 281;
+  --ub-color-purple-low: hsl(var(--ub-hue-purple), 39%, 22%);
+  --ub-color-purple: hsl(var(--ub-hue-purple), 82%, 63%);
+  --ub-color-purple-high: hsl(var(--ub-hue-purple), 82%, 89%);
+  --ub-hue-red: 339;
+  --ub-color-red-low: hsl(var(--ub-hue-red), 39%, 22%);
+  --ub-color-red: hsl(var(--ub-hue-red), 82%, 63%);
+  --ub-color-red-high: hsl(var(--ub-hue-red), 82%, 87%);
+
+  --ub-color-accent-low: hsl(224, 54%, 20%);
+  --ub-color-accent: hsl(224, 100%, 60%);
+  --ub-color-accent-high: hsl(224, 100%, 85%);
+
+  --ub-color-text: var(--ub-color-gray-2);
+  --ub-color-text-accent: var(--ub-color-accent-high);
+  --ub-color-text-invert: var(--ub-color-accent-low);
+  --ub-color-bg: var(--ub-color-black);
+  --ub-color-bg-nav: var(--ub-color-gray-6);
+  --ub-color-bg-sidebar: var(--ub-color-gray-6);
+  --ub-color-bg-inline-code: var(--ub-color-gray-5);
+  --ub-color-bg-accent: var(--ub-color-accent-high);
+  --ub-color-hairline-light: var(--ub-color-gray-5);
+  --ub-color-hairline: var(--ub-color-gray-6);
+  --ub-color-hairline-shade: var(--ub-color-black);
+
+  --ub-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+
+  /* Shadows (dark mode) */
+  --ub-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.12),
+    0px 2px 1px hsla(0, 0%, 0%, 0.24);
+  --ub-shadow-md: 0px 8px 4px hsla(0, 0%, 0%, 0.08),
+    0px 5px 2px hsla(0, 0%, 0%, 0.08), 0px 3px 2px hsla(0, 0%, 0%, 0.12),
+    0px 1px 1px hsla(0, 0%, 0%, 0.15);
+  --ub-shadow-lg: 0px 25px 7px hsla(0, 0%, 0%, 0.03),
+    0px 16px 6px hsla(0, 0%, 0%, 0.1), 0px 9px 5px hsla(223, 13%, 10%, 0.33),
+    0px 4px 4px hsla(0, 0%, 0%, 0.75), 0px 4px 2px hsla(0, 0%, 0%, 0.25);
+
+  /* Text size and line height */
+  --ub-text-xs: 0.8125rem; /* 13px */
+  --ub-text-sm: 0.875rem; /* 14px */
+  --ub-text-base: 1rem; /* 16px */
+  --ub-text-lg: 1.125rem; /* 18px */
+  --ub-text-xl: 1.25rem; /* 20px */
+  --ub-text-2xl: 1.5rem; /* 24px */
+  --ub-text-3xl: 1.8125rem; /* 29px */
+  --ub-text-4xl: 2.1875rem; /* 35px */
+  --ub-text-5xl: 2.625rem; /* 42px */
+  --ub-text-6xl: 4rem; /* 64px */
+
+  --ub-text-body: var(--ub-text-base);
+  --ub-text-body-sm: var(--ub-text-xs);
+  --ub-text-code: var(--ub-text-sm);
+  --ub-text-code-sm: var(--ub-text-xs);
+  --ub-text-h1: var(--ub-text-4xl);
+  --ub-text-h2: var(--ub-text-3xl);
+  --ub-text-h3: var(--ub-text-2xl);
+  --ub-text-h4: var(--ub-text-xl);
+  --ub-text-h5: var(--ub-text-lg);
+
+  --ub-line-height: 1.8;
+  --ub-line-height-headings: 1.2;
+
+  --ub-font-system: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --ub-font-system-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --__ub-font: var(--ub-font, ""), var(--ub-font-system);
+  --__ub-font-mono: var(--ub-font-mono, ""), var(--ub-font-system-mono);
+
+  /** Key layout values */
+  --ub-nav-height: 3.5rem;
+  --ub-nav-pad-x: 1rem;
+  --ub-nav-pad-y: 0.75rem;
+  --ub-mobile-toc-height: 3rem;
+  --ub-sidebar-width: 18.75rem;
+  --ub-sidebar-pad-x: 1rem;
+  --ub-content-width: 45rem;
+  --ub-content-pad-x: 1rem;
+  --ub-menu-button-size: 2rem;
+  --ub-nav-gap: var(--ub-content-pad-x);
+  /* Offset required to show outline inside an element instead of round the outside */
+  --ub-outline-offset-inside: -0.1875rem;
+
+  /* Global z-index values */
+  --ub-z-index-toc: 4;
+  --ub-z-index-menu: 5;
+  --ub-z-index-navbar: 10;
+  --ub-z-index-skiplink: 20;
+}
+
+:root[data-theme="light"],
+[data-theme="light"] ::backdrop {
+  /* Colours (light mode) */
+  --ub-color-white: hsl(224, 10%, 10%);
+  --ub-color-gray-1: hsl(224, 14%, 16%);
+  --ub-color-gray-2: hsl(224, 10%, 23%);
+  --ub-color-gray-3: hsl(224, 7%, 36%);
+  --ub-color-gray-4: hsl(224, 6%, 56%);
+  --ub-color-gray-5: hsl(224, 6%, 77%);
+  --ub-color-gray-6: hsl(224, 20%, 94%);
+  --ub-color-gray-7: hsl(224, 19%, 97%);
+  --ub-color-black: hsl(0, 0%, 100%);
+
+  --ub-color-orange-high: hsl(var(--ub-hue-orange), 80%, 25%);
+  --ub-color-orange: hsl(var(--ub-hue-orange), 90%, 60%);
+  --ub-color-orange-low: hsl(var(--ub-hue-orange), 90%, 88%);
+  --ub-color-green-high: hsl(var(--ub-hue-green), 80%, 22%);
+  --ub-color-green: hsl(var(--ub-hue-green), 90%, 46%);
+  --ub-color-green-low: hsl(var(--ub-hue-green), 85%, 90%);
+  --ub-color-blue-high: hsl(var(--ub-hue-blue), 80%, 30%);
+  --ub-color-blue: hsl(var(--ub-hue-blue), 90%, 60%);
+  --ub-color-blue-low: hsl(var(--ub-hue-blue), 88%, 90%);
+  --ub-color-purple-high: hsl(var(--ub-hue-purple), 90%, 30%);
+  --ub-color-purple: hsl(var(--ub-hue-purple), 90%, 60%);
+  --ub-color-purple-low: hsl(var(--ub-hue-purple), 80%, 90%);
+  --ub-color-red-high: hsl(var(--ub-hue-red), 80%, 30%);
+  --ub-color-red: hsl(var(--ub-hue-red), 90%, 60%);
+  --ub-color-red-low: hsl(var(--ub-hue-red), 80%, 90%);
+
+  --ub-color-accent-high: hsl(234, 80%, 30%);
+  --ub-color-accent: hsl(234, 90%, 60%);
+  --ub-color-accent-low: hsl(234, 88%, 90%);
+
+  --ub-color-text-accent: var(--ub-color-accent);
+  --ub-color-text-invert: var(--ub-color-black);
+  --ub-color-bg-nav: var(--ub-color-gray-7);
+  --ub-color-bg-sidebar: var(--ub-color-bg);
+  --ub-color-bg-inline-code: var(--ub-color-gray-6);
+  --ub-color-bg-accent: var(--ub-color-accent);
+  --ub-color-hairline-light: var(--ub-color-gray-6);
+  --ub-color-hairline-shade: var(--ub-color-gray-6);
+
+  --ub-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
+
+  /* Shadows (light mode) */
+  --ub-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06),
+    0px 2px 1px hsla(0, 0%, 0%, 0.06);
+  --ub-shadow-md: 0px 8px 4px hsla(0, 0%, 0%, 0.03),
+    0px 5px 2px hsla(0, 0%, 0%, 0.03), 0px 3px 2px hsla(0, 0%, 0%, 0.06),
+    0px 1px 1px hsla(0, 0%, 0%, 0.06);
+  --ub-shadow-lg: 0px 25px 7px rgba(0, 0, 0, 0.01),
+    0px 16px 6px hsla(0, 0%, 0%, 0.03), 0px 9px 5px hsla(223, 13%, 10%, 0.08),
+    0px 4px 4px hsla(0, 0%, 0%, 0.16), 0px 4px 2px hsla(0, 0%, 0%, 0.04);
+}
+
+@media (min-width: 50em) {
+  :root {
+    --ub-nav-height: 4rem;
+    --ub-nav-pad-x: 1.5rem;
+    --ub-text-h1: var(--ub-text-5xl);
+    --ub-text-h2: var(--ub-text-4xl);
+    --ub-text-h3: var(--ub-text-3xl);
+    --ub-text-h4: var(--ub-text-2xl);
+  }
+}
+
+@media (min-width: 72rem) {
+  :root {
+    --ub-content-pad-x: 1.5rem;
+    --ub-mobile-toc-height: 0rem;
+  }
+}

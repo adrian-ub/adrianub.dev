@@ -1,6 +1,8 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "./props.css";
+@import "./shiki.css";
 
 :root {
   color-scheme: dark;
@@ -27,20 +29,6 @@
   --input: 240 3.7% 15.9%;
   --ring: 240 4.9% 83.9%;
   --radius: 0.5rem;
-
-  --ub-color-white: hsl(0, 0%, 100%); /* “white” */
-  --ub-color-gray-1: hsl(224, 20%, 94%);
-  --ub-color-gray-2: hsl(224, 6%, 77%);
-  --ub-color-gray-3: hsl(224, 6%, 56%);
-  --ub-color-gray-4: hsl(224, 7%, 36%);
-  --ub-color-gray-5: hsl(224, 10%, 23%);
-  --ub-color-gray-6: hsl(224, 14%, 16%);
-  --ub-color-black: hsl(224, 10%, 10%);
-
-  --ub-color-accent-high: hsl(224, 100%, 85%);
-  --ub-color-accent: hsl(224, 100%, 60%);
-
-  --ub-color-text: var(--ub-color-gray-2);
 }
 
 :root[data-theme="light"] {
@@ -64,19 +52,6 @@
   --input: 240 5.9% 90%;
   --ring: 240 5.9% 10%;
   --radius: 0.5rem;
-
-  --ub-color-white: hsl(224, 10%, 10%);
-  --ub-color-gray-1: hsl(224, 14%, 16%);
-  --ub-color-gray-2: hsl(224, 10%, 23%);
-  --ub-color-gray-3: hsl(224, 7%, 36%);
-  --ub-color-gray-4: hsl(224, 6%, 56%);
-  --ub-color-gray-5: hsl(224, 6%, 77%);
-  --ub-color-gray-6: hsl(224, 20%, 94%);
-  --ub-color-gray-7: hsl(224, 19%, 97%);
-  --ub-color-black: hsl(0, 0%, 100%);
-
-  --ub-color-accent-high: hsl(234, 80%, 30%);
-  --ub-color-accent: hsl(234, 90%, 60%);
 }
 
 * {
