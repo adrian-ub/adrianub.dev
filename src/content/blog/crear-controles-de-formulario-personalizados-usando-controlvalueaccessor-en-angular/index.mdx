@@ -17,7 +17,7 @@ Entonces, si tiene un elemento personalizado que le gustaría conectar a su form
 
 Echemos un vistazo a cómo creamos un control de formulario personalizado
 
-Cuando comencé con Angular, no sabía que existía algo como esto. Recuerdo cuando escribí componentes secundarios para formularios y usé `@Input(){:.entity.name.function}` y `@Output(){:.entity.name.function}` para recibir y enviar valores de formulario al componente de formulario principal. Solía escuchar los cambios en el componente hijo y luego emitir los valores al padre.
+Cuando comencé con Angular, no sabía que existía algo como esto. Recuerdo cuando escribí componentes secundarios para formularios y usé `@Input()` y `@Output()` para recibir y enviar valores de formulario al componente de formulario principal. Solía escuchar los cambios en el componente hijo y luego emitir los valores al padre.
 
 En el padre, los valores se tomarán y usarán para parchear el formulario. Esto fue hasta que me encontré con el ControlValueAccessor. No más inputs y outputs, todo simplemente funciona.
 
