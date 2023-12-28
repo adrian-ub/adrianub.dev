@@ -7,6 +7,8 @@ import Button from "@/components/ui/Button.astro";
 import BackToHomeButton from "./BackToHomeButton.astro";
 import { ub } from "@/utils/ub";
 import { ThemeSelect } from "@/components/theme";
+import Search from "./Search.astro";
+
 interface Props {
   showBackButton?: boolean;
   showMenuButton?: boolean;
@@ -57,6 +59,7 @@ const {
       </div>
 
       <div class="flex flex-row items-center">
+        <Search />
         <div>
           <ThemeSelect />
         </div>

@@ -11,7 +11,7 @@ import icon from "astro-icon";
 import { remarkReadingTime } from "./plugins/reading-time";
 import {
   preprocessThemes,
-  applyStarlightUiThemeColors,
+  applyUiThemeColors,
 } from "./integrations/expressive-code/theming";
 import expressiveCode, {
   pluginFramesTexts,
@@ -54,13 +54,12 @@ export default defineConfig({
       themes,
       defaultLocale: "es",
       customizeTheme: (theme) => {
-        applyStarlightUiThemeColors(theme);
+        applyUiThemeColors(theme);
 
         return theme;
       },
       themeCssSelector: (theme, { styleVariants }) => {
         // If one dark and one light theme are available, and the user has not disabled it,
-        // generate theme CSS selectors compatible with Starlight's dark mode switch
         if (styleVariants.length >= 2) {
           const baseTheme = styleVariants[0]?.theme;
           const altTheme = styleVariants.find(
@@ -99,5 +98,22 @@ export default defineConfig({
     mdx(),
     partytown(),
     critters(),
+    () => ({
+      hooks: {
+        "astro:build:done": ({ dir }) => {
+          if (!userConfig.pagefind) return;
+          const targetDir = fileURLToPath(dir);
+          const cwd = dirname(fileURLToPath(import.meta.url));
+          const relativeDir = relative(cwd, targetDir);
+          return new Promise((resolve) => {
+            spawn("npx", ["-y", "pagefind", "--site", relativeDir], {
+              stdio: "inherit",
+              shell: true,
+              cwd,
+            }).on("close", () => resolve());
+          });
+        },
+      },
+    }),
   ],
 });

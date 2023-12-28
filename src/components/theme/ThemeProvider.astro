@@ -1,8 +1,7 @@
 <script is:inline>
   window.ThemeProvider = (() => {
     const storedTheme =
-      typeof localStorage !== "undefined" &&
-      localStorage.getItem("starlight-theme");
+      typeof localStorage !== "undefined" && localStorage.getItem("theme");
     const theme =
       storedTheme ||
       (window.matchMedia("(prefers-color-scheme: light)").matches

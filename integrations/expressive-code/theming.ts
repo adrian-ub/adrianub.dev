@@ -4,23 +4,17 @@ import {
   type ThemeObjectOrShikiThemeName,
 } from "astro-expressive-code";
 
-export type BundledThemeName = "starlight-dark" | "starlight-light";
+export type BundledThemeName = "dark" | "light";
 
-/**
- * Converts the Starlight `themes` config option into a format understood by Expressive Code,
- * loading any bundled themes and using the Starlight defaults if no themes were provided.
- */
 export function preprocessThemes(): ThemeObjectOrShikiThemeName[] {
   //   themes: ThemeObjectOrBundledThemeName[] | undefined,
-  let themes = ["starlight-dark", "starlight-light"];
+  let themes = ["dark", "light"];
 
   return themes.map((theme) => {
     // If the current entry is the name of a bundled theme, load it
 
     const bundledThemeFile =
-      theme === "starlight-dark"
-        ? "night-owl-dark.jsonc"
-        : "night-owl-light.jsonc";
+      theme === "dark" ? "night-owl-dark.jsonc" : "night-owl-light.jsonc";
 
     return customizeBundledTheme(
       ExpressiveCodeTheme.fromJSONString(
@@ -33,9 +27,6 @@ export function preprocessThemes(): ThemeObjectOrShikiThemeName[] {
   });
 }
 
-/**
- * Customizes some settings of the bundled theme to make it fit better with Starlight.
- */
 function customizeBundledTheme(theme: ExpressiveCodeTheme) {
   theme.colors["titleBar.border"] = theme.colors["tab.activeBackground"];
   theme.colors["editorGroupHeader.tabsBorder"] =
@@ -50,11 +41,7 @@ function customizeBundledTheme(theme: ExpressiveCodeTheme) {
   return theme;
 }
 
-/**
- * Modifies the given theme by applying Starlight's CSS variables to the colors of UI elements
- * (backgrounds, buttons, shadows etc.). This ensures that code blocks match the site's theme.
- */
-export function applyStarlightUiThemeColors(theme: ExpressiveCodeTheme) {
+export function applyUiThemeColors(theme: ExpressiveCodeTheme) {
   const isDark = theme.type === "dark";
   const neutralMinimal = isDark ? "#ffffff17" : "#0000001a";
   const neutralDimmed = isDark ? "#ffffff40" : "#00000055";
@@ -89,7 +76,7 @@ export function applyStarlightUiThemeColors(theme: ExpressiveCodeTheme) {
 
   // Set theme `bg` color property for contrast calculations
   theme.bg = isDark ? "#23262f" : "#f6f7f9";
-  // Set actual background color to the appropriate Starlight CSS variable
+
   const editorBackgroundColor = isDark
     ? "var(--ub-color-gray-6)"
     : "var(--ub-color-gray-7)";

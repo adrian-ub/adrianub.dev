@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import Button from "../ui/Button.astro";
 ---
 
-<starlight-theme-select>
+<theme-select>
   <div class="dark:block hidden transition duration-100 ease-in-out">
     <Button
       id="select-light"
@@ -27,7 +27,7 @@ import Button from "../ui/Button.astro";
       <Icon name="lucide:moon" class="w-5 h-5" />
     </Button>
   </div>
-</starlight-theme-select>
+</theme-select>
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
 <script is:inline>
@@ -37,9 +37,9 @@ import Button from "../ui/Button.astro";
 <script>
   type Theme = "auto" | "dark" | "light";
 
-  class StarlightThemeSelect extends HTMLElement {
+  class ThemeSelect extends HTMLElement {
     /** Key in `localStorage` to store color theme preference at. */
-    #key = "starlight-theme";
+    #key = "theme";
 
     constructor() {
       super();
@@ -102,5 +102,5 @@ import Button from "../ui/Button.astro";
     }
   }
 
-  customElements.define("starlight-theme-select", StarlightThemeSelect);
+  customElements.define("theme-select", ThemeSelect);
 </script>
