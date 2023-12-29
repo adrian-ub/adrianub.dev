@@ -5,7 +5,7 @@
     "label": "Ingeniero FrontEnd enfocado en construir productos con especial atención a los detalles",
     "email": "hola@adrianub.dev",
     "url": "http://adrianub.dev",
-    "summary": "Ingeniero de Sistemas, especialista en Ingenieria de Software con más de 6 años de experiencia en desarrollo FrontEnd bajo metodologías ágiles. \n\nEspecializado en Angular 2+ y con fuertes conocimientos en Javascript, Typescript, NodeJs, Astro y NestJs. \n\nHabilidades sólidas en la construcción de documentación de componentes UI con Storybook y en la creación de pruebas unitarias exhaustivas con Jest. \n\nAdemás, puedo llevar a cabo pruebas E2E con Cypress y Playwright para garantizar la calidad en cada proyecto.",
+    "summary": "Ingeniero de Sistemas, especialista en Ingenieria de Software con más de 6 años de experiencia en desarrollo FrontEnd bajo metodologías ágiles. <br /><br/> Especializado en Angular 2+ y con fuertes conocimientos en Javascript, Typescript, NodeJs, Astro y NestJs. \nHabilidades sólidas en la construcción de documentación de componentes UI con Storybook y en la creación de pruebas unitarias exhaustivas con Jest. \n\nAdemás, puedo llevar a cabo pruebas E2E con Cypress y Playwright para garantizar la calidad en cada proyecto.",
     "location": {
       "countryCode": "COL",
       "region": "Valledupar, Colombia"
@@ -160,6 +160,13 @@
   "references": [],
   "projects": [
     {
+      "name": "ng-strapi",
+      "startDate": "2019-10-22",
+      "description": "Angular SDK para Strapi",
+      "url": "https://github.com/adrian-ub/ng-strapi",
+      "highlights": ["Angular", "Strapi"]
+    },
+    {
       "name": "TailwindCSS Brand Colors",
       "startDate": "2021-07-31",
       "description": "Plugin de Tailwind CSS para agregar colores de marcas reconocidas.",
@@ -194,13 +201,6 @@
       "description": "Usar Netlify CMS para proyectos alojados en hosting diferentes a Netlify",
       "url": "https://github.com/ublabs/netlify-cms-vercel",
       "highlights": ["Netlify CMS", "Vercel"]
-    },
-    {
-      "name": "ng-strapi",
-      "startDate": "2019-10-22",
-      "description": "Angular SDK para Strapi",
-      "url": "https://github.com/adrian-ub/ng-strapi",
-      "highlights": ["Angular", "Strapi"]
     }
   ],
   "meta": {

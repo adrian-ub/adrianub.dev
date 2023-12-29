@@ -17,7 +17,7 @@ const { curriculum } = Astro.props;
   {
     curriculum.work!.map((work) => {
       return (
-        <Card class="bg-transparent">
+        <Card class="bg-transparent print:break-inside-avoid">
           <CardHeader>
             <div class="flex items-center justify-between gap-x-2 text-base">
               <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">

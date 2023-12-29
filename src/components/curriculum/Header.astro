@@ -5,6 +5,8 @@ import Button from "@/components/ui/Button.astro";
 import type { ResumeSchema } from "@/utils/resume-schema";
 import author from "@/assets/author.png";
 
+import { ThemeSelect } from "../theme";
+
 type Props = {
   curriculum: ResumeSchema;
 };
@@ -14,7 +16,14 @@ const { curriculum } = Astro.props;
 
 <div class="flex items-center justify-between">
   <div class="flex-1 space-y-1.5">
-    <h1 class="text-2xl font-bold">{curriculum.basics!.name}</h1>
+    <h1 class="text-2xl font-bold flex items-center space-x-2">
+      <span>
+        {curriculum.basics!.name}
+      </span>
+      <div class="print:hidden">
+        <ThemeSelect />
+      </div>
+    </h1>
     <p class="max-w-md text-pretty font-mono text-sm text-muted-foreground">
       {curriculum.basics!.label}
     </p>
