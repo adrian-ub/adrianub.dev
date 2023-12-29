@@ -1,0 +1,31 @@
+---
+import type { ResumeSchema } from "@/utils/resume-schema";
+import Section from "../ui/Section.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+type Props = {
+  curriculum: ResumeSchema;
+};
+
+const { curriculum } = Astro.props;
+---
+
+<Section class="print-force-new-page scroll-mb-16">
+  <h2 class="text-xl font-bold">Proyectos</h2>
+  <div
+    class="-mx-3 grid grid-cols-1 gap-3 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3"
+  >
+    {
+      curriculum.projects!.map((project) => {
+        return (
+          <ProjectCard
+            title={project.name!}
+            description={project.description!}
+            tags={project.highlights!}
+            link={project.url!}
+          />
+        );
+      })
+    }
+  </div>
+</Section>

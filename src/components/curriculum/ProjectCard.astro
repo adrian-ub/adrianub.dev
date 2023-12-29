@@ -18,7 +18,7 @@ interface Props {
 const { description, tags, title, link } = Astro.props;
 ---
 
-<Card class="flex flex-col overflow-hidden border border-muted p-3">
+<Card class="flex flex-col overflow-hidden border p-3">
   <CardHeader>
     <div class="space-y-1">
       <CardTitle class="text-base">
@@ -48,7 +48,7 @@ const { description, tags, title, link } = Astro.props;
     <div class="mt-2 flex flex-wrap gap-1">
       {
         tags.map((tag) => (
-          <Badge class="px-1 py-0 text-[10px]" variant="secondary">
+          <Badge class="px-1 py-0 text-[10px] rounded-md" variant="secondary">
             {tag}
           </Badge>
         ))

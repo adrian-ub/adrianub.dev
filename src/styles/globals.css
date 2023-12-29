@@ -9,7 +9,7 @@
   color-scheme: dark;
 
   --font-heading: "Cal Sans";
-  --font-sans: "Inter Variable";
+  --font-sans: "Inter Variable", sans-serif;
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
   --card: 240 10% 3.9%;

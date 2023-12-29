@@ -1,0 +1,61 @@
+---
+import type { ResumeSchema } from "@/utils/resume-schema";
+import Section from "../ui/Section.astro";
+import { Card, CardContent, CardHeader } from "../ui/card";
+import Badge from "../ui/Badge.astro";
+import { formatDate } from "@/utils/format-date";
+
+type Props = {
+  curriculum: ResumeSchema;
+};
+
+const { curriculum } = Astro.props;
+---
+
+<Section>
+  <h2 class="text-xl font-bold">Experiencia laboral</h2>
+  {
+    curriculum.work!.map((work) => {
+      return (
+        <Card class="bg-transparent">
+          <CardHeader>
+            <div class="flex items-center justify-between gap-x-2 text-base">
+              <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                <a class="hover:underline" href={work.url}>
+                  {work.name}
+                </a>
+
+                <span class="inline-flex gap-x-1">
+                  {work.highlights!.map((badge) => (
+                    <Badge variant="secondary" class="align-middle text-xs">
+                      {badge}
+                    </Badge>
+                  ))}
+                </span>
+              </h3>
+              <div class="text-sm tabular-nums text-gray-500">
+                {work.startDate &&
+                  formatDate(work.startDate, {
+                    year: "numeric",
+                    month: "short",
+                    day: undefined,
+                  })}
+                -
+                {work.endDate
+                  ? formatDate(work.endDate, {
+                      year: "numeric",
+                      month: "short",
+                      day: undefined,
+                    })
+                  : "presente"}
+              </div>
+            </div>
+
+            <h4 class="font-mono text-sm leading-none">{work.position}</h4>
+          </CardHeader>
+          <CardContent class="mt-2 text-xs" set:text={work.summary} />
+        </Card>
+      );
+    })
+  }
+</Section>

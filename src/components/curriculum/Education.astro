@@ -1,0 +1,47 @@
+---
+import type { ResumeSchema } from "@/utils/resume-schema";
+import Section from "../ui/Section.astro";
+import { Card, CardContent, CardHeader } from "../ui/card";
+import { formatDate } from "@/utils/format-date";
+
+type Props = {
+  curriculum: ResumeSchema;
+};
+
+const { curriculum } = Astro.props;
+---
+
+<Section>
+  <h2 class="text-xl font-bold">Educación</h2>
+  {
+    curriculum.education!.map((education) => {
+      return (
+        <Card class="bg-transparent">
+          <CardHeader>
+            <div class="flex items-center justify-between gap-x-2 text-base">
+              <h3 class="font-semibold leading-none">
+                {education.institution}
+              </h3>
+              <div class="text-sm tabular-nums text-gray-500">
+                {education.startDate &&
+                  formatDate(education.startDate, {
+                    year: "numeric",
+                    month: "short",
+                    day: undefined,
+                  })}
+                {education.startDate && education.endDate ? "-" : ""}{" "}
+                {education.endDate &&
+                  formatDate(education.endDate, {
+                    year: "numeric",
+                    month: undefined,
+                    day: undefined,
+                  })}
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent class="mt-2">{education.area}</CardContent>
+        </Card>
+      );
+    })
+  }
+</Section>

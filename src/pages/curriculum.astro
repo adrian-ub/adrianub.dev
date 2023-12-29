@@ -1,215 +1,115 @@
 ---
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import curriculum from "@/assets/resume.json";
 
 import BaseHead from "@/components/common/BaseHead.astro";
-import Section from "@/components/ui/Section.astro";
-import Badge from "@/components/ui/Badge.astro";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import type { Resume } from "@/utils/resume";
-import ProjectCard from "@/components/curriculum/ProjectCard.astro";
-import Button from "@/components/ui/Button.astro";
-import author from "@/assets/author.png";
-import { formatDate } from "@/utils/format-date";
-
-const curriculum = await fetch(
-  "https://raw.githubusercontent.com/adrian-ub/resume/main/resume.json",
-).then((res) => res.json() as Resume);
+import Header from "@/components/curriculum/Header.astro";
+import About from "@/components/curriculum/About.astro";
+import Work from "@/components/curriculum/Work.astro";
+import Education from "@/components/curriculum/Education.astro";
+import Skills from "@/components/curriculum/Skills.astro";
+import Projects from "@/components/curriculum/Projects.astro";
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <BaseHead title="Curriculum" description="" />
+    <style is:global>
+      :root {
+        --background: 224 71.4% 4.1%;
+        --foreground: 210 20% 98%;
+
+        --card: 224 71.4% 4.1%;
+        --card-foreground: 210 20% 98%;
+
+        --popover: 224 71.4% 4.1%;
+        --popover-foreground: 210 20% 98%;
+
+        --primary: 210 20% 98%;
+        --primary-foreground: 220.9 39.3% 11%;
+
+        --secondary: 215 27.9% 16.9%;
+        --secondary-foreground: 210 20% 98%;
+
+        --muted: 215 27.9% 16.9%;
+        --muted-foreground: 217.9 10.6% 64.9%;
+
+        --accent: 215 27.9% 16.9%;
+        --accent-foreground: 210 20% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 20% 98%;
+
+        --border: 215 27.9% 16.9%;
+        --input: 215 27.9% 16.9%;
+        --ring: 216 12.2% 83.9%;
+      }
+
+      :root[data-theme="light"] {
+        --background: 0 0% 100%;
+        --foreground: 224 71.4% 4.1%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 224 71.4% 4.1%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 224 71.4% 4.1%;
+
+        --primary: 220.9 39.3% 11%;
+        --primary-foreground: 210 20% 98%;
+
+        --secondary: 220 14.3% 95.9%;
+        --secondary-foreground: 220.9 39.3% 11%;
+
+        --muted: 220 14.3% 95.9%;
+        --muted-foreground: 220 8.9% 46.1%;
+
+        --accent: 220 14.3% 95.9%;
+        --accent-foreground: 220.9 39.3% 11%;
+
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 20% 98%;
+
+        --border: 220 13% 91%;
+        --input: 220 13% 91%;
+        --ring: 224 71.4% 4.1%;
+
+        --radius: 0.5rem;
+      }
+
+      * {
+        @apply border-border;
+      }
+      body {
+        @apply bg-background text-foreground;
+      }
+
+      @media print {
+        @page {
+          margin: 0;
+        }
+        body {
+          margin: 1.6cm;
+        }
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg-background" style="">
     <main
       class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16"
     >
       <section class="mx-auto w-full max-w-2xl space-y-8 print:space-y-6">
-        <div class="flex items-center justify-between">
-          <div class="flex-1 space-y-1.5">
-            <h1 class="text-2xl font-bold">{curriculum.basics!.name}</h1>
-            <p
-              class="max-w-md text-pretty font-mono text-sm text-muted-foreground"
-            >
-              {curriculum.basics!.label}
-            </p>
-            <p
-              class="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground"
-            >
-              <a
-                class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
-                href={"https://www.google.com/maps/place/" +
-                  curriculum.basics!.location!.region}
-                target="_blank"
-              >
-                <Icon name="lucide:globe" class="h-3 w-3" />
-                {curriculum.basics!.location!.region}
-              </a>
-            </p>
-            <div
-              class="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden"
-            >
-              {
-                curriculum.basics!.profiles!.map((profile) => {
-                  return (
-                    <a href={profile.url}>
-                      <Button class="h-8 w-8" variant="outline" size="icon">
-                        <Icon
-                          name={
-                            "simple-icons:" + profile.network?.toLowerCase()
-                          }
-                          class="h-4 w-4"
-                        />
-                      </Button>
-                    </a>
-                  );
-                })
-              }
-            </div>
-            <div
-              class="hidden flex-col gap-x-1 font-mono text-sm text-muted-foreground print:flex"
-            >
-            </div>
-          </div>
+        <Header {curriculum} />
 
-          <span
-            class="relative flex shrink-0 overflow-hidden rounded-xl h-28 w-28"
-          >
-            <Image
-              src={author}
-              class="aspect-square h-full w-full"
-              alt="Adrián UB"
-            />
-          </span>
-        </div>
-        <Section>
-          <h2 class="text-xl font-bold">Sobre mí</h2>
-          <p
-            class="text-pretty font-mono text-sm text-muted-foreground"
-            set:text={curriculum.basics!.summary?.toString()}
-          />
-        </Section>
+        <About {curriculum} />
 
-        <Section>
-          <h2 class="text-xl font-bold">Experiencia laboral</h2>
-          {
-            curriculum.work!.map((work) => {
-              return (
-                <Card class="bg-transparent">
-                  <CardHeader>
-                    <div class="flex items-center justify-between gap-x-2 text-base">
-                      <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
-                        <a class="hover:underline" href={work.url}>
-                          {work.name}
-                        </a>
+        <Work {curriculum} />
 
-                        <span class="inline-flex gap-x-1">
-                          {work.highlights!.map((badge) => (
-                            <Badge
-                              variant="secondary"
-                              class="align-middle text-xs"
-                            >
-                              {badge}
-                            </Badge>
-                          ))}
-                        </span>
-                      </h3>
-                      <div class="text-sm tabular-nums text-gray-500">
-                        {work.startDate &&
-                          formatDate(work.startDate, {
-                            year: "numeric",
-                            month: "short",
-                            day: undefined,
-                          })}
-                        -
-                        {work.endDate
-                          ? formatDate(work.endDate, {
-                              year: "numeric",
-                              month: "short",
-                              day: undefined,
-                            })
-                          : "presente"}
-                      </div>
-                    </div>
+        <Education {curriculum} />
 
-                    <h4 class="font-mono text-sm leading-none">
-                      {work.position}
-                    </h4>
-                  </CardHeader>
-                  <CardContent class="mt-2 text-xs" set:text={work.summary} />
-                </Card>
-              );
-            })
-          }
-        </Section>
+        <Skills {curriculum} />
 
-        <Section>
-          <h2 class="text-xl font-bold">Educación</h2>
-          {
-            curriculum.education!.map((education) => {
-              return (
-                <Card class="bg-transparent">
-                  <CardHeader>
-                    <div class="flex items-center justify-between gap-x-2 text-base">
-                      <h3 class="font-semibold leading-none">
-                        {education.institution}
-                      </h3>
-                      <div class="text-sm tabular-nums text-gray-500">
-                        {education.startDate &&
-                          formatDate(education.startDate, {
-                            year: "numeric",
-                            month: "short",
-                            day: undefined,
-                          })}
-                        {education.startDate && education.endDate ? "-" : ""}{" "}
-                        {education.endDate &&
-                          formatDate(education.endDate, {
-                            year: "numeric",
-                            month: "short",
-                            day: undefined,
-                          })}
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent class="mt-2">{education.area}</CardContent>
-                </Card>
-              );
-            })
-          }
-        </Section>
-
-        <Section>
-          <h2 class="text-xl font-bold">Habilidades</h2>
-          <div class="flex flex-wrap gap-1">
-            {
-              curriculum.skills!.map((skill) => {
-                return <Badge>{skill.name}</Badge>;
-              })
-            }
-          </div>
-        </Section>
-
-        <Section class="print-force-new-page scroll-mb-16">
-          <h2 class="text-xl font-bold">Proyectos</h2>
-          <div
-            class="-mx-3 grid grid-cols-1 gap-3 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {
-              curriculum.projects!.map((project) => {
-                return (
-                  <ProjectCard
-                    title={project.name!}
-                    description={project.description!}
-                    tags={[]}
-                    link={project.url!}
-                  />
-                );
-              })
-            }
-          </div>
-        </Section>
+        <Projects {curriculum} />
       </section>
     </main>
   </body>

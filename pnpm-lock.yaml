@@ -80,6 +80,9 @@ dependencies:
   markdown-it:
     specifier: ^13.0.2
     version: 13.0.2
+  marked:
+    specifier: ^11.1.0
+    version: 11.1.0
   mdast:
     specifier: ^3.0.0
     version: 3.0.0
@@ -101,6 +104,9 @@ dependencies:
   rehype-external-links:
     specifier: ^3.0.0
     version: 3.0.0
+  remark:
+    specifier: ^15.0.1
+    version: 15.0.1
   remark-directive:
     specifier: ^3.0.0
     version: 3.0.0
@@ -133,9 +139,15 @@ dependencies:
     version: 5.0.0
 
 devDependencies:
+  '@types/hast':
+    specifier: ^3.0.3
+    version: 3.0.3
   '@types/markdown-it':
     specifier: ^13.0.2
     version: 13.0.2
+  '@types/mdast':
+    specifier: ^4.0.3
+    version: 4.0.3
   '@types/sanitize-html':
     specifier: ^2.9.2
     version: 2.9.2
@@ -1058,7 +1070,7 @@ packages:
     dependencies:
       '@types/estree': 1.0.5
       '@types/estree-jsx': 1.0.3
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       '@types/mdx': 2.0.10
       collapse-white-space: 2.1.0
       devlop: 1.1.0
@@ -1326,14 +1338,13 @@ packages:
   /@types/hast@2.3.6:
     resolution: {integrity: sha512-47rJE80oqPmFdVDCD7IheXBrVdwuBgsYwoczFvKmwfo2Mzsnt+V9OONsYauFmICb6lQPpCuXYJWejBNs4pDJRg==}
     dependencies:
-      '@types/unist': 2.0.8
+      '@types/unist': 2.0.10
     dev: false
 
-  /@types/hast@3.0.1:
-    resolution: {integrity: sha512-hs/iBJx2aydugBQx5ETV3ZgeSS0oIreQrFJ4bjBl0XvM4wAmDjFEALY7p0rTSLt2eL+ibjRAAs9dTPiCLtmbqQ==}
+  /@types/hast@3.0.3:
+    resolution: {integrity: sha512-2fYGlaDy/qyLlhidX42wAH0KBi2TCjKMH8CHmBXgRlJ3Y+OXTiqsPQ6IWarZKwF1JoUcAJdPogv1d4b0COTpmQ==}
     dependencies:
       '@types/unist': 3.0.0
-    dev: false
 
   /@types/linkify-it@3.0.3:
     resolution: {integrity: sha512-pTjcqY9E4nOI55Wgpz7eiI8+LzdYnw3qxXCfHyBDdPbYvbyLgWLJGh8EdPvqawwMK1Uo1794AUkkR38Fr0g+2g==}
@@ -1346,11 +1357,10 @@ packages:
       '@types/mdurl': 1.0.3
     dev: true
 
-  /@types/mdast@4.0.1:
-    resolution: {integrity: sha512-IlKct1rUTJ1T81d8OHzyop15kGv9A/ff7Gz7IJgrk6jDb4Udw77pCJ+vq8oxZf4Ghpm+616+i1s/LNg/Vh7d+g==}
+  /@types/mdast@4.0.3:
+    resolution: {integrity: sha512-LsjtqsyF+d2/yFOYaN22dHZI1Cpwkrj+g06G8+qtUKlhovPW89YhqSnfKtMbkgmEtYpH2gydRNULd6y8mciAFg==}
     dependencies:
       '@types/unist': 3.0.0
-    dev: false
 
   /@types/mdurl@1.0.3:
     resolution: {integrity: sha512-T5k6kTXak79gwmIOaDF2UUQXFbnBE0zBUzF20pz7wDYu0RQMzWg+Ml/Pz50214NsFHBITkoi5VtdjFZnJ2ijjA==}
@@ -1405,13 +1415,8 @@ packages:
     resolution: {integrity: sha512-IfYcSBWE3hLpBg8+X2SEa8LVkJdJEkT2Ese2aaLs3ptGdVtABxndrMaxuFlQ1qdFf9Q5rDvDpxI3WwgvKFAsQA==}
     dev: false
 
-  /@types/unist@2.0.8:
-    resolution: {integrity: sha512-d0XxK3YTObnWVp6rZuev3c49+j4Lo8g4L1ZRm9z5L0xpoZycUPshHgczK5gsUMaZOstjVYYi09p5gYvUtfChYw==}
-    dev: false
-
   /@types/unist@3.0.0:
     resolution: {integrity: sha512-MFETx3tbTjE7Uk6vvnWINA/1iJ7LuMdO4fcq8UfF0pRbj01aGLduVvQcRyswuACJdpnHgg8E3rQLhaRdNEJS0w==}
-    dev: false
 
   /@types/yauzl@2.10.3:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
@@ -2619,7 +2624,7 @@ packages:
   /hast-util-from-html@2.0.1:
     resolution: {integrity: sha512-RXQBLMl9kjKVNkJTIO6bZyb2n+cUH8LFaSSzo82jiLT6Tfc+Pt7VQCS+/h3YwG4jaNE2TA2sdJisGWR+aJrp0g==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       devlop: 1.1.0
       hast-util-from-parse5: 8.0.1
       parse5: 7.1.2
@@ -2642,7 +2647,7 @@ packages:
   /hast-util-from-parse5@8.0.1:
     resolution: {integrity: sha512-Er/Iixbc7IEa7r/XLtuG52zoqn/b3Xng/w6aZQ0xGVxzhw5xUFxcRqdPzP6yFi/4HBYRaifaI5fQ1RH8n0ZeOQ==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       '@types/unist': 3.0.0
       devlop: 1.1.0
       hastscript: 8.0.0
@@ -2655,13 +2660,13 @@ packages:
   /hast-util-has-property@3.0.0:
     resolution: {integrity: sha512-MNilsvEKLFpV604hwfhVStK0usFY/QmM5zX16bo7EjnAEGofr5YyI37kzopBlZJkHD4t887i+q/C8/tr5Q94cA==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
     dev: false
 
   /hast-util-is-element@3.0.0:
     resolution: {integrity: sha512-Val9mnv2IWpLbNPqc/pUem+a7Ipj2aHacCwgNfTiK0vJKl0LF+4Ba4+v1oPHFpf3bLYmreq0/l3Gud9S5OH42g==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
     dev: false
 
   /hast-util-parse-selector@3.1.1:
@@ -2673,7 +2678,7 @@ packages:
   /hast-util-parse-selector@4.0.0:
     resolution: {integrity: sha512-wkQCkSYoOGCRKERFWcxMVMOcYE2K1AaNLU8DXS9arxnLOUEWbOXKXiJUNzEpqZ3JOKpnha3jkFrumEjVliDe7A==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
     dev: false
 
   /hast-util-raw@7.2.3:
@@ -2695,7 +2700,7 @@ packages:
   /hast-util-raw@9.0.1:
     resolution: {integrity: sha512-5m1gmba658Q+lO5uqL5YNGQWeh1MYWZbZmWrM5lncdcuiXuo5E2HT/CIOp0rLF8ksfSwiCVJ3twlgVRyTGThGA==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       '@types/unist': 3.0.0
       '@ungap/structured-clone': 1.2.0
       hast-util-from-parse5: 8.0.1
@@ -2713,7 +2718,7 @@ packages:
   /hast-util-select@6.0.2:
     resolution: {integrity: sha512-hT/SD/d/Meu+iobvgkffo1QecV8WeKWxwsNMzcTJsKw1cKTQKSR/7ArJeURLNJF9HDjp9nVoORyNNJxrvBye8Q==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       '@types/unist': 3.0.0
       bcp-47-match: 2.0.3
       comma-separated-tokens: 2.0.3
@@ -2736,7 +2741,7 @@ packages:
     dependencies:
       '@types/estree': 1.0.5
       '@types/estree-jsx': 1.0.3
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       comma-separated-tokens: 2.0.3
       devlop: 1.1.0
       estree-util-attach-comments: 3.0.0
@@ -2773,7 +2778,7 @@ packages:
   /hast-util-to-html@9.0.0:
     resolution: {integrity: sha512-IVGhNgg7vANuUA2XKrT6sOIIPgaYZnmLx3l/CCOAK0PtgfoHrZwX7jCSYyFxHTrGmC6S9q8aQQekjp4JPZF+cw==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       '@types/unist': 3.0.0
       ccount: 2.0.1
       comma-separated-tokens: 2.0.3
@@ -2791,7 +2796,7 @@ packages:
     resolution: {integrity: sha512-H/y0+IWPdsLLS738P8tDnrQ8Z+dj12zQQ6WC11TIM21C8WFVoIxcqWXf2H3hiTVZjF1AWqoimGwrTWecWrnmRQ==}
     dependencies:
       '@types/estree': 1.0.5
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       '@types/unist': 3.0.0
       comma-separated-tokens: 2.0.3
       devlop: 1.1.0
@@ -2823,7 +2828,7 @@ packages:
   /hast-util-to-parse5@8.0.0:
     resolution: {integrity: sha512-3KKrV5ZVI8if87DVSi1vDeByYrkGzg4mEfeu4alwgmmIeARiBLKCZS2uw5Gb6nU9x9Yufyj3iudm6i7nl52PFw==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       comma-separated-tokens: 2.0.3
       devlop: 1.1.0
       property-information: 6.4.0
@@ -2835,7 +2840,7 @@ packages:
   /hast-util-to-string@3.0.0:
     resolution: {integrity: sha512-OGkAxX1Ua3cbcW6EJ5pT/tslVb90uViVkcJ4ZZIMW/R33DX/AkcJcRrPebPwJkHYwlDHXz4aIwvAAaAdtrACFA==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
     dev: false
 
   /hast-util-whitespace@2.0.1:
@@ -2845,7 +2850,7 @@ packages:
   /hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
     dev: false
 
   /hast@1.0.0:
@@ -2866,7 +2871,7 @@ packages:
   /hastscript@8.0.0:
     resolution: {integrity: sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       comma-separated-tokens: 2.0.3
       hast-util-parse-selector: 4.0.0
       property-information: 6.4.0
@@ -3282,10 +3287,16 @@ packages:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
     dev: false
 
+  /marked@11.1.0:
+    resolution: {integrity: sha512-fvKJWAPEafVj1dwGwcPI5mBB/0pvViL6NlCbNDG1HOIRwwAU/jeMoFxfbRLuirO1wRH7m4yPvBqD/O1wyWvayw==}
+    engines: {node: '>= 18'}
+    hasBin: true
+    dev: false
+
   /mdast-util-definitions@6.0.0:
     resolution: {integrity: sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       '@types/unist': 3.0.0
       unist-util-visit: 5.0.0
     dev: false
@@ -3293,7 +3304,7 @@ packages:
   /mdast-util-directive@3.0.0:
     resolution: {integrity: sha512-JUpYOqKI4mM3sZcNxmF/ox04XYFFkNwr0CFlrQIkCwbvH0xzMCqkMqAde9wRd80VAhaUrwFwKm2nxretdT1h7Q==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       '@types/unist': 3.0.0
       devlop: 1.1.0
       mdast-util-from-markdown: 2.0.0
@@ -3308,7 +3319,7 @@ packages:
   /mdast-util-find-and-replace@3.0.1:
     resolution: {integrity: sha512-SG21kZHGC3XRTSUhtofZkBzZTJNM5ecCi0SK2IMKmSXR8vO3peL+kb1O0z7Zl83jKtutG4k5Wv/W7V3/YHvzPA==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       escape-string-regexp: 5.0.0
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
@@ -3317,7 +3328,7 @@ packages:
   /mdast-util-from-markdown@2.0.0:
     resolution: {integrity: sha512-n7MTOr/z+8NAX/wmhhDji8O3bRvPTV/U0oTCaZJkjhPSKTPhS3xufVhKGF8s1pJ7Ox4QgoIU7KHseh09S+9rTA==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       '@types/unist': 3.0.0
       decode-named-character-reference: 1.0.2
       devlop: 1.1.0
@@ -3336,7 +3347,7 @@ packages:
   /mdast-util-gfm-autolink-literal@2.0.0:
     resolution: {integrity: sha512-FyzMsduZZHSc3i0Px3PQcBT4WJY/X/RCtEJKuybiC6sjPqLv7h1yqAkmILZtuxMSsUyaLUWNp71+vQH2zqp5cg==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       ccount: 2.0.1
       devlop: 1.1.0
       mdast-util-find-and-replace: 3.0.1
@@ -3346,7 +3357,7 @@ packages:
   /mdast-util-gfm-footnote@2.0.0:
     resolution: {integrity: sha512-5jOT2boTSVkMnQ7LTrd6n/18kqwjmuYqo7JUPe+tRCY6O7dAuTFMtTPauYYrMPpox9hlN0uOx/FL8XvEfG9/mQ==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       devlop: 1.1.0
       mdast-util-from-markdown: 2.0.0
       mdast-util-to-markdown: 2.1.0
@@ -3358,7 +3369,7 @@ packages:
   /mdast-util-gfm-strikethrough@2.0.0:
     resolution: {integrity: sha512-mKKb915TF+OC5ptj5bJ7WFRPdYtuHv0yTRxK2tJvi+BDqbkiG7h7u/9SI89nRAYcmap2xHQL9D+QG/6wSrTtXg==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       mdast-util-from-markdown: 2.0.0
       mdast-util-to-markdown: 2.1.0
     transitivePeerDependencies:
@@ -3368,7 +3379,7 @@ packages:
   /mdast-util-gfm-table@2.0.0:
     resolution: {integrity: sha512-78UEvebzz/rJIxLvE7ZtDd/vIQ0RHv+3Mh5DR96p7cS7HsBhYIICDBCu8csTNWNO6tBWfqXPWekRuj2FNOGOZg==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       devlop: 1.1.0
       markdown-table: 3.0.3
       mdast-util-from-markdown: 2.0.0
@@ -3380,7 +3391,7 @@ packages:
   /mdast-util-gfm-task-list-item@2.0.0:
     resolution: {integrity: sha512-IrtvNvjxC1o06taBAVJznEnkiHxLFTzgonUdy8hzFVeDun0uTjxxrRGVaNFqkU1wJR3RBPEfsxmU6jDWPofrTQ==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       devlop: 1.1.0
       mdast-util-from-markdown: 2.0.0
       mdast-util-to-markdown: 2.1.0
@@ -3406,8 +3417,8 @@ packages:
     resolution: {integrity: sha512-fGCu8eWdKUKNu5mohVGkhBXCXGnOTLuFqOvGMvdikr+J1w7lDJgxThOKpwRWzzbyXAU2hhSwsmssOY4yTokluw==}
     dependencies:
       '@types/estree-jsx': 1.0.3
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.1
+      '@types/hast': 3.0.3
+      '@types/mdast': 4.0.3
       devlop: 1.1.0
       mdast-util-from-markdown: 2.0.0
       mdast-util-to-markdown: 2.1.0
@@ -3419,8 +3430,8 @@ packages:
     resolution: {integrity: sha512-XZuPPzQNBPAlaqsTTgRrcJnyFbSOBovSadFgbFu8SnuNgm+6Bdx1K+IWoitsmj6Lq6MNtI+ytOqwN70n//NaBA==}
     dependencies:
       '@types/estree-jsx': 1.0.3
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.1
+      '@types/hast': 3.0.3
+      '@types/mdast': 4.0.3
       '@types/unist': 3.0.0
       ccount: 2.0.1
       devlop: 1.1.0
@@ -3451,8 +3462,8 @@ packages:
     resolution: {integrity: sha512-EcmOpxsZ96CvlP03NghtH1EsLtr0n9Tm4lPUJUBccV9RwUOneqSycg19n5HGzCf+10LozMRSObtVr3ee1WoHtg==}
     dependencies:
       '@types/estree-jsx': 1.0.3
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.1
+      '@types/hast': 3.0.3
+      '@types/mdast': 4.0.3
       devlop: 1.1.0
       mdast-util-from-markdown: 2.0.0
       mdast-util-to-markdown: 2.1.0
@@ -3463,15 +3474,15 @@ packages:
   /mdast-util-phrasing@4.0.0:
     resolution: {integrity: sha512-xadSsJayQIucJ9n053dfQwVu1kuXg7jCTdYsMK8rqzKZh52nLfSH/k0sAxE0u+pj/zKZX+o5wB+ML5mRayOxFA==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       unist-util-is: 6.0.0
     dev: false
 
   /mdast-util-to-hast@13.0.2:
     resolution: {integrity: sha512-U5I+500EOOw9e3ZrclN3Is3fRpw8c19SMyNZlZ2IS+7vLsNzb2Om11VpIVOR+/0137GhZsFEF6YiKD5+0Hr2Og==}
     dependencies:
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.1
+      '@types/hast': 3.0.3
+      '@types/mdast': 4.0.3
       '@ungap/structured-clone': 1.2.0
       devlop: 1.1.0
       micromark-util-sanitize-uri: 2.0.0
@@ -3483,7 +3494,7 @@ packages:
   /mdast-util-to-markdown@2.1.0:
     resolution: {integrity: sha512-SR2VnIEdVNCJbP6y7kVTJgPLifdr8WEU440fQec7qHoHOUz/oJ2jmNRqdDQ3rbiStOXb2mCDGTuwsK5OPUgYlQ==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       '@types/unist': 3.0.0
       longest-streak: 3.1.0
       mdast-util-phrasing: 4.0.0
@@ -3496,7 +3507,7 @@ packages:
   /mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
     dev: false
 
   /mdast@3.0.0:
@@ -4566,7 +4577,7 @@ packages:
   /rehype-external-links@3.0.0:
     resolution: {integrity: sha512-yp+e5N9V3C6bwBeAC4n796kc86M4gJCdlVhiMTxIrJG5UHDMh+PJANf9heqORJbt1nrCbDwIlAZKjANIaVBbvw==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       '@ungap/structured-clone': 1.2.0
       hast-util-is-element: 3.0.0
       is-absolute-url: 4.0.1
@@ -4577,7 +4588,7 @@ packages:
   /rehype-parse@9.0.0:
     resolution: {integrity: sha512-WG7nfvmWWkCR++KEkZevZb/uw41E8TsH4DsY9UxsTbIXCVGbAs4S+r8FrQ+OtH5EEQAs+5UxKC42VinkmpA1Yw==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       hast-util-from-html: 2.0.1
       unified: 11.0.4
     dev: false
@@ -4585,7 +4596,7 @@ packages:
   /rehype-raw@7.0.0:
     resolution: {integrity: sha512-/aE8hCfKlQeA8LmyeyQvQF3eBiLRGNlfBJEvWH7ivp9sBqs7TNqBL5X3v157rM4IFETqDnIOO+z5M/biZbo9Ww==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       hast-util-raw: 9.0.1
       vfile: 6.0.1
     dev: false
@@ -4593,7 +4604,7 @@ packages:
   /rehype-stringify@10.0.0:
     resolution: {integrity: sha512-1TX1i048LooI9QoecrXy7nGFFbFSufxVRAfc6Y9YMRAi56l+oB0zP51mLSV312uRuvVLPV1opSlJmslozR1XHQ==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       hast-util-to-html: 9.0.0
       unified: 11.0.4
     dev: false
@@ -4601,7 +4612,7 @@ packages:
   /rehype@13.0.1:
     resolution: {integrity: sha512-AcSLS2mItY+0fYu9xKxOu1LhUZeBZZBx8//5HKzF+0XP+eP8+6a5MXn2+DW2kfXR6Dtp1FEXMVrjyKAcvcU8vg==}
     dependencies:
-      '@types/hast': 3.0.1
+      '@types/hast': 3.0.3
       rehype-parse: 9.0.0
       rehype-stringify: 10.0.0
       unified: 11.0.4
@@ -4610,7 +4621,7 @@ packages:
   /remark-directive@3.0.0:
     resolution: {integrity: sha512-l1UyWJ6Eg1VPU7Hm/9tt0zKtReJQNOA4+iDMAxTyZNWnJnFlbS/7zhiel/rogTLQ2vMYwDzSJa4BiVNqGlqIMA==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       mdast-util-directive: 3.0.0
       micromark-extension-directive: 3.0.0
       unified: 11.0.4
@@ -4629,7 +4640,7 @@ packages:
   /remark-gfm@4.0.0:
     resolution: {integrity: sha512-U92vJgBPkbw4Zfu/IiW2oTZLSL3Zpv+uI7My2eq8JxKgqraFdU8YUGicEJCEgSbeaG+QDFqIcwwfMTOEelPxuA==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       mdast-util-gfm: 3.0.0
       micromark-extension-gfm: 3.0.0
       remark-parse: 11.0.0
@@ -4651,7 +4662,7 @@ packages:
   /remark-parse@11.0.0:
     resolution: {integrity: sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       mdast-util-from-markdown: 2.0.0
       micromark-util-types: 2.0.0
       unified: 11.0.4
@@ -4662,8 +4673,8 @@ packages:
   /remark-rehype@11.0.0:
     resolution: {integrity: sha512-vx8x2MDMcxuE4lBmQ46zYUDfcFMmvg80WYX+UNLeG6ixjdCCLcw1lrgAukwBTuOFsS78eoAedHGn9sNM0w7TPw==}
     dependencies:
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.1
+      '@types/hast': 3.0.3
+      '@types/mdast': 4.0.3
       mdast-util-to-hast: 13.0.2
       unified: 11.0.4
       vfile: 6.0.1
@@ -4681,9 +4692,20 @@ packages:
   /remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
     dependencies:
-      '@types/mdast': 4.0.1
+      '@types/mdast': 4.0.3
       mdast-util-to-markdown: 2.1.0
       unified: 11.0.4
+    dev: false
+
+  /remark@15.0.1:
+    resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
+    dependencies:
+      '@types/mdast': 4.0.3
+      remark-parse: 11.0.0
+      remark-stringify: 11.0.0
+      unified: 11.0.4
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /resolve@1.22.8:
