@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 
@@ -14,6 +13,8 @@ import { remarkReadingTime } from "./plugins/reading-time";
 import { pageFind } from "./integrations/pagefind";
 import { expressiveCode } from "./integrations/expressive-code";
 import { asides } from "./integrations/asides";
+
+import UnoCSS from "@unocss/astro";
 
 // https://astro.build/config
 export default defineConfig({
@@ -37,11 +38,11 @@ export default defineConfig({
     ],
   },
   integrations: [
+    UnoCSS({
+      injectReset: true,
+    }),
     icon(),
     sitemap(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
     expressiveCode(),
     mdx(),
     partytown(),

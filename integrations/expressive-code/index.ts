@@ -2,7 +2,7 @@ import astroExpressiveCode, {
   pluginFramesTexts,
   addClassName,
 } from "astro-expressive-code";
-import { preprocessThemes, applyUiThemeColors } from "./theming";
+import { applyUiThemeColors } from "./theming";
 import type { AstroIntegration } from "astro";
 
 pluginFramesTexts.overrideTexts("es", {
@@ -10,11 +10,10 @@ pluginFramesTexts.overrideTexts("es", {
   copyButtonTooltip: "Copiar al portapapeles",
   terminalWindowFallbackTitle: "Ventana de terminal",
 });
-const themes = preprocessThemes();
 
 export function expressiveCode(): AstroIntegration {
   return astroExpressiveCode({
-    themes,
+    themes: ["github-dark", "github-light"],
     defaultLocale: "es",
     customizeTheme: (theme) => {
       applyUiThemeColors(theme);

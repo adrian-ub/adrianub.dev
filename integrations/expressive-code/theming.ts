@@ -1,45 +1,6 @@
-import fs from "node:fs";
-import {
-  ExpressiveCodeTheme,
-  type ThemeObjectOrShikiThemeName,
-} from "astro-expressive-code";
+import { ExpressiveCodeTheme } from "astro-expressive-code";
 
 export type BundledThemeName = "dark" | "light";
-
-export function preprocessThemes(): ThemeObjectOrShikiThemeName[] {
-  //   themes: ThemeObjectOrBundledThemeName[] | undefined,
-  let themes = ["dark", "light"];
-
-  return themes.map((theme) => {
-    // If the current entry is the name of a bundled theme, load it
-
-    const bundledThemeFile =
-      theme === "dark" ? "night-owl-dark.jsonc" : "night-owl-light.jsonc";
-
-    return customizeBundledTheme(
-      ExpressiveCodeTheme.fromJSONString(
-        fs.readFileSync(
-          new URL(`./themes/${bundledThemeFile}`, import.meta.url),
-          "utf-8",
-        ),
-      ),
-    );
-  });
-}
-
-function customizeBundledTheme(theme: ExpressiveCodeTheme) {
-  theme.colors["titleBar.border"] = theme.colors["tab.activeBackground"];
-  theme.colors["editorGroupHeader.tabsBorder"] =
-    theme.colors["tab.activeBackground"];
-
-  // Add underline font style to link syntax highlighting tokens
-  // to match the new GitHub theme link style
-  theme.settings.forEach((s) => {
-    if (s.name?.includes("Link")) s.settings.fontStyle = "underline";
-  });
-
-  return theme;
-}
 
 export function applyUiThemeColors(theme: ExpressiveCodeTheme) {
   const isDark = theme.type === "dark";

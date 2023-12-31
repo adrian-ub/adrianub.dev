@@ -134,7 +134,7 @@ function remarkAsides(): Plugin<[], Root> {
         "aside",
         {
           "aria-label": title,
-          class: `ub-aside ub-aside--${variant}`,
+          class: `ub-aside ub-aside--${variant} not-prose`,
         },
         [
           h("p", { class: "ub-aside__title", "aria-hidden": "true" }, [
@@ -151,7 +151,7 @@ function remarkAsides(): Plugin<[], Root> {
             ),
             { type: "text", value: title },
           ]),
-          h("section", { class: "ub-aside__content" }, node.children),
+          h("section", { class: "ub-aside__content prose" }, node.children),
         ],
       );
 
