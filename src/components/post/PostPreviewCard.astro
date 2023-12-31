@@ -20,16 +20,16 @@ const {
 } = Astro.props;
 ---
 
-<div class={ub(className, "col-span-1")}>
+<div class={ub(className, ":uno: col-span-1")}>
   <a
     aria-label={post.data.title}
-    class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 bg-card"
+    class=":uno: mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 bg-card"
     href={post.slug + "/"}
   >
     <Picture
       src={post.data.heroImage ?? noContent}
       alt={post.data.title}
-      class="blog-article-card-cover block w-full"
+      class=":uno: blog-article-card-cover block w-full"
       loading={imageLoading}
       transition:name={`post-hero-image-${post.slug}`}
       formats={["webp"]}
@@ -37,7 +37,7 @@ const {
     />
   </a>
   <h1
-    class="blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75"
+    class=":uno: blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75"
   >
     <a href={post.slug + "/"}>
       {post.data.title}
@@ -45,7 +45,7 @@ const {
   </h1>
   {
     showSummary && (
-      <p class="blog-article-card-brief mx-4 mb-3 break-words text-lg leading-snug hover:opacity-75 text-muted-foreground">
+      <p class=":uno: blog-article-card-brief mx-4 mb-3 break-words text-lg leading-snug hover:opacity-75 text-muted-foreground">
         <a href={post.slug + "/"}>{post.data.description}</a>
       </p>
     )

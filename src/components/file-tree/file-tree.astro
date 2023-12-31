@@ -17,7 +17,11 @@ const processedContent = await fileTreeProcessor.process({
 });
 ---
 
-<file-tree set:html={processedContent} class="not-prose" data-pagefind-ignore />
+<file-tree
+  set:html={processedContent}
+  class=":uno: not-prose"
+  data-pagefind-ignore
+/>
 
 <style is:global>
   file-tree {

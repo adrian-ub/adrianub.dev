@@ -28,28 +28,28 @@ const {
 
 <header
   class={ub(
-    "z-50 w-full border-b relative bg-background bg-opacity-70 border-white/10",
+    ":uno: z-50 w-full border-b relative bg-background bg-opacity-70 border-white/10",
     className,
   )}
 >
-  <div class="container mx-auto px-2 md:px-4 2xl:px-10">
+  <div class=":uno: container mx-auto px-2 md:px-4 2xl:px-10">
     <div
-      class="relative z-40 flex flex-row items-center justify-between pt-8 pb-2 md:mb-4"
+      class=":uno: relative z-40 flex flex-row items-center justify-between pt-8 pb-2 md:mb-4"
     >
-      <div class="flex flex-row items-center py-1 space-x-2">
+      <div class=":uno: flex flex-row items-center py-1 space-x-2">
         {showBackButton && <BackToHomeButton />}
         <div class=`${!showMenuButton ? 'md:hidden' : ''}`>
           <!-- <MenuToggle client:load /> -->
         </div>
 
-        <div class="hidden md:block">
+        <div class=":uno: hidden md:block">
           <h1
-            class="text-xl md:text-2xl text-left break-words font-heading font-semibold leading-snug md:font-bold"
+            class=":uno: text-xl md:text-2xl text-left break-words font-heading font-semibold leading-snug md:font-bold"
           >
             <a
               href="/"
               aria-label="Adrián UB"
-              class="flex flex-row items-center"
+              class=":uno: flex flex-row items-center"
               transition:name={`blog-name`}
             >
               {SITE_TITLE}
@@ -58,7 +58,7 @@ const {
         </div>
       </div>
 
-      <div class="flex flex-row items-center">
+      <div class=":uno: flex flex-row items-center">
         <Search />
         <div>
           <ThemeSelect />
@@ -67,12 +67,16 @@ const {
     </div>
 
     <div
-      class="mx-auto my-5 flex w-2/3 flex-row items-center justify-center md:hidden"
+      class=":uno: mx-auto my-5 flex w-2/3 flex-row items-center justify-center md:hidden"
     >
       <h1
-        class="blog-title text-2xl text-center break-words font-heading font-semibold leading-snug md:font-bold"
+        class=":uno: blog-title text-2xl text-center break-words font-heading font-semibold leading-snug md:font-bold"
       >
-        <a href="/" aria-label="Adrián UB" class="flex flex-row items-center">
+        <a
+          href="/"
+          aria-label="Adrián UB"
+          class=":uno: flex flex-row items-center"
+        >
           {SITE_TITLE}
         </a>
       </h1>
@@ -84,7 +88,7 @@ const {
           (hideLinks ? " md:hidden" : "")}
       >
         <div
-          class="blog-social-media-section flex flex-row flex-wrap gap-y-2 justify-center text-muted-foreground"
+          class=":uno: blog-social-media-section flex flex-row flex-wrap gap-y-2 justify-center text-muted-foreground"
         >
           <a
             href={GITHUB_URL}
@@ -98,7 +102,7 @@ const {
               name="github"
               aria-label="github"
             >
-              <Icon name="simple-icons:github" class="h-5 w-5" />
+              <Icon name="simple-icons:github" class=":uno: h-5 w-5" />
             </Button>
           </a>
           <a
@@ -108,7 +112,7 @@ const {
             rel="me noopener"
           >
             <Button variant="ghost" size="icon" name="x" aria-label="x">
-              <Icon name="simple-icons:x" class="h-5 w-5" />
+              <Icon name="simple-icons:x" class=":uno: h-5 w-5" />
             </Button>
           </a>
           <a
@@ -118,7 +122,7 @@ const {
             rel="me noopener"
           >
             <Button variant="ghost" size="icon" name="rss" aria-label="rss">
-              <Icon name="lucide:rss" class="h-5 w-5" />
+              <Icon name="lucide:rss" class=":uno: h-5 w-5" />
             </Button>
           </a>
         </div>
@@ -126,9 +130,9 @@ const {
 
       {
         !hideLinks && (
-          <div class="relative mt-8 hidden flex-row items-center justify-center overflow-hidden text-base md:flex">
-            <div class="overflow-hidden">
-              <nav class="relative flex flex-row flex-nowrap items-end whitespace-nowrap">
+          <div class=":uno: relative mt-8 hidden flex-row items-center justify-center overflow-hidden text-base md:flex">
+            <div class=":uno: overflow-hidden">
+              <nav class=":uno: relative flex flex-row flex-nowrap items-end whitespace-nowrap">
                 <HeaderLink href="/">Inicio</HeaderLink>
                 <HeaderLink href="/sobre-mi/">Sobre mí</HeaderLink>
               </nav>

@@ -14,40 +14,46 @@ type Props = {
 const { curriculum } = Astro.props;
 ---
 
-<div class="flex items-center justify-between">
-  <div class="flex-1 space-y-1.5">
-    <h1 class="text-2xl font-bold flex items-center space-x-2">
+<div class=":uno: flex items-center justify-between">
+  <div class=":uno: flex-1 space-y-1.5">
+    <h1 class=":uno: text-2xl font-bold flex items-center space-x-2">
       <span>
         {curriculum.basics!.name}
       </span>
-      <div class="print:hidden">
+      <div class=":uno: print:hidden">
         <ThemeSelect />
       </div>
     </h1>
-    <p class="max-w-md text-pretty font-mono text-sm text-muted-foreground">
+    <p
+      class=":uno: max-w-md text-pretty font-mono text-sm text-muted-foreground"
+    >
       {curriculum.basics!.label}
     </p>
     <p
-      class="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground"
+      class=":uno: max-w-md items-center text-pretty font-mono text-xs text-muted-foreground"
     >
       <a
-        class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
+        class=":uno: inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
         href={"https://www.google.com/maps/place/" +
           curriculum.basics!.location!.region}
         target="_blank"
       >
-        <Icon name="lucide:globe" class="h-3 w-3" />
+        <Icon name="lucide:globe" class=":uno: h-3 w-3" />
         {curriculum.basics!.location!.region}
       </a>
     </p>
     <div
-      class="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden"
+      class=":uno: flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden"
     >
       {
         curriculum.basics?.email && (
           <a href={"mailto:" + curriculum.basics!.email}>
-            <Button class="h-8 w-8 rounded-md" variant="outline" size="icon">
-              <Icon name="lucide:mail" class="h-4 w-4" />
+            <Button
+              class=":uno: h-8 w-8 rounded-md"
+              variant="outline"
+              size="icon"
+            >
+              <Icon name="lucide:mail" class=":uno: h-4 w-4" />
             </Button>
           </a>
         )
@@ -56,10 +62,14 @@ const { curriculum } = Astro.props;
         curriculum.basics!.profiles!.map((profile) => {
           return (
             <a href={profile.url}>
-              <Button class="h-8 w-8 rounded-md" variant="outline" size="icon">
+              <Button
+                class=":uno: h-8 w-8 rounded-md"
+                variant="outline"
+                size="icon"
+              >
                 <Icon
                   name={"simple-icons:" + profile.network?.toLowerCase()}
-                  class="h-4 w-4"
+                  class=":uno: h-4 w-4"
                 />
               </Button>
             </a>
@@ -68,19 +78,25 @@ const { curriculum } = Astro.props;
       }
     </div>
     <div
-      class="hidden flex-col gap-x-1 font-mono text-sm text-muted-foreground print:flex"
+      class=":uno: hidden flex-col gap-x-1 font-mono text-sm text-muted-foreground print:flex"
     >
       {
         curriculum.basics?.email && (
           <a href={`mailto:${curriculum.basics.email}`}>
-            <span class="underline">{curriculum.basics.email}</span>
+            <span class=":uno: underline">{curriculum.basics.email}</span>
           </a>
         )
       }
     </div>
   </div>
 
-  <span class="relative flex shrink-0 overflow-hidden rounded-xl h-28 w-28">
-    <Image src={author} class="aspect-square h-full w-full" alt="Adrián UB" />
+  <span
+    class=":uno: relative flex shrink-0 overflow-hidden rounded-xl h-28 w-28"
+  >
+    <Image
+      src={author}
+      class=":uno: aspect-square h-full w-full"
+      alt="Adrián UB"
+    />
   </span>
 </div>

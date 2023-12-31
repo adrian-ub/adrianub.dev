@@ -13,27 +13,30 @@ const { curriculum } = Astro.props;
 ---
 
 <Section>
-  <h2 class="text-xl font-bold">Experiencia laboral</h2>
+  <h2 class=":uno: text-xl font-bold">Experiencia laboral</h2>
   {
     curriculum.work!.map((work) => {
       return (
-        <Card class="bg-transparent print:break-inside-avoid">
+        <Card class=":uno: bg-transparent print:break-inside-avoid">
           <CardHeader>
-            <div class="flex items-center justify-between gap-x-2 text-base">
-              <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
-                <a class="hover:underline" href={work.url}>
+            <div class=":uno: flex items-center justify-between gap-x-2 text-base">
+              <h3 class=":uno: inline-flex items-center justify-center gap-x-1 font-semibold leading-none">
+                <a class=":uno: hover:underline" href={work.url}>
                   {work.name}
                 </a>
 
-                <span class="inline-flex gap-x-1">
+                <span class=":uno: inline-flex gap-x-1">
                   {work.highlights!.map((badge) => (
-                    <Badge variant="secondary" class="align-middle text-xs">
+                    <Badge
+                      variant="secondary"
+                      class=":uno: align-middle text-xs"
+                    >
                       {badge}
                     </Badge>
                   ))}
                 </span>
               </h3>
-              <div class="text-sm tabular-nums text-gray-500">
+              <div class=":uno: text-sm tabular-nums text-gray-500">
                 {work.startDate &&
                   formatDate(work.startDate, {
                     year: "numeric",
@@ -51,9 +54,11 @@ const { curriculum } = Astro.props;
               </div>
             </div>
 
-            <h4 class="font-mono text-sm leading-none">{work.position}</h4>
+            <h4 class=":uno: font-mono text-sm leading-none">
+              {work.position}
+            </h4>
           </CardHeader>
-          <CardContent class="mt-2 text-xs" set:text={work.summary} />
+          <CardContent class=":uno: mt-2 text-xs" set:text={work.summary} />
         </Card>
       );
     })

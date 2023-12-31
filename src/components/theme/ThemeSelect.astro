@@ -4,34 +4,32 @@ import Button from "../ui/Button.astro";
 ---
 
 <theme-select>
-  <div class="dark:block hidden transition duration-100 ease-in-out">
+  <div class=":uno: dark:block hidden transition duration-100 ease-in-out">
     <Button
       id="select-light"
       size="icon"
       variant="ghost"
-      class="blog-theme-switcher"
       aria-label="Switch to light mode"
     >
-      <Icon name="lucide:sun" class="h-5 w-5" />
+      <Icon name="lucide:sun" class=":uno: h-5 w-5 blog-theme-switcher" />
     </Button>
   </div>
 
-  <div class="dark:hidden block transition duration-100 ease-in-out">
+  <div class=":uno: dark:hidden block transition duration-100 ease-in-out">
     <Button
       id="select-dark"
       size="icon"
       variant="ghost"
-      class="blog-theme-switcher"
       aria-label="Switch to dark mode"
     >
-      <Icon name="lucide:moon" class="w-5 h-5" />
+      <Icon name="lucide:moon" class=":uno: w-5 h-5 blog-theme-switcher" />
     </Button>
   </div>
 </theme-select>
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
 <script is:inline>
-  ThemeProvider.updatePickers();
+  ThemeProvider();
 </script>
 
 <script>

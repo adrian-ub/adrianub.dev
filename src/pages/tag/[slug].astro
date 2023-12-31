@@ -17,7 +17,7 @@ const { data, slug, posts } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class=":uno: scroll-smooth">
   <head>
     <BaseHead
       title={`#${slug}`}
@@ -27,24 +27,26 @@ const { data, slug, posts } = Astro.props;
   <body>
     <Header />
     <main>
-      <section class="blog-content-area feed-width mx-auto md:w-2/3 mt-12">
-        <div class="blog-series-card mt-12 mb-16 px-4 lg:px-16">
+      <section
+        class=":uno: blog-content-area feed-width mx-auto md:w-2/3 mt-12"
+      >
+        <div class=":uno: blog-series-card mt-12 mb-16 px-4 lg:px-16">
           <div
-            class="flex w-full min-w-0 flex-col flex-wrap items-center md:flex-row xl:flex-nowrap"
+            class=":uno: flex w-full min-w-0 flex-col flex-wrap items-center md:flex-row xl:flex-nowrap"
           >
-            <div class="mb-5 w-full min-w-0 xl:mb-0 xl:flex-1 xl:pr-8">
+            <div class=":uno: mb-5 w-full min-w-0 xl:mb-0 xl:flex-1 xl:pr-8">
               <span
-                class="blog-series-label mb-2 font-semibold uppercase tracking-tight text-muted-foreground"
+                class=":uno: blog-series-label mb-2 font-semibold uppercase tracking-tight text-muted-foreground"
               >
                 Etiqueta
               </span>
-              <div class="truncate">
+              <div class=":uno: truncate">
                 <h1
-                  class="blog-series-title mb-2 pb-px font-heading text-3xl font-bold md:text-4xl"
+                  class=":uno: blog-series-title mb-2 pb-px font-heading text-3xl font-bold md:text-4xl"
                 >
                   {data.title}
                 </h1>
-                <p class="text-lg text-muted-foreground">
+                <p class=":uno: text-lg text-muted-foreground">
                   #{slug}
                 </p>
               </div>
@@ -52,16 +54,16 @@ const { data, slug, posts } = Astro.props;
           </div>
         </div>
 
-        <div class="my-10 flex flex-col items-center justify-center">
-          <hr class="w-full border-t" />
+        <div class=":uno: my-10 flex flex-col items-center justify-center">
+          <hr class=":uno: w-full border-t" />
           <p
-            class="-mt-5 p-2 font-medium text-muted-foreground bg-primary-foreground"
+            class=":uno: -mt-5 p-2 font-medium text-muted-foreground bg-primary-foreground"
           >
             Artículos con esta etiqueta
           </p>
         </div>
 
-        <div class="blog-posts-wrapper mt-10">
+        <div class=":uno: blog-posts-wrapper mt-10">
           {posts.map((post) => <PostCard {...post} />)}
         </div>
       </section>

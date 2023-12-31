@@ -11,9 +11,9 @@ interface Props {
 const { posts = [] } = Astro.props;
 ---
 
-<div class="blog-articles-area mx-auto py-10 bg-primary-foreground">
+<div class=":uno: blog-articles-area mx-auto py-10 bg-primary-foreground">
   <div
-    class="blog-articles-container container mx-auto grid grid-cols-1 gap-10 px-4 py-4 md:grid-cols-2 lg:grid-cols-3 xl:py-10 xl:px-10 2xl:px-24 2xl:py-5"
+    class=":uno: blog-articles-container container mx-auto grid grid-cols-1 gap-10 px-4 py-4 md:grid-cols-2 lg:grid-cols-3 xl:py-10 xl:px-10 2xl:px-24 2xl:py-5"
   >
     {posts.map((post) => <PostPreviewCard post={post} />)}
   </div>

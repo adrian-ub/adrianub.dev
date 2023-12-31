@@ -12,9 +12,11 @@ const { orientation = "horizontal", class: className, ...props } = Astro.props;
 
 <div
   class={ub(
-    "shrink-0 bg-border",
-    orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
-    className
+    ":uno: shrink-0 bg-border",
+    orientation === "horizontal"
+      ? ":uno: h-[1px] w-full"
+      : ":uno: h-full w-[1px]",
+    className,
   )}
   {...props}
 >

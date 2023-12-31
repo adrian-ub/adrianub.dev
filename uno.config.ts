@@ -1,5 +1,9 @@
-import { defineConfig } from "unocss";
-import { presetUno, presetTypography } from "unocss";
+import { defineConfig, presetUno, presetTypography } from "unocss";
+
+import transformerCompileClass from "@unocss/transformer-compile-class";
+
+import extractorMdc from "@unocss/extractor-mdc";
+import extractorArbitrary from "@unocss/extractor-arbitrary-variants";
 
 import presetAnimations from "unocss-preset-animations";
 
@@ -105,4 +109,10 @@ export default defineConfig({
       heading: "var(--font-heading)",
     },
   },
+  transformers: [
+    transformerCompileClass({
+      classPrefix: "",
+    }),
+  ],
+  extractors: [extractorMdc(), extractorArbitrary],
 });

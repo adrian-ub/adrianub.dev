@@ -8,6 +8,6 @@ export type Props = HTMLAttributes<"div">;
 const { class: className, ...props } = Astro.props;
 ---
 
-<div class={ub("text-sm [&_p]:leading-relaxed", className)} {...props}>
+<div class={ub(":uno: text-sm [&_p]:leading-relaxed", className)} {...props}>
   <slot />
 </div>

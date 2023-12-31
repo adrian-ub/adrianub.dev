@@ -8,23 +8,25 @@ interface Props {
 const { headings } = Astro.props;
 ---
 
-<div class="relative mb-10 w-full overflow-hidden rounded-2xl border p-4 pt-0">
-  <div class="max-h-full">
-    <div class="pt-4">
+<div
+  class=":uno: relative mb-10 w-full overflow-hidden rounded-2xl border p-4 pt-0"
+>
+  <div class=":uno: max-h-full">
+    <div class=":uno: pt-4">
       <h3
-        class="py-2 px-[18px] text-sm font-medium uppercase text-muted-foreground"
+        class=":uno: py-2 px-[18px] text-sm font-medium uppercase text-muted-foreground"
       >
         <span>TABLA DE CONTENIDO</span>
       </h3>
     </div>
-    <ul class="list-inside font-semibold">
+    <ul class=":uno: list-inside font-semibold">
       {
         headings.map((heading) => (
           <div>
-            <li class="py-0.5 px-2 align-middle">
-              <div class="flex items-center gap-2 rounded-lg hover:underline">
+            <li class=":uno: py-0.5 px-2 align-middle">
+              <div class=":uno: flex items-center gap-2 rounded-lg hover:underline">
                 <a
-                  class="w-full py-2.5 pr-2.5 text-sm font-medium text-secondary-foreground pl-3"
+                  class=":uno: w-full py-2.5 pr-2.5 text-sm font-medium text-secondary-foreground pl-3"
                   href={"#" + heading.slug}
                   aria-label={heading.text}
                 >

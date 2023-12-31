@@ -142,6 +142,12 @@ devDependencies:
   '@unocss/astro':
     specifier: ^0.58.2
     version: 0.58.2
+  '@unocss/extractor-arbitrary-variants':
+    specifier: ^0.58.2
+    version: 0.58.2
+  '@unocss/extractor-mdc':
+    specifier: ^0.58.2
+    version: 0.58.2
   '@unocss/postcss':
     specifier: ^0.58.2
     version: 0.58.2
@@ -152,6 +158,9 @@ devDependencies:
     specifier: ^0.58.2
     version: 0.58.2
   '@unocss/reset':
+    specifier: ^0.58.2
+    version: 0.58.2
+  '@unocss/transformer-compile-class':
     specifier: ^0.58.2
     version: 0.58.2
   prettier:
@@ -1693,6 +1702,10 @@ packages:
     resolution: {integrity: sha512-/UOd7iGL8FxRnd4pvYzKX1lHvBeqgfw/MUwrIirta6k4sYsO4PVIszKGOEkstNqjGl90oQgxLGMjF3HGRAw8pg==}
     dependencies:
       '@unocss/core': 0.58.2
+    dev: true
+
+  /@unocss/extractor-mdc@0.58.2:
+    resolution: {integrity: sha512-fasv/mGWkmBdjbaI5Bysovjgo/X43zEOtYUVuVHj1Q0lDL0gyMV/h4Zf4BlSI8gn5mCx3T1qMv27NVfSpvp7zA==}
     dev: true
 
   /@unocss/inspector@0.58.2:

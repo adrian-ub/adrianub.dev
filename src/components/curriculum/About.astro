@@ -12,9 +12,9 @@ const { curriculum } = Astro.props;
 ---
 
 <Section>
-  <h2 class="text-xl font-bold">Sobre mí</h2>
+  <h2 class=":uno: text-xl font-bold">Sobre mí</h2>
   <div
-    class="text-pretty font-mono text-sm text-muted-foreground"
+    class=":uno: text-pretty font-mono text-sm text-muted-foreground"
     set:html={marked.parse(curriculum.basics!.summary!)}
   />
 </Section>

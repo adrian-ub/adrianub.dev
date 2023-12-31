@@ -23,36 +23,45 @@ const { Content } = await render();
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class=":uno: scroll-smooth">
   <head>
     <BaseHead title={title} description={SITE_DESCRIPTION} />
   </head>
   <body>
     <Header />
     <main>
-      <section class="blog-content-area feed-width mx-auto md:w-2/3 mt-12">
-        <div class="blog-series-card mt-12 mb-16 px-4 lg:px-16">
-          <div class="flex flex-col-reverse flex-wrap items-start md:flex-row">
-            <div class="pr-8 w-full" class:list={[{ "md:w-1/2": heroImage }]}>
+      <section
+        class=":uno: blog-content-area feed-width mx-auto md:w-2/3 mt-12"
+      >
+        <div class=":uno: blog-series-card mt-12 mb-16 px-4 lg:px-16">
+          <div
+            class=":uno: flex flex-col-reverse flex-wrap items-start md:flex-row"
+          >
+            <div
+              class=":uno: pr-8 w-full"
+              class:list={[{ "md:w-1/2": heroImage }]}
+            >
               <span
-                class="blog-series-label mb-2 font-semibold uppercase tracking-tight text-muted-foreground"
+                class=":uno: blog-series-label mb-2 font-semibold uppercase tracking-tight text-muted-foreground"
               >
                 Series
               </span>
               <h1
-                class="blog-series-title mb-2 font-heading text-3xl font-bold md:text-4xl xl:text-5xl"
+                class=":uno: blog-series-title mb-2 font-heading text-3xl font-bold md:text-4xl xl:text-5xl"
               >
                 {title}
               </h1>
-              <div class="blog-series-desc prose prose-lg mb-5 prose-invert">
+              <div
+                class=":uno: blog-series-desc prose prose-lg mb-5 prose-invert"
+              >
                 <Content />
               </div>
             </div>
             {
               heroImage && (
-                <div class="blog-series-cover-container mb-5 w-full md:mb-0 md:w-1/2">
+                <div class=":uno: blog-series-cover-container mb-5 w-full md:mb-0 md:w-1/2">
                   <div
-                    class="blog-series-cover h-32 w-full rounded-lg border bg-cover bg-center bg-no-repeat"
+                    class=":uno: blog-series-cover h-32 w-full rounded-lg border bg-cover bg-center bg-no-repeat"
                     style={`background-image:url('${heroImage.src}');width:100%;padding-top:52.5%`}
                   />
                 </div>
@@ -61,16 +70,16 @@ const { Content } = await render();
           </div>
         </div>
 
-        <div class="my-10 flex flex-col items-center justify-center">
-          <hr class="w-full border-t" />
+        <div class=":uno: my-10 flex flex-col items-center justify-center">
+          <hr class=":uno: w-full border-t" />
           <p
-            class="-mt-5 p-2 font-medium text-muted-foreground bg-primary-foreground"
+            class=":uno: -mt-5 p-2 font-medium text-muted-foreground bg-primary-foreground"
           >
             Artículos de esta serie
           </p>
         </div>
 
-        <div class="blog-posts-wrapper mt-10">
+        <div class=":uno: blog-posts-wrapper mt-10">
           {posts.map((post) => <PostCard {...post} />)}
         </div>
       </section>

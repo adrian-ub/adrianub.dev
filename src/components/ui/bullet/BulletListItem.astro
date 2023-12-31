@@ -8,8 +8,8 @@ interface Props {
 const { type } = Astro.props;
 
 const className = {
-  check: "text-green-500",
-  cross: "text-red-500",
+  check: ":uno: text-green-500",
+  cross: ":uno: text-red-500",
 }[type];
 
 const icon = {
@@ -18,9 +18,9 @@ const icon = {
 }[type];
 ---
 
-<li class="flex max-w-2xl items-center space-x-4">
+<li class=":uno: flex max-w-2xl items-center space-x-4">
   <span class={className}>
-    <Icon class="w-6 h-6" name={icon} />
+    <Icon class=":uno: w-6 h-6" name={icon} />
   </span>
-  <span class="leading-normal prose-p:my-0"><slot /></span>
+  <span class=":uno: leading-normal prose-p:my-0"><slot /></span>
 </li>

@@ -11,18 +11,18 @@ type Props = {
 const { curriculum } = Astro.props;
 ---
 
-<Section class="print:break-inside-avoid">
-  <h2 class="text-xl font-bold">Educación</h2>
+<Section class=":uno: print:break-inside-avoid">
+  <h2 class=":uno: text-xl font-bold">Educación</h2>
   {
     curriculum.education!.map((education) => {
       return (
-        <Card class="bg-transparent">
+        <Card class=":uno: bg-transparent">
           <CardHeader>
-            <div class="flex items-center justify-between gap-x-2 text-base">
-              <h3 class="font-semibold leading-none">
+            <div class=":uno: flex items-center justify-between gap-x-2 text-base">
+              <h3 class=":uno: font-semibold leading-none">
                 {education.institution}
               </h3>
-              <div class="text-sm tabular-nums text-gray-500">
+              <div class=":uno: text-sm tabular-nums text-gray-500">
                 {education.startDate &&
                   formatDate(education.startDate, {
                     year: "numeric",
@@ -39,7 +39,7 @@ const { curriculum } = Astro.props;
               </div>
             </div>
           </CardHeader>
-          <CardContent class="mt-2">{education.area}</CardContent>
+          <CardContent class=":uno: mt-2">{education.area}</CardContent>
         </Card>
       );
     })

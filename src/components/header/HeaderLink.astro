@@ -14,21 +14,21 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
   href={href}
   class={ub(
     className,
-    "flex items-center justify-center px-2 capitalize flex-col"
+    ":uno: flex items-center justify-center px-2 capitalize flex-col",
   )}
   {...props}
 >
   <span
-    class="blog-nav-text mb-2 block rounded-lg px-2 py-1 transition-colors duration-150 text-primary hover:bg-secondary font-semibold"
+    class=":uno: blog-nav-text mb-2 block rounded-lg px-2 py-1 transition-colors duration-150 text-primary hover:bg-secondary font-semibold"
   >
     <slot />
   </span>
   <div
-    class="border-b-2 w-full px-4"
+    class=":uno: border-b-2 w-full px-4"
     transition:name={isActive ? "active-nav" : ""}
     class:list={[
-      { "border-secondary-foreground": isActive },
-      { "border-transparent": !isActive },
+      { ":uno: border-secondary-foreground": isActive },
+      { ":uno: border-transparent": !isActive },
     ]}
   >
   </div>

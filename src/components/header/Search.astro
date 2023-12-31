@@ -14,12 +14,12 @@ import Button from "../ui/Button.astro";
     id="searchButton"
     aria-label="Buscar"
   >
-    <Icon name="lucide:search" class="h-5 w-5" />
+    <Icon name="lucide:search" class=":uno: h-5 w-5" />
   </Button>
 
   <dialog style="padding:0" aria-label="Buscar">
-    <div class="dialog-frame flex">
-      <button data-close-modal class="flex md:hidden"> Cancelar</button>
+    <div class=":uno: dialog-frame flex">
+      <button data-close-modal class=":uno: flex md:hidden"> Cancelar</button>
       {
         import.meta.env.DEV ? (
           <div
@@ -29,7 +29,7 @@ import Button from "../ui/Button.astro";
             <p>Solo es para PROD</p>
           </div>
         ) : (
-          <div class="search-container">
+          <div class=":uno: search-container">
             <div id="search" />
           </div>
         )
