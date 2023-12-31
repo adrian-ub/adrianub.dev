@@ -35,6 +35,10 @@ import Button from "../ui/Button.astro";
 <script>
   type Theme = "auto" | "dark" | "light";
 
+  const isAppearanceTransition =
+    document.startViewTransition &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   class ThemeSelect extends HTMLElement {
     /** Key in `localStorage` to store color theme preference at. */
     #key = "theme";
@@ -45,15 +49,15 @@ import Button from "../ui/Button.astro";
 
       const lightButton = this.querySelector("#select-light");
       if (lightButton) {
-        lightButton.addEventListener("click", () => {
-          this.#onThemeChange("light");
+        lightButton.addEventListener("click", (event) => {
+          this.#toggleDark(event as MouseEvent, "light");
         });
       }
 
       const darkButton = this.querySelector("#select-dark");
       if (darkButton) {
-        darkButton.addEventListener("click", () => {
-          this.#onThemeChange("dark");
+        darkButton.addEventListener("click", (event) => {
+          this.#toggleDark(event as MouseEvent, "dark");
         });
       }
     }
@@ -79,6 +83,44 @@ import Button from "../ui/Button.astro";
       document.documentElement.dataset.theme =
         theme === "auto" ? this.#getPreferredColorScheme() : theme;
       this.#storeTheme(theme);
+    }
+
+    #toggleDark(event: MouseEvent, theme: Theme) {
+      if (!isAppearanceTransition || !event) {
+        this.#onThemeChange(theme);
+        return;
+      }
+      const x = event.clientX;
+      const y = event.clientY;
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y),
+      );
+      // @ts-expect-error: Transition API
+      const transition = document.startViewTransition(async () => {
+        this.#onThemeChange(theme);
+      });
+
+      transition.ready.then(() => {
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`,
+        ];
+        document.documentElement.animate(
+          {
+            clipPath:
+              this.#loadTheme() === "dark" ? [...clipPath].reverse() : clipPath,
+          },
+          {
+            duration: 400,
+            easing: "ease-in",
+            pseudoElement:
+              this.#loadTheme() === "dark"
+                ? "::view-transition-old(root)"
+                : "::view-transition-new(root)",
+          },
+        );
+      });
     }
 
     /** Store the user’s preference in `localStorage`. */
