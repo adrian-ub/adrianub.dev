@@ -4,177 +4,182 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@11ty/eleventy-fetch':
-    specifier: ^4.0.0
-    version: 4.0.0
-  '@astrojs/mdx':
-    specifier: ^2.0.3
-    version: 2.0.3(astro@4.0.8)
-  '@astrojs/partytown':
-    specifier: ^2.0.3
-    version: 2.0.3
-  '@astrojs/rss':
-    specifier: ^4.0.1
-    version: 4.0.1
-  '@astrojs/sitemap':
-    specifier: ^3.0.4
-    version: 3.0.4
-  '@fontsource-variable/inter':
-    specifier: ^5.0.13
-    version: 5.0.13
-  '@iconify-json/lucide':
-    specifier: ^1.1.148
-    version: 1.1.148
-  '@iconify-json/simple-icons':
-    specifier: ^1.1.85
-    version: 1.1.85
-  '@pagefind/default-ui':
-    specifier: ^1.0.4
-    version: 1.0.4
-  astro:
-    specifier: ^4.0.8
-    version: 4.0.8
-  astro-critters:
-    specifier: ^2.0.11
-    version: 2.0.11
-  astro-expressive-code:
-    specifier: ^0.30.1
-    version: 0.30.1(astro@4.0.8)
-  astro-icon:
-    specifier: 1.0.0
-    version: 1.0.0
-  cal-sans:
-    specifier: ^1.0.1
-    version: 1.0.1
-  class-variance-authority:
-    specifier: ^0.7.0
-    version: 0.7.0
-  clsx:
-    specifier: ^2.0.0
-    version: 2.0.0
-  hast:
-    specifier: ^1.0.0
-    version: 1.0.0
-  hast-util-from-html:
-    specifier: ^2.0.1
-    version: 2.0.1
-  hast-util-select:
-    specifier: ^6.0.2
-    version: 6.0.2
-  hast-util-to-string:
-    specifier: ^3.0.0
-    version: 3.0.0
-  hastscript:
-    specifier: ^8.0.0
-    version: 8.0.0
-  linkedom:
-    specifier: ^0.16.5
-    version: 0.16.5
-  markdown-it:
-    specifier: ^13.0.2
-    version: 13.0.2
-  marked:
-    specifier: ^11.1.0
-    version: 11.1.0
-  mdast:
-    specifier: ^3.0.0
-    version: 3.0.0
-  mdast-util-directive:
-    specifier: ^3.0.0
-    version: 3.0.0
-  mdast-util-to-string:
-    specifier: ^4.0.0
-    version: 4.0.0
-  pagefind:
-    specifier: ^1.0.4
-    version: 1.0.4
-  reading-time-estimator:
-    specifier: ^1.9.0
-    version: 1.9.0
-  rehype:
-    specifier: ^13.0.1
-    version: 13.0.1
-  rehype-external-links:
-    specifier: ^3.0.0
-    version: 3.0.0
-  remark:
-    specifier: ^15.0.1
-    version: 15.0.1
-  remark-directive:
-    specifier: ^3.0.0
-    version: 3.0.0
-  sanitize-html:
-    specifier: ^2.11.0
-    version: 2.11.0
-  sharp:
-    specifier: ^0.32.6
-    version: 0.32.6
-  shiki:
-    specifier: ^0.14.5
-    version: 0.14.5
-  tailwind-merge:
-    specifier: ^1.14.0
-    version: 1.14.0
-  unified:
-    specifier: ^11.0.4
-    version: 11.0.4
-  unist-util-remove:
-    specifier: ^4.0.0
-    version: 4.0.0
-  unist-util-visit:
-    specifier: ^5.0.0
-    version: 5.0.0
+importers:
 
-devDependencies:
-  '@types/hast':
-    specifier: ^3.0.3
-    version: 3.0.3
-  '@types/markdown-it':
-    specifier: ^13.0.2
-    version: 13.0.2
-  '@types/mdast':
-    specifier: ^4.0.3
-    version: 4.0.3
-  '@types/sanitize-html':
-    specifier: ^2.9.2
-    version: 2.9.2
-  '@unocss/astro':
-    specifier: ^0.58.2
-    version: 0.58.2
-  '@unocss/extractor-arbitrary-variants':
-    specifier: ^0.58.2
-    version: 0.58.2
-  '@unocss/extractor-mdc':
-    specifier: ^0.58.2
-    version: 0.58.2
-  '@unocss/postcss':
-    specifier: ^0.58.2
-    version: 0.58.2
-  '@unocss/preset-typography':
-    specifier: ^0.58.2
-    version: 0.58.2
-  '@unocss/preset-uno':
-    specifier: ^0.58.2
-    version: 0.58.2
-  '@unocss/reset':
-    specifier: ^0.58.2
-    version: 0.58.2
-  '@unocss/transformer-compile-class':
-    specifier: ^0.58.2
-    version: 0.58.2
-  prettier:
-    specifier: ^3.1.0
-    version: 3.1.0
-  prettier-plugin-astro:
-    specifier: ^0.12.2
-    version: 0.12.2
-  unocss:
-    specifier: ^0.58.2
-    version: 0.58.2
-  unocss-preset-animations:
-    specifier: ^1.0.1
-    version: 1.0.1(unocss@0.58.2)
+  .:
+    dependencies:
+      '@11ty/eleventy-fetch':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@astrojs/mdx':
+        specifier: ^2.0.3
+        version: 2.0.3(astro@4.0.8)
+      '@astrojs/partytown':
+        specifier: ^2.0.3
+        version: 2.0.3
+      '@astrojs/rss':
+        specifier: ^4.0.1
+        version: 4.0.1
+      '@astrojs/sitemap':
+        specifier: ^3.0.4
+        version: 3.0.4
+      '@fontsource-variable/inter':
+        specifier: ^5.0.13
+        version: 5.0.13
+      '@iconify-json/lucide':
+        specifier: ^1.1.148
+        version: 1.1.148
+      '@iconify-json/simple-icons':
+        specifier: ^1.1.85
+        version: 1.1.85
+      '@pagefind/default-ui':
+        specifier: ^1.0.4
+        version: 1.0.4
+      astro:
+        specifier: ^4.0.8
+        version: 4.0.8
+      astro-critters:
+        specifier: ^2.0.11
+        version: 2.0.11
+      astro-expressive-code:
+        specifier: ^0.30.1
+        version: 0.30.1(astro@4.0.8)
+      astro-icon:
+        specifier: 1.0.0
+        version: 1.0.0
+      cal-sans:
+        specifier: ^1.0.1
+        version: 1.0.1
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.0.0
+        version: 2.0.0
+      hast:
+        specifier: ^1.0.0
+        version: 1.0.0
+      hast-util-from-html:
+        specifier: ^2.0.1
+        version: 2.0.1
+      hast-util-select:
+        specifier: ^6.0.2
+        version: 6.0.2
+      hast-util-to-string:
+        specifier: ^3.0.0
+        version: 3.0.0
+      hastscript:
+        specifier: ^8.0.0
+        version: 8.0.0
+      linkedom:
+        specifier: ^0.16.5
+        version: 0.16.5
+      markdown-it:
+        specifier: ^13.0.2
+        version: 13.0.2
+      marked:
+        specifier: ^11.1.0
+        version: 11.1.0
+      mdast:
+        specifier: ^3.0.0
+        version: 3.0.0
+      mdast-util-directive:
+        specifier: ^3.0.0
+        version: 3.0.0
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
+      pagefind:
+        specifier: ^1.0.4
+        version: 1.0.4
+      reading-time-estimator:
+        specifier: ^1.9.0
+        version: 1.9.0
+      rehype:
+        specifier: ^13.0.1
+        version: 13.0.1
+      rehype-external-links:
+        specifier: ^3.0.0
+        version: 3.0.0
+      remark:
+        specifier: ^15.0.1
+        version: 15.0.1
+      remark-directive:
+        specifier: ^3.0.0
+        version: 3.0.0
+      sanitize-html:
+        specifier: ^2.11.0
+        version: 2.11.0
+      sharp:
+        specifier: ^0.32.6
+        version: 0.32.6
+      shiki:
+        specifier: ^0.14.5
+        version: 0.14.5
+      tailwind-merge:
+        specifier: ^1.14.0
+        version: 1.14.0
+      unified:
+        specifier: ^11.0.4
+        version: 11.0.4
+      unist-util-remove:
+        specifier: ^4.0.0
+        version: 4.0.0
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
+    devDependencies:
+      '@astrojs/ts-plugin':
+        specifier: ^1.3.1
+        version: 1.3.1
+      '@types/hast':
+        specifier: ^3.0.3
+        version: 3.0.3
+      '@types/markdown-it':
+        specifier: ^13.0.2
+        version: 13.0.2
+      '@types/mdast':
+        specifier: ^4.0.3
+        version: 4.0.3
+      '@types/sanitize-html':
+        specifier: ^2.9.2
+        version: 2.9.2
+      '@unocss/astro':
+        specifier: ^0.58.2
+        version: 0.58.2
+      '@unocss/extractor-arbitrary-variants':
+        specifier: ^0.58.2
+        version: 0.58.2
+      '@unocss/extractor-mdc':
+        specifier: ^0.58.2
+        version: 0.58.2
+      '@unocss/postcss':
+        specifier: ^0.58.2
+        version: 0.58.2
+      '@unocss/preset-typography':
+        specifier: ^0.58.2
+        version: 0.58.2
+      '@unocss/preset-uno':
+        specifier: ^0.58.2
+        version: 0.58.2
+      '@unocss/reset':
+        specifier: ^0.58.2
+        version: 0.58.2
+      '@unocss/transformer-compile-class':
+        specifier: ^0.58.2
+        version: 0.58.2
+      prettier:
+        specifier: ^3.1.0
+        version: 3.1.0
+      prettier-plugin-astro:
+        specifier: ^0.12.2
+        version: 0.12.2
+      unocss:
+        specifier: ^0.58.2
+        version: 0.58.2
+      unocss-preset-animations:
+        specifier: ^1.0.1
+        version: 1.0.1(unocss@0.58.2)
 
 packages:
 
@@ -213,7 +218,6 @@ packages:
 
   /@astrojs/compiler@2.3.4:
     resolution: {integrity: sha512-33/YtWoBCE0cBUNy1kh78FCDXBoBANX87ShgATlAHECYbG2+buNTAgq4Xgz4t5NgnEHPN21GIBC2Mvvwisoutw==}
-    dev: false
 
   /@astrojs/internal-helpers@0.2.1:
     resolution: {integrity: sha512-06DD2ZnItMwUnH81LBLco3tWjcZ1lGU9rLCCBaeUCGYe9cI0wKyY2W3kDyoW1I6GmcWgt1fu+D1CTvz+FIKf8A==}
@@ -308,6 +312,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /@astrojs/ts-plugin@1.3.1:
+    resolution: {integrity: sha512-Q6d7XzDS8L77U38vrnl4Uwp2IkrcRn7eb/VIGDgRVwzWcV8vJsg8nSf7Av7fQOgYQ09ezZODYQKGNx9uK9KCgw==}
+    dependencies:
+      '@astrojs/compiler': 2.3.4
+      '@jridgewell/sourcemap-codec': 1.4.15
+      '@volar/language-core': 1.10.10
+      '@volar/typescript': 1.10.10
+      semver: 7.5.4
+      vscode-languageserver-textdocument: 1.0.11
+    dev: true
 
   /@babel/code-frame@7.22.13:
     resolution: {integrity: sha512-XktuhWlJ5g+3TJXc5upd9Ks1HutSArik6jf2eAjYFyIOf4ej3RN+184cZbzDvbPnuTJIUhPKKJE3cIsYTiAT3w==}
@@ -1861,6 +1876,25 @@ packages:
       magic-string: 0.30.5
     transitivePeerDependencies:
       - rollup
+    dev: true
+
+  /@volar/language-core@1.10.10:
+    resolution: {integrity: sha512-nsV1o3AZ5n5jaEAObrS3MWLBWaGwUj/vAsc15FVNIv+DbpizQRISg9wzygsHBr56ELRH8r4K75vkYNMtsSNNWw==}
+    dependencies:
+      '@volar/source-map': 1.10.10
+    dev: true
+
+  /@volar/source-map@1.10.10:
+    resolution: {integrity: sha512-GVKjLnifV4voJ9F0vhP56p4+F3WGf+gXlRtjFZsv6v3WxBTWU3ZVeaRaEHJmWrcv5LXmoYYpk/SC25BKemPRkg==}
+    dependencies:
+      muggle-string: 0.3.1
+    dev: true
+
+  /@volar/typescript@1.10.10:
+    resolution: {integrity: sha512-4a2r5bdUub2m+mYVnLu2wt59fuoYWe7nf0uXtGHU8QQ5LDNfzAR0wK7NgDiQ9rcl2WT3fxT2AA9AylAwFtj50A==}
+    dependencies:
+      '@volar/language-core': 1.10.10
+      path-browserify: 1.0.1
     dev: true
 
   /acorn-jsx@5.3.2(acorn@8.11.2):
@@ -3639,7 +3673,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
-    dev: false
 
   /magic-string@0.30.5:
     resolution: {integrity: sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==}
@@ -4364,6 +4397,10 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: false
 
+  /muggle-string@0.3.1:
+    resolution: {integrity: sha512-ckmWDJjphvd/FvZawgygcUeQCxzvohjFO5RxTjj4eq8kw359gFF3E1brjfI+viLMxss5JrHTDRHZvu2/tuy0Qg==}
+    dev: true
+
   /nanoid@3.3.6:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -4628,6 +4665,10 @@ packages:
     dependencies:
       entities: 4.5.0
     dev: false
+
+  /path-browserify@1.0.1:
+    resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
+    dev: true
 
   /path-exists@4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
@@ -5132,7 +5173,6 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
-    dev: false
 
   /server-destroy@1.0.1:
     resolution: {integrity: sha512-rb+9B5YBIEzYcD6x2VKidaa+cqYBJQKnU4oe4E3ANwRRN56yk/ua1YCJT1n21NTS8w6CcOclAKNP3PhdCXKYtQ==}
@@ -5873,6 +5913,10 @@ packages:
       vite: 5.0.10
     dev: false
 
+  /vscode-languageserver-textdocument@1.0.11:
+    resolution: {integrity: sha512-X+8T3GoiwTVlJbicx/sIAF+yuJAqz8VvwJyoMVhwEMoEKE/fkDmrqUgDMyBECcM2A2frVZIUj5HI/ErRXCfOeA==}
+    dev: true
+
   /vscode-oniguruma@1.7.0:
     resolution: {integrity: sha512-L9WMGRfrjOhgHSdOYgCt/yRMsXzLDJSL7BPrOZt73gU0iWO4mpqzqQzOz5srxqTvMBaR0XZTSrVWo4j55Rc6cA==}
     dev: false
@@ -5950,7 +5994,6 @@ packages:
 
   /yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
-    dev: false
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
