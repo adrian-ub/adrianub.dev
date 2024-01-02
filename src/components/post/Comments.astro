@@ -9,20 +9,25 @@
   function sendMessage(message) {
     const iframe = document.querySelector("iframe.giscus-frame");
     if (!iframe) return;
-    iframe.contentWindow.postMessage({ giscus: message }, "https://giscus.app");
+    iframe.contentWindow.postMessage(
+      { giscus: message },
+      "https://comments.adrianub.dev",
+    );
   }
 
   function setGiscusTheme() {
-    sendMessage({
-      setConfig: {
-        theme: getGiscusTheme(),
-      },
-    });
+    setTimeout(() => {
+      sendMessage({
+        setConfig: {
+          theme: getGiscusTheme(),
+        },
+      });
+    }, 400);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     const giscusAttributes = {
-      src: "https://giscus.app/client.js",
+      src: "https://comments.adrianub.dev/client.js",
       id: "comments",
       "data-repo": "adrian-ub/adrianub-comments",
       "data-repo-id": "R_kgDOJfx1UA:",
