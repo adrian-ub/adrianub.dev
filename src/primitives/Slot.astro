@@ -1,0 +1,26 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+import { JSDOM } from "jsdom";
+
+export type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }>;
+
+const html = await Astro.slots.render("default");
+
+const dom = new JSDOM(html);
+
+const body = dom.window.document.body;
+const firstChild = body.children[0];
+const TagName = firstChild.tagName;
+
+let attributes: {
+  [key: string]: string;
+} = {};
+
+for (const attribute of firstChild.attributes) {
+  attributes[attribute.name] = attribute.value;
+}
+
+const content = firstChild.innerHTML;
+---
+
+<TagName {...attributes} {...Astro.props} set:html={content} />

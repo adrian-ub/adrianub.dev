@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { VariantProps } from "class-variance-authority";
+
+import { ub } from "@/lib/utils";
+import { alertVariants } from "./alertVariants";
+
+export type Props = VariantProps<typeof alertVariants> & HTMLAttributes<"div">;
+
+const { variant, class: className, ...props } = Astro.props;
+---
+
+<div role="alert" class={ub(alertVariants({ variant }), className)} {...props}>
+  <slot />
+</div>

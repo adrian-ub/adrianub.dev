@@ -1,0 +1,190 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Adrián Urrego Bohórquez",
+    "label": "Ingeniero FrontEnd enfocado en construir productos con especial atención a los detalles",
+    "email": "hola@adrianub.dev",
+    "url": "http://adrianub.dev",
+    "summary": "Ingeniero de Sistemas, especialista en Ingeniería de Software con más de 6 años de experiencia en desarrollo FrontEnd bajo metodologías ágiles. <br /><br/> Especializado en Angular 2+ y con fuertes conocimientos en Javascript, Typescript, NodeJs, Astro y NestJs. \nHabilidades sólidas en la construcción de documentación de componentes UI con Storybook y en la creación de pruebas unitarias exhaustivas con Jest. \n\nAdemás, puedo llevar a cabo pruebas E2E con Cypress y Playwright para garantizar la calidad en cada proyecto.",
+    "location": {
+      "countryCode": "COL",
+      "region": "Valledupar, Colombia"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "adrian-ub",
+        "url": "https://github.com/adrian-ub"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "adrianub",
+        "url": "https://www.linkedin.com/in/adrianub/"
+      },
+      {
+        "network": "X",
+        "username": "AdrianUB",
+        "url": "https://x.com/adrianub"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "IAS SOFTWARE",
+      "position": "Desarrollador de Software - Bancolombia",
+      "startDate": "2021-05-31",
+      "highlights": [],
+      "summary": "Análisis, diseño y desarrollo de aplicaciones Frontend Angular, implementación DDD y microfront con Angular Module Federation, configuración de Storybook para visualización de componentes y mocks con MSWJS, desarrollo de pipelines en Azure Devops. Logrando disminuir el tiempo de desarrollo, integración y despliegue continuo.",
+      "url": "https://www.linkedin.com/company/iassoftware/",
+      "location": "Colombia"
+    },
+    {
+      "name": "SalvaYA!",
+      "position": "Desarrollador de software",
+      "startDate": "2017-07-31",
+      "endDate": "2020-12-31",
+      "highlights": [],
+      "summary": "Análisis, diseño y desarrollo de la aplicación para solicitudes de Servicio de Salvavidas Profesionales por Días en la ciudad de Valledupar, reduciendo en un 60% el tiempo de solicitud a los administradores de piscinas y mejorando la experiencia de usuario.",
+      "url": "https://www.linkedin.com/company/salvayacom/",
+      "location": "Valledupar, Cesar, Colombia"
+    },
+    {
+      "name": "Universidad Popular del Cesar",
+      "position": "Desarrollador de software",
+      "startDate": "2020-07-31",
+      "endDate": "2020-10-31",
+      "highlights": [],
+      "summary": "Análisis, diseño y desarrollo de la plataforma web para la gestión de la Unidad de Emprendimiento y Desarrollo Empresarial de la Universidad Popular del Cesar implementando metodologías ágiles, reduciendo un 40% en el proceso de inscripción e información de eventos.",
+      "url": "https://www.linkedin.com/school/universidad-popular-del-c%C3%A9sar/",
+      "location": "Valledupar, Cesar, Colombia"
+    },
+    {
+      "name": "Freelance",
+      "startDate": "2015-01-10",
+      "endDate": "2019-12-31",
+      "highlights": [],
+      "description": "",
+      "summary": "Análisis, diseño y desarrollo FullStack de múltiples aplicaciones y sitios web como gestión de restaurantes, gestión de colegios, implementando Angular, JQuery, CSS, Java, Javascript, PHP, GatsbyJS, Netlify CMS, TailwindCSS, Laravel, NodeJS, Express, MongoDB, MySQL, PostgreSQL, Firebase, entre otros."
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "Universidad Popular del Cesar",
+      "area": "Grado de Especialización en Ingeniería de software",
+      "studyType": "Especialización",
+      "endDate": "2023-06-30",
+      "score": "",
+      "courses": []
+    },
+    {
+      "institution": "Universidad Popular del Cesar",
+      "area": "Grado en Ingeniería de Sistemas",
+      "studyType": "Pregrado",
+      "endDate": "2022-12-31",
+      "score": "",
+      "courses": []
+    }
+  ],
+  "awards": [
+    {
+      "title": "Hackathon Departamental",
+      "date": "2017-06-30",
+      "awarder": "Universidad Popular del Cesar",
+      "summary": "2 puesto en la Hackathon Departamental realizada por el Punto Vive Digital Lab de Valledupar,\nconstó en desarrollar un software para visualizar la cantidad de alimentos por municipio a los\nproveedores del Departamento del Cesar, desarrollado en Angular y Java."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "CCNA Routing and Switching: Introducción a redes",
+      "issuer": "Cisco",
+      "date": "2020-06-30"
+    },
+    {
+      "name": "Competencias en Ciudadano Digital - Desarrollo de Videojuegos",
+      "issuer": "Universidad de Cundinamarca",
+      "date": "2017-06-30"
+    }
+  ],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Angular"
+    },
+    {
+      "name": "Astro"
+    },
+    {
+      "name": "Typescript"
+    },
+    {
+      "name": "Javascript"
+    },
+    {
+      "name": "NodeJS"
+    },
+    {
+      "name": "NestJS"
+    },
+    {
+      "name": "GraphQL"
+    }
+  ],
+  "languages": [
+    {
+      "language": "Español",
+      "fluency": "Nativo"
+    }
+  ],
+  "interests": [],
+  "references": [],
+  "projects": [
+    {
+      "name": "ng-strapi",
+      "startDate": "2019-10-22",
+      "description": "Angular SDK para Strapi",
+      "url": "https://github.com/adrian-ub/ng-strapi",
+      "highlights": ["Angular", "Strapi"]
+    },
+    {
+      "name": "TailwindCSS Brand Colors",
+      "startDate": "2021-07-31",
+      "description": "Plugin de Tailwind CSS para agregar colores de marcas reconocidas.",
+      "url": "https://github.com/ublabs/tailwindcss-brand-colors",
+      "endDate": "2021-07-31",
+      "highlights": ["TailwindCSS"]
+    },
+    {
+      "name": "Blade CoreUI Icons",
+      "startDate": "2021-04-30",
+      "description": "Un paquete para hacer uso fácilmente de CoreUI Icons en sus vistas de Laravel Blade.",
+      "url": "https://github.com/ublabs/blade-coreui-icons",
+      "highlights": ["Laravel", "Blade", "PHP", "CoreUI Icons"]
+    },
+    {
+      "name": "Blade Simple Icons",
+      "startDate": "2021-04-30",
+      "description": "Un paquete para utilizar fácilmente Simple Icons en sus vistas de Laravel Blade.",
+      "url": "https://github.com/ublabs/blade-simple-icons",
+      "highlights": ["Laravel", "Blade", "PHP", "Simple Icons"]
+    },
+    {
+      "name": "Banners",
+      "startDate": "2021-02-28",
+      "description": "Generador de Banners para paquetes de código abierto y publicaciones de blog.",
+      "url": "https://github.com/ublabs/banners",
+      "highlights": ["NodeJS", "Typescript", "TailwindCSS"]
+    },
+    {
+      "name": "Netlify CMS OAuth",
+      "startDate": "2021-02-28",
+      "description": "Usar Netlify CMS para proyectos alojados en hosting diferentes a Netlify",
+      "url": "https://github.com/ublabs/netlify-cms-vercel",
+      "highlights": ["Netlify CMS", "Vercel"]
+    }
+  ],
+  "meta": {
+    "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/resume.json",
+    "version": "v1.0.0"
+  }
+}

@@ -1,0 +1,55 @@
+---
+import curriculum from "@/assets/resume.json";
+
+import PageHeader from "@/components/header/Header.astro";
+
+import BaseHead from "@/components/common/BaseHead.astro";
+import Header from "@/components/curriculum/Header.astro";
+import About from "@/components/curriculum/About.astro";
+import Work from "@/components/curriculum/Work.astro";
+import Education from "@/components/curriculum/Education.astro";
+import Skills from "@/components/curriculum/Skills.astro";
+import Projects from "@/components/curriculum/Projects.astro";
+
+import { SITE_DESCRIPTION } from "@/lib/consts";
+---
+
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <BaseHead title="Curriculum" description={SITE_DESCRIPTION} />
+    <style is:global>
+      @media print {
+        @page {
+          margin: 0;
+        }
+        body {
+          margin: 1.6cm;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <div class="relative flex min-h-screen flex-col bg-background">
+      <PageHeader class="print:hidden" />
+
+      <main
+        class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16 flex-1"
+      >
+        <section class="mx-auto w-full max-w-2xl space-y-8 print:space-y-6">
+          <Header {curriculum} />
+
+          <About {curriculum} />
+
+          <Work {curriculum} />
+
+          <Education {curriculum} />
+
+          <Skills {curriculum} />
+
+          <Projects {curriculum} />
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

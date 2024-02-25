@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+
+import { Button } from "../ui/button";
+---
+
+<aside class="max-w-3xl mx-auto">
+  <div class="bg-muted rounded-xl p-10 text-lg my-20">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-6 gap-10 overflow-hidden">
+      <div class="col-span-full lg:col-span-4">
+        <h2 class="mt-0 font-bold text-3xl mb-6">Mantente en contacto</h2>
+        <p>
+          No te pierdas ni una sola publicación o anuncio de proyecto que haga.
+          Sígueme en 𝕏 para mantenerte en contacto, hacer una pregunta o
+          simplemente discutir juntos diferentes temas de ingeniería.
+        </p>
+      </div>
+      <div
+        class="col-span-full lg:col-span-2 self-center lg:justify-self-center"
+      >
+        <Button asChild>
+          <a
+            href="https://twitter.com/intent/follow?original_referer=https://adrianub.dev&twgr=AdrianUB&screen_name=AdrianUB&twterm=follow"
+            target="_blank"
+            rel="noreferrer"
+            class="button text-center w-full md:w-auto px-12 py-2 whitespace-nowrap"
+          >
+            <Icon
+              name="simple-icons:x"
+              class="inline-block -mb-[0.25ch] mr-2 align-baseline"
+            />
+
+            <span>Sígueme</span>
+          </a>
+        </Button>
+      </div>
+    </div>
+  </div>
+</aside>

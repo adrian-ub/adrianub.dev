@@ -1,0 +1,61 @@
+---
+import { Icon } from "astro-icon/components";
+import ShareX from "./ShareX.astro";
+import type ButtonProps from "./types";
+import ShareFacebook from "./ShareFacebook.astro";
+import ShareReddit from "./ShareReddit.astro";
+import ShareLinkedIn from "./ShareLinkedIn.astro";
+
+type Props = ButtonProps;
+---
+
+<aside class="block lg:hidden my-20 max-w-3xl mx-auto text-center">
+  <ul
+    class="flex gap-2 items-center justify-end text-2xl text-muted-foreground bg-gradient-to-r from-transparent to-muted rounded-lg"
+  >
+    <li>
+      <ShareX {...Astro.props}>
+        <button
+          aria-label="Share on Twitter"
+          class="block p-4 undefined hover:text-primary"
+          style="background-color: transparent; font: inherit; cursor: pointer;"
+        >
+          <Icon name="simple-icons:x" />
+        </button>
+      </ShareX>
+    </li>
+    <li>
+      <ShareFacebook {...Astro.props}>
+        <button
+          aria-label="Share on Facebook"
+          class="block p-4 undefined hover:text-primary"
+          style="background-color: transparent; font: inherit; cursor: pointer;"
+        >
+          <Icon name="simple-icons:facebook" />
+        </button>
+      </ShareFacebook>
+    </li>
+    <li>
+      <ShareReddit {...Astro.props}>
+        <button
+          aria-label="Share on Reddit"
+          class="block p-4 hover:text-primary"
+          style="background-color: transparent; font: inherit; cursor: pointer;"
+        >
+          <Icon name="simple-icons:reddit" />
+        </button>
+      </ShareReddit>
+    </li>
+    <li>
+      <ShareLinkedIn {...Astro.props}>
+        <button
+          aria-label="Share on Reddit"
+          class="block p-4 hover:text-primary"
+          style="background-color: transparent; font: inherit; cursor: pointer;"
+        >
+          <Icon name="simple-icons:linkedin" />
+        </button>
+      </ShareLinkedIn>
+    </li>
+  </ul>
+</aside>

@@ -1,0 +1,55 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Picture } from "astro:assets";
+
+import noContent from "@/assets/no-content.png";
+import { ub } from "@/lib/utils";
+
+interface Props {
+  showSummary?: boolean;
+  class?: string;
+  post: CollectionEntry<"blog">;
+  imageLoading?: "lazy" | "eager";
+}
+
+const {
+  post,
+  showSummary = false,
+  class: className = "",
+  imageLoading = "lazy",
+} = Astro.props;
+
+const slug = "/" + post.slug + "/";
+---
+
+<div class={ub(className, "col-span-1")}>
+  <a
+    aria-label={post.data.title}
+    class="mb-4 block w-full overflow-hidden rounded-lg border hover:opacity-90 bg-card"
+    href={slug}
+  >
+    <Picture
+      src={post.data.heroImage ?? noContent}
+      alt={post.data.title}
+      class="blog-article-card-cover block w-full"
+      loading={imageLoading}
+      transition:name={`post-hero-image-${post.slug}`}
+      formats={["webp"]}
+      densities={[1.5, 2]}
+    />
+  </a>
+  <h3
+    class="blog-article-card-title mx-4 mb-2 block break-words font-heading text-2xl font-extrabold leading-snug hover:opacity-75"
+  >
+    <a href={slug}>
+      {post.data.title}
+    </a>
+  </h3>
+  {
+    showSummary && (
+      <p class="blog-article-card-brief mx-4 mb-3 break-words text-lg leading-snug hover:opacity-75 text-muted-foreground">
+        <a href={slug}>{post.data.description}</a>
+      </p>
+    )
+  }
+</div>

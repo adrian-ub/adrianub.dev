@@ -1,0 +1,28 @@
+---
+import type { HTMLAttributes, HTMLTag, Polymorphic } from "astro/types";
+import Slot from "@/primitives/Slot.astro";
+import { type VariantProps } from "class-variance-authority";
+
+import { ub } from "@/lib/utils";
+import { buttonVariants } from "./buttonVariants";
+
+export type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> &
+  VariantProps<typeof buttonVariants> &
+  HTMLAttributes<"button"> & {
+    asChild?: boolean;
+  };
+
+const {
+  class: className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+} = Astro.props;
+
+const Component = asChild ? Slot : "button";
+---
+
+<Component class={ub(buttonVariants({ variant, size, className }))} {...props}>
+  <slot />
+</Component>

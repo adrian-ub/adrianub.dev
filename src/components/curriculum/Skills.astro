@@ -1,0 +1,28 @@
+---
+import type { ResumeSchema } from "@/lib/resume-schema";
+import Section from "./Section.astro";
+import { Badge } from "../ui/badge";
+
+type Props = {
+  curriculum: ResumeSchema;
+};
+
+const { curriculum } = Astro.props;
+---
+
+{
+  curriculum.skills && curriculum.skills.length > 0 && (
+    <Section>
+      <h2 class="text-xl font-bold">Habilidades</h2>
+      <div class="flex flex-wrap gap-1">
+        {curriculum.skills.map((skill) => {
+          return (
+            <Badge class="rounded-md print:text-primary print:underline">
+              {skill.name}
+            </Badge>
+          );
+        })}
+      </div>
+    </Section>
+  )
+}

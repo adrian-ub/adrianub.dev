@@ -1,0 +1,27 @@
+---
+import MobileNav from "./MobileNav.astro";
+import MainNav from "./MainNav.astro";
+import ModeToggle from "../theme/ModeToggle.astro";
+import Search from "./Search.astro";
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b border-border bg-background bg-opacity-80 backdrop-blur-md font-medium z-10"
+  class:list={[Astro.props.class]}
+>
+  <div class="container flex h-14 max-w-screen-2xl items-center">
+    <MainNav />
+    <MobileNav />
+    <div
+      class="flex flex-1 items-center justify-between space-x-2 md:justify-end"
+    >
+      <div class="w-full flex-1 md:w-auto md:flex-none"><Search /></div>
+
+      <nav class="flex items-center">
+        <SocialLinks />
+        <ModeToggle />
+      </nav>
+    </div>
+  </div>
+</header>

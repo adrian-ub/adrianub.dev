@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import { ub } from "@/lib/utils";
+
+export type Props = HTMLAttributes<"h5">;
+const { class: className, ...props } = Astro.props;
+---
+
+<h5
+  class={ub("mb-1 font-medium leading-none tracking-tight", className)}
+  {...props}
+>
+  <slot />
+</h5>

@@ -1,0 +1,22 @@
+---
+import SocialShare from "./SocialShare.astro";
+import type ButtonProps from "./types";
+
+type Props = ButtonProps;
+
+const {
+  url = new URL(Astro.url.pathname, Astro.site),
+  description,
+  via,
+  title,
+} = Astro.props;
+
+let urlPath = `https://twitter.com/intent/tweet?url=${url}`;
+
+if (description)
+  urlPath += `&text=¡Acabo de leer "${title}" de @${via} y tú también deberías hacerlo!`;
+---
+
+<SocialShare url={urlPath}>
+  <slot />
+</SocialShare>

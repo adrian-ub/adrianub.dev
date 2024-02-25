@@ -1,0 +1,14 @@
+---
+import SocialShare from "./SocialShare.astro";
+import type ButtonProps from "./types";
+
+type Props = ButtonProps;
+
+const { url = new URL(Astro.url.pathname, Astro.site) } = Astro.props;
+
+let urlPath = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+---
+
+<SocialShare url={urlPath}>
+  <slot />
+</SocialShare>

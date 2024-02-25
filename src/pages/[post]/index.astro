@@ -1,0 +1,113 @@
+---
+import { type CollectionEntry, getEntries } from "astro:content";
+
+import Comments from "@/components/post/Comments.astro";
+import Tags from "@/components/post/Tags.astro";
+import TableOfContents from "@/components/post/TableOfContents.astro";
+
+import { posts, getRelatedPosts } from "@/lib/post";
+import BaseHead from "@/components/common/BaseHead.astro";
+import Header from "@/components/header/Header.astro";
+import HeaderPost from "@/components/post/HeaderPost.astro";
+import SharedPostLg from "@/components/post/SharedPostLg.astro";
+import SharedPost from "@/components/post/SharedPost.astro";
+import FollowMe from "@/components/post/FollowMe.astro";
+import PostPreviewCard from "@/components/post/PostPreviewCard.astro";
+
+export async function getStaticPaths() {
+  return posts.map((post) => ({ params: { post: post.slug }, props: post }));
+}
+
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+
+const {
+  data: {
+    title,
+    description,
+    pubDate,
+    heroImage,
+    categories = [],
+    tableOfContents,
+  },
+  slug,
+  render,
+} = Astro.props;
+
+const {
+  Content,
+  headings,
+  remarkPluginFrontmatter: { minutesRead },
+} = await render();
+
+const relatedPosts = getRelatedPosts(slug, categories);
+
+const tags = await getEntries(categories);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = heroImage?.src || new URL("og.png", canonicalURL).toString();
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth" data-theme="dark">
+  <head>
+    <BaseHead title={title} description={description} image={ogImage} />
+    <meta name="author" content="Adrián UB" />
+    <meta property="article:published_time" content={pubDate.toDateString()} />
+  </head>
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <div>
+      <div class="relative flex min-h-screen flex-col bg-background">
+        <Header />
+
+        <div class="flex-1">
+          <HeaderPost {...post} {minutesRead} />
+          <div
+            class="text-lg mb-20 lg:mb-[7.5rem]"
+            data-projection-id="3"
+            style="opacity: 1; transform: none;"
+          >
+            <div class="px-5 max-w-6xl mx-auto relative">
+              <SharedPostLg {...{ title, description, via: "AdrianUB" }} />
+              {
+                tableOfContents && (
+                  <div class="max-w-4xl mx-auto">
+                    <TableOfContents headings={headings} />
+                  </div>
+                )
+              }
+              <main
+                class="post-content max-w-3xl mx-auto prose text-lg"
+                data-pagefind-body
+              >
+                <Content />
+              </main>
+              <div>
+                <Tags categories={tags} />
+              </div>
+              <SharedPost {...{ title, description, via: "AdrianUB" }} />
+              <FollowMe />
+            </div>
+
+            <section class="my-20">
+              <div class="px-5 max-w-6xl mx-auto">
+                <h2 class="font-bold text-3xl">Sigue leyendo</h2>
+                <div
+                  class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 overflow-hidden my-10 gap-y-20"
+                >
+                  {relatedPosts.map((post) => <PostPreviewCard post={post} />)}
+                </div>
+              </div>
+            </section>
+
+            <aside class="py-4">
+              <div class="px-5 max-w-6xl mx-auto">
+                <Comments />
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

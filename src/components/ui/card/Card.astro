@@ -1,0 +1,13 @@
+---
+import { ub } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"div">;
+---
+
+<div
+  class={ub("rounded-lg bg-card text-card-foreground", Astro.props.class)}
+  {...Astro.props}
+>
+  <slot />
+</div>

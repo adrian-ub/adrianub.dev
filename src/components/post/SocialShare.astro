@@ -1,0 +1,69 @@
+---
+export type Props = {
+  url: string;
+  height?: number;
+  width?: number;
+  [key: string]: any;
+};
+
+const { url, height = 400, width = 550, ...configRest } = Astro.props;
+
+const config: { [key: string]: string | number } = {
+  height,
+  width,
+  location: "no",
+  toolbar: "no",
+  status: "no",
+  directories: "no",
+  menubar: "no",
+  scrollbars: "yes",
+  resizable: "no",
+  centerscreen: "yes",
+  chrome: "yes",
+  ...configRest,
+};
+---
+
+<social-share data-url={url} data-config={JSON.stringify(config)}>
+  <slot />
+</social-share>
+
+<script>
+  class SocialShare extends HTMLElement {
+    constructor() {
+      super();
+
+      const url = this.dataset.url;
+      let config: { [key: string]: any } = JSON.parse(
+        this.dataset.config || "{}"
+      );
+
+      config = {
+        ...config,
+        ...this.getBoxPositionOnWindowCenter(config.width, config.height),
+      };
+      const properties = Object.keys(config)
+        .map((key) => `${key}=${config[key]}`)
+        .join(", ");
+
+      this.addEventListener("click", () => {
+        window.open(url, "", properties);
+      });
+    }
+
+    getBoxPositionOnWindowCenter(width: number, height: number) {
+      return {
+        left:
+          window.outerWidth / 2 +
+          (window.screenX || window.screenLeft || 0) -
+          width / 2,
+        top:
+          window.outerHeight / 2 +
+          (window.screenY || window.screenTop || 0) -
+          height / 2,
+      };
+    }
+  }
+
+  customElements.define("social-share", SocialShare);
+</script>

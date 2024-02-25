@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { type VariantProps } from "class-variance-authority";
+
+import { ub } from "@/lib/utils";
+import { badgeVariants } from "./variants";
+
+export type Props = VariantProps<typeof badgeVariants> & HTMLAttributes<"div">;
+
+const { class: className, variant, ...props } = Astro.props;
+---
+
+<div class={ub(badgeVariants({ variant }), className)} {...props}>
+  <slot />
+</div>

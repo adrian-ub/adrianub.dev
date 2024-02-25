@@ -1,0 +1,35 @@
+---
+import { Separator } from "@/components/ui/separator";
+import { SITE_TITLE } from "@/lib/consts";
+import LinkItems from "../header/LinkItems.astro";
+import SocialLinks from "../header/SocialLinks.astro";
+import { Image } from "astro:assets";
+---
+
+<Separator />
+<section>
+  <div
+    class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8"
+  >
+    <nav class="flex flex-wrap justify-center -mx-5 -my-2 space-x-5 py-2">
+      <LinkItems />
+    </nav>
+    <div class="flex justify-center mt-8 space-x-6">
+      <SocialLinks />
+    </div>
+    <p class="mt-8 text-base leading-6 text-center">
+      © {new Date().getFullYear()}
+      {SITE_TITLE}
+    </p>
+    <div class="flex flex-col items-center">
+      <a target="_blank" href="https://astro.build">
+        <Image
+          src="https://astro.badg.es/v2/built-with-astro/small.svg"
+          alt="Built with Astro"
+          width="240"
+          height="40"
+        />
+      </a>
+    </div>
+  </div>
+</section>

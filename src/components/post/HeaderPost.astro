@@ -1,0 +1,152 @@
+---
+import { Image, Picture } from "astro:assets";
+import { type CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+import FormattedDate from "@/components/format/FormattedDate.astro";
+import { Separator } from "../ui/separator";
+import authorImage from "@/assets/author.png";
+import { AUTHOR_NAME, GITHUB_URL, X_URL } from "@/lib/consts";
+
+export type Props = CollectionEntry<"blog"> & {
+  minutesRead: string;
+};
+const {
+  data: { heroImage, title, pubDate },
+  minutesRead,
+  slug,
+} = Astro.props;
+---
+
+<div class="from-background to-background-foreground bg-gradient-to-t">
+  <div class="px-5 max-w-6xl mx-auto mb-20 lg:pt-10">
+    <div class="relative max-w-3xl mx-auto">
+      <div
+        class="hidden lg:block absolute top-0 -left-16 -translate-x-full bottom-[25%] opacity-20 w-[300px]"
+      >
+        <svg width="100%" height="100%">
+          <pattern
+            id="pattern-circles"
+            x="0"
+            y="0"
+            width="50"
+            height="50"
+            patternUnits="userSpaceOnUse"
+            patternContentUnits="userSpaceOnUse"
+          >
+            <circle
+              id="pattern-circle"
+              cx="10"
+              cy="10"
+              r="1.6257413380501518"
+              fill="currentColor"></circle>
+          </pattern>
+
+          <rect
+            id="rect"
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            fill="url(#pattern-circles)"></rect>
+        </svg>
+      </div>
+      <div
+        class="hidden lg:block absolute top-0 -right-16 translate-x-full bottom-[25%] opacity-20 w-[300px]"
+      >
+        <svg width="100%" height="100%">
+          <pattern
+            id="pattern-circles"
+            x="0"
+            y="0"
+            width="50"
+            height="50"
+            patternUnits="userSpaceOnUse"
+            patternContentUnits="userSpaceOnUse"
+          >
+            <circle
+              id="pattern-circle"
+              cx="10"
+              cy="10"
+              r="1.6257413380501518"
+              fill="currentColor"></circle>
+          </pattern>
+
+          <rect
+            id="rect"
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            fill="url(#pattern-circles)"></rect>
+        </svg>
+      </div>
+      <div
+        data-projection-id="1"
+        style="opacity: 1; filter: grayscale(0%); transform: none;"
+      >
+        <div class="mx-auto pb-5 lg:pb-10 drop-shadow-2xl">
+          <Picture
+            data-pagefind-meta="image[src], image_alt[alt]"
+            alt={title}
+            src={heroImage}
+            class="rounded"
+            transition:name={`post-hero-image-${slug}`}
+            formats={["webp"]}
+            densities={[1.5, 2]}
+            loading="eager"
+          />
+        </div>
+      </div>
+      <header
+        class="text-center text-xl"
+        data-projection-id="2"
+        style="opacity: 1; transform: none;"
+      >
+        <div
+          class="text-muted-foreground mb-8 uppercase text-base font-medium tracking-widest font-mono"
+        >
+          <span class="text-primary">{minutesRead}</span>
+          <span class="mx-3 text-gray-300">—</span>
+          <FormattedDate date={pubDate} />
+        </div>
+        <h1
+          class="text-4xl lg:text-6xl font-extrabold"
+          data-pagefind-meta="title"
+        >
+          {title}
+        </h1>
+        <div
+          class="inline-grid grid-cols-[2fr_1fr_auto_1fr_2fr] items-center gap-5 text-gray-500 mt-16 font-medium text-2xl"
+        >
+          <Separator />
+          <a
+            href={X_URL}
+            rel="noreferrer"
+            target="_blank"
+            class="p-5 text-muted-foreground hover:text-primary"
+          >
+            <Icon name="simple-icons:x" />
+            <span class="sr-only">X</span>
+          </a>
+          <Image
+            src={authorImage}
+            alt={AUTHOR_NAME}
+            class="h-12 w-12 rounded-full shadow-lg"
+            loading="eager"
+          />
+          <a
+            href={GITHUB_URL}
+            rel="noreferrer"
+            target="_blank"
+            class="p-5 text-muted-foreground hover:text-primary"
+          >
+            <Icon name="simple-icons:github" />
+            <span class="sr-only">GitHub</span>
+          </a>
+          <Separator />
+        </div>
+      </header>
+    </div>
+  </div>
+</div>

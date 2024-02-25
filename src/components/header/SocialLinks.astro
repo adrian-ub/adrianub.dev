@@ -1,0 +1,54 @@
+---
+import { GITHUB_URL, X_URL } from "@/lib/consts";
+import { Button } from "../ui/button";
+import { Icon } from "astro-icon/components";
+---
+
+<Button
+  variant="ghost"
+  size="icon"
+  name="github"
+  aria-label="github"
+  class="w-9 px-0"
+  asChild
+>
+  <a
+    href={GITHUB_URL}
+    aria-label="Find me on Github"
+    target="_blank"
+    rel="me noopener"
+  >
+    <Icon name="simple-icons:github" class="h-4 w-4" />
+  </a>
+</Button>
+
+<Button
+  variant="ghost"
+  size="icon"
+  name="x"
+  aria-label="x"
+  class="w-9 px-0"
+  asChild
+>
+  <a href={X_URL} aria-label="Find me on X" target="_blank" rel="me noopener">
+    <Icon name="simple-icons:x" class="h-4 w-4" />
+  </a>
+</Button>
+
+<Button
+  variant="ghost"
+  size="icon"
+  name="rss"
+  aria-label="rss"
+  class="w-9 px-0"
+  asChild
+>
+  <a
+    href="/rss.xml"
+    aria-label="Blog's XML Feed"
+    target="_blank"
+    rel="me noopener"
+  >
+    <Icon name="lucide:rss" class="h-4 w-4" />
+  </a>
+</Button>

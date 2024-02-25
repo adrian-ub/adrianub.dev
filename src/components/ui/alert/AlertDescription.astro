@@ -1,0 +1,12 @@
+---
+import { ub } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"p">;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div class={ub("text-sm [&_p]:leading-relaxed", className)} {...props}>
+  <slot />
+</div>

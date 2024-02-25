@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Tag from "./Tag.astro";
+interface Props {
+  categories: CollectionEntry<"tags">[];
+}
+
+const { categories } = Astro.props;
+---
+
+{
+  !!categories.length && (
+    <div class="mb-5 flex w-full flex-row flex-wrap justify-center md:mb-0 space-x-2">
+      {categories.map((category) => (
+        <Tag tag={category} />
+      ))}
+    </div>
+  )
+}

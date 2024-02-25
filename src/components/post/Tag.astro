@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Badge } from "@/components/ui/badge";
+
+export type Props = {
+  tag: CollectionEntry<"tags">;
+};
+
+const { tag } = Astro.props;
+---
+
+<a href={"/tag/" + tag.slug + "/"}>
+  <Badge>{tag.data.title}</Badge>
+</a>

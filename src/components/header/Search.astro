@@ -1,0 +1,420 @@
+---
+import "@pagefind/default-ui/css/ui.css";
+
+import { Button } from "../ui/button";
+import { ub } from "@/lib/utils";
+---
+
+<site-search>
+  <Button
+    variant="outline"
+    id="searchButton"
+    data-open-modal
+    aria-label="Buscar"
+    class={ub(
+      "relative h-8 w-full justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
+    )}
+  >
+    <span class="inline-flex">Buscar...</span>
+    <div
+      class="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex"
+    >
+      <span class="text-xs">⌘</span>K
+    </div>
+  </Button>
+
+  <dialog style="padding:0" aria-label="Buscar">
+    <div class="dialog-frame flex bg-background">
+      <button data-close-modal class="flex md:hidden"> Cancelar</button>
+      {
+        import.meta.env.DEV ? (
+          <div style="margin: auto; text-align: center; white-space: pre-line;">
+            <p>Solo es para PROD</p>
+          </div>
+        ) : (
+          <div>
+            <div id="search" />
+          </div>
+        )
+      }
+    </div>
+  </dialog>
+</site-search>
+
+<script>
+  class SiteSearch extends HTMLElement {
+    constructor() {
+      super();
+      const openBtn = this.querySelector<HTMLButtonElement>(
+        "button[data-open-modal]"
+      )!;
+      const closeBtn = this.querySelector<HTMLButtonElement>(
+        "button[data-close-modal]"
+      )!;
+      const dialog = this.querySelector("dialog")!;
+      const dialogFrame = this.querySelector(".dialog-frame")!;
+
+      /** Close the modal if a user clicks on a link or outside of the modal. */
+      const onClick = (event: MouseEvent) => {
+        const isLink = "href" in (event.target || {});
+        if (
+          isLink ||
+          (document.body.contains(event.target as Node) &&
+            !dialogFrame.contains(event.target as Node))
+        ) {
+          closeModal();
+        }
+      };
+
+      const openModal = (event?: MouseEvent) => {
+        dialog.showModal();
+        document.body.toggleAttribute("data-search-modal-open", true);
+        this.querySelector("input")?.focus();
+        event?.stopPropagation();
+        window.addEventListener("click", onClick);
+      };
+
+      const closeModal = () => dialog.close();
+
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+
+      dialog.addEventListener("close", () => {
+        document.body.toggleAttribute("data-search-modal-open", false);
+        window.removeEventListener("click", onClick);
+      });
+
+      window.addEventListener("keydown", (e) => {
+        const isInput =
+          document.activeElement instanceof HTMLElement &&
+          (["input", "select", "textarea"].includes(
+            document.activeElement.tagName.toLowerCase()
+          ) ||
+            document.activeElement.isContentEditable);
+        if (e.metaKey === true && e.key === "k") {
+          dialog.open ? closeModal() : openModal();
+          e.preventDefault();
+        } else if (e.key === "/" && !dialog.open && !isInput) {
+          openModal();
+          e.preventDefault();
+        }
+      });
+
+      const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
+      const stripTrailingSlash = (path: string) =>
+        path.replace(/(.)\/(#.*)?$/, "$1$2");
+      const formatURL = shouldStrip
+        ? stripTrailingSlash
+        : (path: string) => path;
+
+      window.addEventListener("DOMContentLoaded", () => {
+        if (import.meta.env.DEV) return;
+        const onIdle =
+          window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+        onIdle(async () => {
+          // @ts-expect-error — Missing types for @pagefind/default-ui package.
+          const { PagefindUI } = await import("@pagefind/default-ui");
+          new PagefindUI({
+            resetStyles: false,
+            element: "#search",
+            baseUrl: import.meta.env.BASE_URL,
+            bundlePath:
+              import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
+            showImages: false,
+            showSubResults: true,
+            processResult: (result: {
+              url: string;
+              excerpt: string;
+              sub_results: Array<{
+                url: string;
+              }>;
+            }) => {
+              result.url = formatURL(result.url);
+              result.excerpt = "";
+              result.sub_results = result.sub_results.map((sub_result) => {
+                sub_result.url = formatURL(sub_result.url);
+                return sub_result;
+              });
+            },
+          });
+        });
+      });
+    }
+  }
+  customElements.define("site-search", SiteSearch);
+</script>
+
+<style>
+  :root,
+  :root[theme="light"] {
+    --pagefind-ui-primary: hsl(var(--primary));
+    --pagefind-ui-text: hsl(var(--primary));
+    --pagefind-ui-background: hsl(var(--background));
+    --pagefind-ui-border: hsl(var(--border));
+    --pagefind-ui-tag: hsl(var(--border));
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-border-width: 2px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: sans-serif;
+  }
+
+  site-search {
+    display: contents;
+  }
+
+  dialog {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+
+    @media (min-width: 50rem) {
+      margin: 4rem auto auto;
+      border-radius: 0.5rem;
+      width: 90%;
+      max-width: 40rem;
+      height: max-content;
+      min-height: 15rem;
+      max-height: calc(100% - 8rem);
+    }
+  }
+
+  dialog[open] {
+    display: grid;
+  }
+
+  dialog::backdrop {
+    -webkit-backdrop-filter: blur(0.25rem);
+    backdrop-filter: blur(0.25rem);
+  }
+
+  .dialog-frame {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  button[data-close-modal] {
+    position: absolute;
+    z-index: 1;
+    align-items: center;
+    align-self: flex-end;
+    height: calc(64px * var(--pagefind-ui-scale));
+    padding: 0.25rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+</style>
+
+<style is:global>
+  [data-search-modal-open] {
+    overflow: hidden;
+  }
+
+  #search .pagefind-ui__form::before {
+    opacity: 1;
+  }
+
+  #search .pagefind-ui__search-input {
+    font-weight: 400;
+    width: calc(100% - 5rem);
+    background-color: transparent;
+    border: transparent;
+    outline: 2px solid transparent;
+    border-bottom: var(--pagefind-ui-border-width) solid
+      var(--pagefind-ui-border);
+
+    @media (min-width: 50rem) {
+      width: calc(100% - 0px);
+    }
+  }
+
+  #search .pagefind-ui__search-clear {
+    inset-inline-end: 5rem;
+    width: calc(60px * var(--pagefind-ui-scale));
+    padding: 0;
+    overflow: hidden;
+
+    @media (min-width: 50rem) {
+      inset-inline-end: 0px;
+    }
+  }
+
+  #search .pagefind-ui__search-clear:focus {
+    outline: 1px solid transparent;
+  }
+
+  #search .pagefind-ui__search-clear::before {
+    content: "";
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+      center / 50% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+      center / 50% no-repeat;
+    display: block;
+    background-color: var(--pagefind-ui-text);
+    width: 80%;
+    height: 100%;
+  }
+
+  #search .pagefind-ui__results-area {
+    margin-top: 0;
+  }
+
+  #search .pagefind-ui__message {
+    padding: 0 0 calc(20px * var(--pagefind-ui-scale)) 0;
+  }
+
+  #search .pagefind-ui__drawer {
+    padding: 1rem;
+  }
+
+  #search mark {
+    color: var(--pagefind-ui-text);
+    background-color: transparent;
+    font-weight: 600;
+  }
+
+  #search .pagefind-ui__results > * + * {
+    margin-top: 1rem;
+  }
+  #search .pagefind-ui__result {
+    border: 0;
+    padding: 0;
+  }
+
+  #search .pagefind-ui__result-nested {
+    position: relative;
+    padding: calc(0.625rem * 0.8) calc(1.25rem * 0.8);
+    padding-inline-start: calc(3.75rem * 0.8);
+  }
+
+  #search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
+  #search .pagefind-ui__result-nested {
+    position: relative;
+    background-color: hsl(var(--secondary));
+  }
+
+  #search
+    .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):hover,
+  #search
+    .pagefind-ui__result-title:not(
+      :where(.pagefind-ui__result-nested *)
+    ):focus-within,
+  #search .pagefind-ui__result-nested:hover,
+  #search .pagefind-ui__result-nested:focus-within {
+    outline: 1px solid hsl(var(--border));
+  }
+
+  #search
+    .pagefind-ui__result-title:not(
+      :where(.pagefind-ui__result-nested *)
+    ):focus-within,
+  #search .pagefind-ui__result-nested:focus-within {
+    background-color: hsl(var(--border));
+  }
+
+  #search .pagefind-ui__result-thumb,
+  #search .pagefind-ui__result-inner {
+    margin-top: 0;
+  }
+
+  #search .pagefind-ui__result-inner > :first-child {
+    border-radius: var(--pagefind-ui-border-radius)
+      var(--pagefind-ui-border-radius) 0 0;
+  }
+
+  #search .pagefind-ui__result-inner > :last-child {
+    border-radius: 0 0 var(--pagefind-ui-border-radius)
+      var(--pagefind-ui-border-radius);
+  }
+
+  #search .pagefind-ui__result-inner > .pagefind-ui__result-title {
+    padding: calc(0.9375rem * 0.8) calc(1.25rem * 0.8);
+    padding-inline-start: calc(3.75rem * 0.8);
+  }
+
+  #search .pagefind-ui__result-inner > .pagefind-ui__result-title::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc((calc(3.75rem * 0.8) - calc(1.875rem * 0.8)) / 2);
+    width: calc(1.875rem * 0.8);
+    background: hsl(var(--muted-foreground));
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+      center no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+      center no-repeat;
+  }
+
+  #search .pagefind-ui__result-inner {
+    align-items: stretch;
+    gap: 1px;
+  }
+
+  #search .pagefind-ui__result-link {
+    position: unset;
+    --pagefind-ui-text: hsl(var(--primary));
+    font-weight: 600;
+  }
+
+  #search .pagefind-ui__result-link:hover {
+    text-decoration: none;
+  }
+
+  #search .pagefind-ui__result-nested .pagefind-ui__result-link::before {
+    content: unset;
+  }
+
+  #search .pagefind-ui__result-nested::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc((calc(3.75rem * 0.8) - calc(2.5rem * 0.8)) / 2);
+    width: calc(2.5rem * 0.8);
+    background: hsl(var(--muted-foreground));
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
+      0% 0% / 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
+      0% 0% / 100% no-repeat;
+  }
+
+  #search .pagefind-ui__result-nested:last-child::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
+  }
+
+  [dir="rtl"] .pagefind-ui__result-title::before,
+  [dir="rtl"] .pagefind-ui__result-nested::before {
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+
+  #search .pagefind-ui__result-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  #search .pagefind-ui__result-excerpt {
+    font-size: calc(1rem * 0.8);
+    overflow-wrap: anywhere;
+  }
+
+  #search
+    .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):hover,
+  #search
+    .pagefind-ui__result-title:not(
+      :where(.pagefind-ui__result-nested *)
+    ):focus-within,
+  #search .pagefind-ui__result-nested:hover,
+  #search .pagefind-ui__result-nested:focus-within {
+    outline: 1px solid hsl(var(--primary));
+  }
+
+  #search .pagefind-ui__result-inner > .pagefind-ui__result-excerpt {
+    visibility: hidden;
+    margin-top: 0;
+  }
+</style>

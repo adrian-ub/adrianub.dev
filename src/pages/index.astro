@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import Header from "@/components/header/Header.astro";
+import BaseHead from "@/components/common/BaseHead.astro";
+import Footer from "@/components/footer/Footer.astro";
+import FeaturedPosts from "@/components/post/FeaturedPosts.astro";
+import BlogList from "@/components/post/BlogList.astro";
+import BlogAuthorContent from "@/components/author/BlogAuthorContent.astro";
+
+import { posts } from "@/lib/post";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/lib/consts";
+import { Separator } from "@/components/ui/separator";
+
+const featuredPost = posts.filter((post) => !!post.data.featured).splice(0, 3);
+
+const otherPosts = posts.reduce((acc: CollectionEntry<"blog">[], curr) => {
+  if (!featuredPost.includes(curr)) {
+    acc.push(curr);
+  }
+  return acc;
+}, []);
+---
+
+<html lang="es" class="scroll-smooth" data-theme="dark">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <div class="relative flex min-h-screen flex-col bg-background">
+      <Header />
+      <main class="flex-1">
+        <div class="relative">
+          <div class="hero-gradient">
+            <FeaturedPosts posts={featuredPost} />
+          </div>
+          <Separator />
+          <BlogAuthorContent />
+          <Separator />
+          <BlogList posts={otherPosts} />
+          <Separator />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

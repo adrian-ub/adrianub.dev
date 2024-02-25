@@ -1,0 +1,200 @@
+---
+title: Cómo usar TailwindCSS v2 en Laravel 8
+description: >-
+  Hola desarrolladores, vamos a ver cómo configurar de manera manual un entorno
+  de desarrollo con Laravel 8 y TailwindCSS 2.
+featured: false
+pubDate: "2021-01-11"
+heroImage: ./assets/hero.png
+author: adrianub
+categories: []
+---
+
+import { Tabs, TabItem } from "@/components/tabs";
+
+Hola desarrolladores, vamos a ver cómo configurar de manera manual un entorno de desarrollo con Laravel 8 y TailwindCSS 2.
+
+## Crear un nuevo proyecto
+
+Siguiendo la documentación de laravel crearemos un nuevo proyecto con `composer`
+
+```sh title="Creando proyecto..."
+composer create-project laravel/laravel laravel-tailwind
+```
+
+## Instalar dependencias
+
+Luego de crear nuestro proyecto seguiremos a instalar nuestras dependencias para el desarrollo a través de `npm`:
+
+<Tabs>
+  <TabItem label="npm">
+
+```sh title="Instalando dependencias..."
+npm i -D tailwindcss autoprefixer postcss sass sass-loader
+```
+
+  </TabItem>
+
+  <TabItem label="yarn">
+
+```sh title="Instalando dependencias..."
+yarn add -D tailwindcss autoprefixer postcss sass sass-loader
+```
+
+  </TabItem>
+</Tabs>
+
+Al momento de escribir este artículo las versiones instaladas en las dependencias son las siguientes:
+
+```json
+// package.json
+"devDependencies": {
+   "autoprefixer": "^10.2.1",
+   "laravel-mix": "^6.0.6",
+   "postcss": "^8.2.4",
+   "sass": "^1.32.2",
+   "sass-loader": "^8.0.2",
+   "tailwindcss": "^2.0.2"
+}
+```
+
+## Crea tu archivo de configuración
+
+A continuación, genera tu archivo `tailwind.config.js`:
+
+```sh title="Inicializar tailwindcss"
+npx tailwindcss init
+```
+
+Esto creará un archivo `tailwind.config.js` mínimo en la raíz de su proyecto:
+
+```js
+// tailwind.config.js
+module.exports = {
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+Configuremos Tailwind para eliminar los estilos no utilizados en producción:
+
+```js {1,19}
+// tailwind.config.js
+module.exports = (isProd) => ({
+  purge: [],
+  purge: {
+    enabled: isProd,
+    content: [
+      "./app/**/*.php",
+      "./resources/**/*.html",
+      "./resources/**/*.php",
+    ],
+  },
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+});
+```
+
+### Configuración para AlpineJs
+
+```js {1-13,22}
+// tailwind.config.js
+module.exports = (isProd) => ({
+  purge: {
+    enabled: isProd,
+    content: [
+      "./app/**/*.php",
+      "./resources/**/*.html",
+      "./resources/**/*.php",
+    ],
+    options: {
+      defaultExtractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
+      whitelistPatterns: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
+    },
+  },
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+});
+```
+
+## Crear archivo SCSS
+
+Vamos a la ruta `resources/sass`y creamos un archivo llamado `app.scss`:
+
+```css
+// app.scss
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## Configurar Tailwind con Laravel Mix
+
+En su `webpack.mix.js`, agregue `tailwindcss`:
+
+```javascript
+// webpack.mix.js
+const mix = require("laravel-mix");
+const tailwindcss = require("tailwindcss");
+const isProd = mix.inProduction();
+const tailwindConfig = require("./tailwind.config")(isProd);
+
+mix
+  .js("resources/js/app.js", "public/js/app.js")
+  .sass("resources/sass/app.scss", "public/css/app.css")
+  .options({
+    processCssUrls: false,
+    postCss: [tailwindcss(tailwindConfig)],
+  })
+  .sourceMaps();
+
+if (isProd) {
+  mix.version();
+}
+```
+
+Ahora solo falta correr el comando:
+
+<Tabs>
+<TabItem label="Desarrollo">
+
+```sh title="Levantar aplicación en modo desarrollo"
+npm run development
+```
+
+</TabItem>
+<TabItem label="Producción">
+
+```sh title="Compilar aplicación para producción"
+npm run production
+```
+
+</TabItem>
+</Tabs>
+
+Agregar los estilos a tu aplicación:
+
+```html
+<link rel="stylesheet" href="{{ url(mix('css/app.css')) }}" />
+```
+
+Y comenzar a probar con TailwindCSS.

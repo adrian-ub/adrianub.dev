@@ -1,0 +1,45 @@
+---
+import { type CollectionEntry } from "astro:content";
+
+import BaseHead from "@/components/common/BaseHead.astro";
+import Footer from "@/components/footer/Footer.astro";
+import Header from "@/components/header/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/consts";
+import { pages } from "@/lib/page";
+
+export async function getStaticPaths() {
+  return pages.map((page) => ({ params: { page: page.slug }, props: page }));
+}
+
+export type Props = CollectionEntry<"pages">;
+
+const {
+  data: { title = SITE_TITLE, description = SITE_DESCRIPTION, heroImage },
+  render,
+} = Astro.props;
+const { Content } = await render();
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth" data-theme="dark">
+  <head>
+    <BaseHead title={title} description={description} image={heroImage?.src} />
+  </head>
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <div class="relative flex min-h-screen flex-col bg-background">
+      <Header />
+      <main class="flex-1">
+        <div class="blog-page-area relative container py-8">
+          <div class="blog-page-card pb-32">
+            <div
+              class="blog-page-content prose text-lg mx-auto break-words tracking-tight dark:prose-invert xl:text-xl"
+            >
+              <Content />
+            </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

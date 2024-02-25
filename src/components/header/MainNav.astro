@@ -1,0 +1,15 @@
+---
+import { Icon } from "astro-icon/components";
+import LinkItems from "./LinkItems.astro";
+---
+
+<div class="mr-4 hidden md:flex">
+  <a href="/" class="mr-6 flex items-center space-x-2">
+    <Icon name="logo" class="h-10 w-10 dark:invert" />
+    <span class="sr-only">Logo</span>
+  </a>
+
+  <nav class="flex items-center gap-6 text-sm">
+    <LinkItems />
+  </nav>
+</div>

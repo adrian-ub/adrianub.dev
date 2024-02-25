@@ -1,0 +1,22 @@
+---
+import { ub } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"div"> & {
+  orientation?: "horizontal" | "vertical";
+};
+
+const { orientation = "horizontal", class: className, ...props } = Astro.props;
+---
+
+<div
+  data-orientation={orientation}
+  role="none"
+  class={ub(
+    "shrink-0 bg-border",
+    orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
+    className
+  )}
+  {...props}
+>
+</div>

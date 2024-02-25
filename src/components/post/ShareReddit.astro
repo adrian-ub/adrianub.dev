@@ -1,0 +1,18 @@
+---
+import SocialShare from "./SocialShare.astro";
+import type ButtonProps from "./types";
+
+type Props = ButtonProps;
+
+const {
+  url = new URL(Astro.url.pathname, Astro.site),
+  title,
+  via,
+} = Astro.props;
+
+let urlPath = `https://www.reddit.com/submit?url=${url}&title=¡Acabo de leer "${title}" de @${via} y tú también deberías hacerlo!`;
+---
+
+<SocialShare url={urlPath}>
+  <slot />
+</SocialShare>

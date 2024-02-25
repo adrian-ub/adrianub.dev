@@ -1,0 +1,13 @@
+---
+import { ub } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"div">;
+---
+
+<p
+  class={ub("text-sm text-muted-foreground", Astro.props.class)}
+  {...Astro.props}
+>
+  <slot />
+</p>

@@ -1,0 +1,263 @@
+---
+title: Formularios reactivos en Angular usando ControlValueAccessor
+description: >-
+  Podemos crear componentes de formulario personalizados y conectarlos a
+  formularios basados en plantillas o formularios reactivos.
+featured: true
+pubDate: "2021-09-15"
+heroImage: ./assets/hero.png
+author: adrianub
+categories:
+  - angular
+---
+
+[ControlValueAccessor](https://angular.dev/api/forms/ControlValueAccessor) es una interfaz incluida en Angular. Actúa como un puente entre los elementos DOM y la API de forma angular.
+
+Entonces, si tiene un elemento personalizado que le gustaría conectar a su formulario, debe hacer uso de ControlValueAccessor para que el elemento sea compatible con la API de Angular Forms. Hacerlo permitirá que el elemento se conecte usando `ngModel` (Formularios controlados por plantillas) o `formControl` (Formularios reactivos).
+
+Echemos un vistazo a cómo creamos un control de formulario personalizado
+
+Cuando comencé con Angular, no sabía que existía algo como esto. Recuerdo cuando escribí componentes secundarios para formularios y usé `@Input()` y `@Output()` para recibir y enviar valores de formulario al componente de formulario principal. Solía escuchar los cambios en el componente hijo y luego emitir los valores al padre.
+
+En el padre, los valores se tomarán y usarán para parchear el formulario. Esto fue hasta que me encontré con el ControlValueAccessor. No más inputs y outputs, todo simplemente funciona.
+
+## Paso 1: configuración del proyecto
+
+Primero, cree un nuevo `RatingInputComponent`. Esto se puede lograr con `@angular/cli`:
+
+```sh title="Crear proyecto"
+ng generate component rating-input --inline-template --inline-style
+```
+
+Esto agregará el nuevo componente a las `declarations` de la aplicación y producirá un archivo `rating-input.component.ts`:
+
+```ts
+// rating-input.component.ts
+import { Component, OnInit } from "@angular/core";
+
+@Component({
+  selector: "app-rating-input",
+  template: ` <p>rating-input works!</p> `,
+  styles: [],
+})
+export class RatingInputComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit(): void {}
+}
+```
+
+Agregamos la plantilla, los estilos y la lógica:
+
+```ts
+// rating-input.component.ts
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "app-rating-input",
+  template: `
+    <ng-container *ngFor="let starred of stars; let i = index">
+      <span (click)="rate(i + (starred ? (value > i + 1 ? 1 : 0) : 1))">
+        <ng-container *ngIf="starred; else noStar">⭐</ng-container>
+        <ng-template #noStar>·</ng-template>
+      </span>
+    </ng-container>
+  `,
+  styles: [
+    `
+      span {
+        display: inline-block;
+        width: 25px;
+        line-height: 25px;
+        text-align: center;
+        cursor: pointer;
+      }
+    `,
+  ],
+})
+export class RatingInputComponent {
+  stars: boolean[] = Array(5).fill(false);
+
+  get value(): number {
+    return this.stars.reduce((total, starred) => {
+      return total + (starred ? 1 : 0);
+    }, 0);
+  }
+
+  rate(rating: number) {
+    this.stars = this.stars.map((_, i) => rating > i);
+  }
+}
+```
+
+Podemos obtener el `value` del componente (`0` a `5`) y establecer el valor del componente llamando a la función de `rate` o haciendo clic en el número de estrellas deseado.
+
+Puede agregar el componente a la aplicación: `src/app/app.component.html`
+
+```html
+<!-- app.component.html -->
+<app-rating-input></app-rating-input>
+```
+
+Y ejecute la aplicación:
+
+```sh title="Ejecutar aplicación"
+ng serve
+```
+
+Esto es genial, pero no podemos simplemente agregar esta entrada a un formulario y esperar que todo funcione. Necesitamos convertirlo en un `ControlValueAccessor`.
+
+## Implemente la interface ControlValueAccessor
+
+Implemente la interfaz en el componente personalizado. La interfaz nos pediría que agreguemos algunos métodos en nuestra clase.
+
+```ts
+interface ControlValueAccessor {
+  writeValue(obj: any): void
+  registerOnChange(fn: any): void
+  registerOnTouched(fn: any): void
+  setDisabledState(isDisabled: boolean)?: void
+}
+```
+
+Veamos qué está haciendo cada uno de los métodos. Una vez que tengamos claro cómo están las cosas, podemos sumergirnos en la implementación.
+
+- `writeValue()` - la API de formularios llama a esta función para actualizar el valor del elemento. Cuando el valor de ngModel o formControl cambia, se llama a esta función y se pasa el último valor como argumento de la función. Podemos utilizar el último valor y realizar cambios en el componente. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#writevalue))
+- `registerOnChange()` - obtenemos acceso a una función en el argumento que se puede guardar en una variable local. Entonces esta función se puede llamar cuando hay algún cambio en el valor de nuestro control de formulario personalizado. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#registerOnChange))
+- `registerOnTouched()` - obtenemos acceso a otra función que se puede utilizar para actualizar el estado del formulario ha sido tocado (`touched`). Entonces, cuando el usuario interactúa con nuestro elemento de formulario personalizado, podemos llamar a la función guardada para que Angular sepa que se ha interactuado con el elemento. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#registerOnTouched))
+- `setDisabledState()` - esta función será llamada por la API de formularios cuando se cambie el estado deshabilitado (`disabled`). Podemos obtener el estado actual y actualizar el estado del control de formulario personalizado. ([referencia](https://angular.dev/api/forms/ControlValueAccessor#setDisabledState))
+
+Una vez que implementamos estas funciones, el siguiente paso es proporcionar el token `NG_VALUE_ACCESSOR` en la matriz de proveedores del componente así:
+
+```ts /CONTROL_VALUE_ACCESSOR/
+// rating-input.component.ts
+const CONTROL_VALUE_ACCESSOR: Provider = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => RatingInputComponent),
+  multi: true,
+};
+
+@Component({
+  selector: "app-rating-input",
+  template: `...`,
+  providers: [CONTROL_VALUE_ACCESSOR], // <-- agregar aquí
+})
+export class RatingInputComponent {}
+```
+
+> [!NOTE]
+> Aquí creé una constante de proveedor y luego la pasé a los providers. Es necesario porque nos referimos a la clase RatingInputComponent que no está definida antes de su referencia. Entonces, ahora que sabemos lo que hace cada una de estas funciones, podemos comenzar a implementar nuestro elemento de formulario personalizado.
+
+Volvamos a `rating-input.component.ts` en el editor de código y realicemos los siguientes cambios:
+
+```ts
+// rating-input.component.ts
+import { Component, forwardRef, HostBinding, Input } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+const CONTROL_VALUE_ACCESSOR: Provider = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => RatingInputComponent),
+  multi: true,
+};
+
+@Component({
+  selector: "app-rating-input",
+  template: `
+    <ng-container *ngFor="let starred of stars; let i = index">
+      <span
+        (click)="onTouched(); rate(i + (starred ? (value > i + 1 ? 1 : 0) : 1))"
+      >
+        <ng-container *ngIf="starred; else noStar">⭐</ng-container>
+        <ng-template #noStar>·</ng-template>
+      </span>
+    </ng-container>
+  `,
+  styles: [
+    `
+      span {
+        display: inline-block;
+        width: 25px;
+        line-height: 25px;
+        text-align: center;
+        cursor: pointer;
+      }
+    `,
+  ],
+  providers: [CONTROL_VALUE_ACCESSOR],
+})
+export class RatingInputComponent implements ControlValueAccessor {
+  stars: boolean[] = Array(5).fill(false);
+
+  // Permita que el input esté deshabilitado, y cuando lo esté, hágalo algo transparente.
+  @Input() disabled = false;
+
+  @HostBinding("style.opacity")
+  get opacity() {
+    return this.disabled ? 0.25 : 1;
+  }
+
+  // Función para llamar cuando cambia la calificación.
+  onChange = (rating: number) => {};
+
+  // Función para llamar cuando se toca el input (cuando se hace clic en una estrella).
+  onTouched = () => {};
+
+  get value(): number {
+    return this.stars.reduce((total, starred) => {
+      return total + (starred ? 1 : 0);
+    }, 0);
+  }
+
+  rate(rating: number) {
+    if (!this.disabled) {
+      this.writeValue(rating);
+    }
+  }
+
+  // Permite que Angular actualice el modelo (rating).
+  // Actualice el modelo y los cambios necesarios para la vista aquí.
+  writeValue(rating: number): void {
+    this.stars = this.stars.map((_, i) => rating > i);
+    this.onChange(this.value);
+  }
+
+  // Permite a Angular registrar una función para llamar cuando cambia el modelo (rating).
+  // Guarde la función como una propiedad para llamar más tarde aquí.
+  registerOnChange(fn: (rating: number) => void): void {
+    this.onChange = fn;
+  }
+
+  // Permite a Angular registrar una función para llamar cuando se ha tocado el input.
+  // Guarde la función como una propiedad para llamar más tarde aquí.
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  // Permite que Angular deshabilite el input.
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+}
+```
+
+Ahora puede desactivar los controles del input, agregar un `[(ngModel)]` o un `formControlName`:
+
+```html "[disabled]" "[(ngModel)]" "formControlName"
+<!-- app.component.html -->
+<app-rating-input [disabled]="true"></app-rating-input>
+
+<app-rating-input [(ngModel)]="rating"></app-rating-input>
+
+<form [formGroup]="reactiveForm">
+  <app-rating-input formControlName="rating"></app-rating-input>
+</form>
+```
+
+¡En este punto podemos decir que nuestro `RatingInputComponent` es un componente de formulario personalizado! Funcionará como cualquier otro input nativo (¡Angular proporciona `ControlValueAccessors` para esos!) En formas reactivas o basadas en plantillas.
+
+Angular hace que sea realmente fácil implementar el control de formulario personalizado usando `ControlValueAccessor`. Al implementar algunos métodos, podemos conectar directamente nuestro componente a un `formulario reactivo` o `Template Driven` con facilidad.
+
+Podemos escribir todo tipo de elementos de formas asombrosas y usarlos sin escribir lógica para manejar la comunicación entre padres e hijos. Deje que la API de formularios haga la magia por nosotros.
+
+También podemos utilizar este enfoque para dividir secciones del formulario en su propio componente individual. De esta manera, si el formulario es grande/complejo, podemos dividirlo en componentes más pequeños que se pueden administrar fácilmente.
