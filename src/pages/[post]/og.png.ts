@@ -118,8 +118,10 @@ export async function GET({ props }: Props) {
 }
 
 export async function getStaticPaths() {
-  return posts.map((post) => ({
-    params: { post: post.slug },
-    props: { post },
-  }));
+  return posts
+    .filter((post) => !post.data.heroImage)
+    .map((post) => ({
+      params: { post: post.slug },
+      props: { post },
+    }));
 }
