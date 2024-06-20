@@ -16,7 +16,7 @@ Una mejor práctica, de hecho, es mantener toda la lógica de manipulación del 
 
 A continuación, se muestra un ejemplo básico de servicio con una llamada `Http`:
 
-```ts
+```angular-ts
 @Injectable()
 export class AuthorService {
   constructor(private http: HttpClient) {}
@@ -29,7 +29,7 @@ export class AuthorService {
 
 El controlador debe llamar al servicio, así:
 
-```ts
+```angular-ts
 @Component({
   selector: "app-author",
   templateUrl: "./author.component.html",
