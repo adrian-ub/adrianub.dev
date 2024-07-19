@@ -1,7 +1,5 @@
 import { ExpressiveCodeTheme } from "astro-expressive-code";
 
-export type BundledThemeName = "dark" | "light";
-
 export function applyUiThemeColors(theme: ExpressiveCodeTheme) {
   const isDark = theme.type === "dark";
   const neutralMinimal = isDark ? "#ffffff17" : "#0000001a";
