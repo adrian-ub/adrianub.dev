@@ -1,0 +1,114 @@
+---
+import Logo from "./Logo.astro";
+import ScrollToTop from "./ScrollToTop.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<header
+  class="header z-40"
+  transition:persist="navbar"
+  transition:name="navbar"
+>
+  <a href="/" class="w-20 h-20 absolute xl:fixed m-5 select-none outline-none">
+    <Logo />
+  </a>
+  <ScrollToTop />
+  <nav class="nav">
+    <div class="spacer"></div>
+    <div class="right" print:op0>
+      <a href="/posts">
+        <span class="lt-md:hidden">Blog</span>
+        <div i-ri-article-line md:hidden></div>
+      </a>
+      <a href="/projects">
+        <span class="lt-md:hidden">Proyectos</span>
+        <div i-ri-lightbulb-line class="md:hidden"></div>
+      </a>
+      <!-- <a href="/talks" class="lt-md:hidden"> Talks </a> -->
+      <!-- <a href="/sponsors-list">
+        <span class="lt-md:hidden">Sponsors</span>
+        <div i-ri-heart-line class="md:hidden"></div>
+      </a> -->
+      <!-- <a href="/podcasts" class="lt-md:hidden">
+        <div i-ri-mic-line></div>
+      </a> -->
+      <!-- <a href="/demos">
+        <div i-ri-screenshot-line></div>
+      </a> -->
+      <!-- <a href="/chat">
+        <div i-ri-chat-1-line></div>
+      </a> -->
+      <a
+        href="https://twitter.com/adrianub"
+        target="_blank"
+        class="lt-md:hidden"
+      >
+        <div i-ri-twitter-x-fill></div>
+      </a>
+      <a
+        href="https://github.com/adrian-ub"
+        target="_blank"
+        class="lt-md:hidden"
+      >
+        <div i-uil-github-alt></div>
+      </a>
+      <a href="/rss.xml" target="_blank" class="lt-md:hidden">
+        <div i-la-rss-square style="font-size:1.25rem; margin: 0 -0.125rem;">
+        </div>
+      </a>
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
+
+<style>
+  .header h1 {
+    margin-bottom: 0;
+  }
+
+  .logo {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .nav {
+    padding: 2rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto max-content;
+    box-sizing: border-box;
+  }
+
+  .nav > * {
+    margin: auto;
+  }
+
+  .nav img {
+    margin-bottom: 0;
+  }
+
+  .nav a {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+    opacity: 0.6;
+    outline: none;
+  }
+
+  .nav a:hover {
+    opacity: 1;
+    text-decoration-color: inherit;
+  }
+
+  .nav .right {
+    display: grid;
+    grid-gap: 1.2rem;
+    grid-auto-flow: column;
+  }
+
+  .nav .right > * {
+    margin: auto;
+  }
+</style>

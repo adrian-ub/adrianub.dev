@@ -1,0 +1,38 @@
+<button
+  id="scrollToTop"
+  fixed
+  right-3
+  bottom-3
+  w-10
+  h-10
+  hover:op100
+  rounded-full
+  hover-bg-hex-8883
+  transition
+  duration-300
+  z-100
+  print:hidden
+  class="op0! pointer-events-none"
+>
+  <div i-ri-arrow-up-line></div>
+</button>
+
+<script>
+  const button = document.getElementById("scrollToTop");
+  button?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      button?.classList.add("op30");
+      button?.classList.remove("op0!", "pointer-events-none");
+    } else {
+      button?.classList.remove("op30");
+      button?.classList.add("op0!", "pointer-events-none");
+    }
+  });
+</script>

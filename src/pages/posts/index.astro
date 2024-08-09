@@ -1,0 +1,18 @@
+---
+import ListPosts from "@/components/ListPosts.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import SubNav from "@/components/SubNav.astro";
+import { getPosts } from "@/utils/posts";
+
+const posts = await getPosts();
+---
+
+<BaseLayout title="Blog" description="List of all the blog posts.">
+  <article>
+    <div class="prose m-auto slide-enter-content">
+      <SubNav />
+      <ListPosts posts={posts} />
+    </div>
+  </article>
+</BaseLayout>

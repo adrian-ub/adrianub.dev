@@ -1,0 +1,21 @@
+---
+export type Props = {
+	href: string;
+	iconUrl: string;
+};
+const { href, iconUrl } = Astro.props;
+---
+
+<a
+  href={href}
+  class="markdown-magic-link markdown-magic-link-link"
+  target="_blank"
+  rel="noopener"
+>
+  <span
+    class="markdown-magic-link-image"
+    style={`background-image: url("${iconUrl}");`}
+  >
+  </span>
+  <slot />
+</a>

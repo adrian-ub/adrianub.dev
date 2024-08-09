@@ -1,0 +1,89 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { components } from "@/components/markdown";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatDate } from "@/logics";
+import { getPosts } from "@/utils/posts";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => {
+    return {
+      params: { slug: post.slug },
+      props: {
+        post,
+      },
+    };
+  });
+}
+
+type Props = { post: CollectionEntry<"posts"> };
+
+const { post } = Astro.props;
+const { title, description, heroImage } = post.data;
+
+const {
+  Content,
+  headings,
+  remarkPluginFrontmatter: { minutesRead },
+} = await post.render();
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = heroImage?.src || new URL("og.png", canonicalURL).toString();
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageType="article"
+  image={{
+    src: ogImage,
+    alt: title,
+  }}
+>
+  <div class="prose m-auto mb-8">
+    <h1 class="mb-0 slide-enter-50" transition:name={"title" + post.slug}>
+      {post.data.title}
+    </h1>
+    <p class="opacity-50 !-mt-6 slide-enter-50">
+      <span transition:name={"date" + post.slug}>
+        {formatDate(post.data.date, false)}
+      </span>
+      <span transition:name={"min" + post.slug}>
+        {minutesRead && ` • ${minutesRead}min`}
+      </span>
+    </p>
+  </div>
+
+  <article>
+    <div class="prose m-auto slide-enter-content">
+      <p>
+        <div class="table-of-contents">
+          <div class="table-of-contents-anchor">
+            <div class="i-ri-menu-2-fill"></div>
+          </div>
+          <ul>
+            {
+              headings.map((heading) => (
+                <li>
+                  <a href={"#" + heading.slug}>{heading.text}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </p>
+      <Content {components} />
+    </div>
+  </article>
+
+  <div
+    class="prose m-auto mt-8 mb-8 slide-enter animate-delay-500 print:hidden"
+  >
+    <span font-mono op50>{">"} </span>
+    <a
+      href={Astro.url.pathname.split("/").slice(0, -1).join("/") || "/"}
+      class="font-mono op50 hover:op75">cd ..</a
+    >
+  </div>
+</BaseLayout>

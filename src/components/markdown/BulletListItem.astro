@@ -1,0 +1,24 @@
+---
+interface Props {
+	type: "check" | "cross";
+}
+
+const { type } = Astro.props;
+
+const className = {
+	check: "text-green-500",
+	cross: "text-red-500",
+}[type];
+
+const icon = {
+	check: "i-carbon-checkmark",
+	cross: "i-carbon-close",
+}[type];
+---
+
+<div class="flex max-w-2xl items-center space-x-4">
+  <span class={className}>
+    <i class:list={["w-6 h-6", icon]}></i>
+  </span>
+  <span class="leading-normal prose-p:my-0"><slot /></span>
+</div>

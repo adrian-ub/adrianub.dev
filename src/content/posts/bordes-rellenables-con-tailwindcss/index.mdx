@@ -1,0 +1,59 @@
+---
+title: Bordes rellenables con TailwindCSS
+description: >-
+  Se pueden lograr algunos efectos geniales con Tailwind puro, sin ningún JS o
+  CSS personalizado.
+date: "2021-04-19"
+heroImage: ./assets/hero.png
+---
+
+import Preview from "./assets/_preview.html";
+
+Veamos como podemos construir una card con bordes rellenables de forma sencilla sin usar Javascript o Css personalizado.
+
+
+<Preview />
+
+¿Observa cómo se llenan los bordes? Para lograr este efecto, no necesitamos escribir ningún CSS o JS personalizado. Todo se puede lograr con Tailwind puro.
+
+## Iniciemos
+
+En primer lugar, comencemos creando una card simple:
+
+```html
+<div
+  class="bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10"
+>
+  <div>
+    <!-- Aquí va la información de su card -->
+  </div>
+</div>
+```
+
+En el siguiente paso, agregaremos los bordes mágicos (verifique el efecto de desplazamiento):
+
+```html {4-15} /group/ /relative/
+<div
+  class="group relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10"
+>
+  <div
+    class="absolute bottom-0 left-0 h-1 w-full origin-left scale-x-0 transform bg-sky-400 duration-300 group-hover:scale-x-100"
+  ></div>
+  <div
+    class="absolute bottom-0 left-0 h-full w-1 origin-bottom scale-y-0 transform bg-sky-400 duration-300 group-hover:scale-y-100"
+  ></div>
+  <div
+    class="absolute top-0 left-0 h-1 w-full origin-right scale-x-0 transform bg-sky-400 duration-300 group-hover:scale-x-100"
+  ></div>
+  <div
+    class="absolute bottom-0 right-0 h-full w-1 origin-top scale-y-0 transform bg-sky-400 duration-300 group-hover:scale-y-100"
+  ></div>
+  <div>
+    <!-- Aquí va la información de su card -->
+  </div>
+</div>
+```
+
+Observe que hemos agregado 4 DIV absolutos, que se estiran al pasar el mouse. No olvide agregar las clases `relative` y `group` al contenedor principal.
+
+**¡Y eso es!** Toma el código y úsalo en tus increíbles proyectos.
