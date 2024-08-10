@@ -5,32 +5,32 @@ import "@/styles/prose.css";
 import "@/styles/markdown.css";
 
 interface Props {
-	title?: string;
-	description?: string;
-	image?: { src: string; alt?: string };
-	pageType?: "website" | "article";
+  title?: string;
+  description?: string;
+  image?: { src: string; alt?: string };
+  pageType?: "website" | "article";
 }
 
 const {
-	description = "",
-	image = siteConfig.image,
-	pageType = "website",
+  description = "",
+  image = siteConfig.image,
+  pageType = "website",
 } = Astro.props;
 
 const title = Astro.props.title;
 
 const resolvedImage = {
-	src: new URL(image.src, Astro.url).toString(),
-	alt: image.alt,
+  src: new URL(image.src, Astro.url).toString(),
+  alt: image.alt,
 };
 
 const canonicalURL = new URL(Astro.request.url, Astro.site);
 
 function formatCanonicalURL(url: string | URL) {
-	const path = url.toString();
-	const hasQueryParams = path.includes("?");
-	if (hasQueryParams) path.replace(/\/?$/, "");
-	return path.replace(/\/?$/, hasQueryParams ? "" : "/");
+  const path = url.toString();
+  const hasQueryParams = path.includes("?");
+  if (hasQueryParams) path.replace(/\/?$/, "");
+  return path.replace(/\/?$/, hasQueryParams ? "" : "/");
 }
 ---
 
@@ -47,13 +47,16 @@ function formatCanonicalURL(url: string | URL) {
 
 <!-- Page Metadata -->
 <link rel="canonical" href={formatCanonicalURL(canonicalURL)} />
-<meta name="description" content={description} />
+<meta name="description" content={description || siteConfig.description} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={pageType} />
 <meta property="og:url" content={formatCanonicalURL(canonicalURL)} />
 <meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta
+  property="og:description"
+  content={description || siteConfig.description}
+/>
 {resolvedImage?.src && <meta property="og:image" content={resolvedImage.src} />}
 {
   resolvedImage?.alt && (
@@ -65,7 +68,10 @@ function formatCanonicalURL(url: string | URL) {
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={formatCanonicalURL(canonicalURL)} />
 <meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
+<meta
+  property="twitter:description"
+  content={description || siteConfig.description}
+/>
 {
   resolvedImage?.src && (
     <meta property="twitter:image" content={resolvedImage.src} />
