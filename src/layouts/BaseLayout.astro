@@ -8,6 +8,7 @@ import "markdown-it-github-alerts/styles/github-base.css";
 import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/Footer.astro";
 import NavBar from "@/components/NavBar.astro";
+import ArtDots from "@/components/ArtDots.astro";
 
 const { ...head } = Astro.props;
 ---
@@ -42,23 +43,7 @@ const { ...head } = Astro.props;
   <body class="font-sans text-gray-700 dark:text-gray-200 relative">
     <NavBar />
     <main class="px-7 py-10 of-x-hidden">
-      <div
-        z--1
-        fixed
-        left-0
-        right-0
-        top-0
-        bottom-0
-        pointer-events-none
-        dark:invert
-      >
-        <canvas
-          id="defaultCanvas0"
-          class="p5Canvas"
-          style="width: 1162px; height: 1014px;"
-          width="1162"
-          height="1014"></canvas>
-      </div>
+      <ArtDots />
       <slot />
       <Footer />
     </main>
