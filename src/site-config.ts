@@ -4,7 +4,7 @@ export const siteConfig = {
 	description:
 		"Artículos sobre Angular, Nestjs, componentes web y más cosas relacionadas con el desarrollo web...",
 	image: {
-		src: "/og.jpg",
+		src: "/og.png",
 		alt: "Artículos sobre Angular, Nestjs, componentes web y más cosas relacionadas con el desarrollo web...",
 	},
 	page: {
