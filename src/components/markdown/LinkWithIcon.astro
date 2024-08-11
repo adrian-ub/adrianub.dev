@@ -1,9 +1,16 @@
 ---
+import { getImage } from "astro:assets";
+
 export type Props = {
-	href: string;
-	iconUrl: string;
+  href: string;
+  iconUrl: string;
 };
 const { href, iconUrl } = Astro.props;
+
+const icon = await getImage({
+  src: iconUrl,
+  inferSize: true,
+});
 ---
 
 <a
@@ -14,7 +21,7 @@ const { href, iconUrl } = Astro.props;
 >
   <span
     class="markdown-magic-link-image"
-    style={`background-image: url("${iconUrl}");`}
+    style={`background-image: url("${icon.src}");`}
   >
   </span>
   <slot />

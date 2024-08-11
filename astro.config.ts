@@ -37,6 +37,13 @@ export default defineConfig({
 		"/desplegar-nestjs-en-detash": "/posts/desplegar-nestjs-en-detash",
 		"/refactorizacion-guard-clauses": "/posts/refactorizacion-guard-clauses",
 	},
+	image: {
+		remotePatterns: [
+			{
+				protocol: "https",
+			},
+		],
+	},
 	markdown: {
 		shikiConfig: {
 			themes: {
