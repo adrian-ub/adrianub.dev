@@ -1,9 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { projectData } from "./data";
+import siteConfig from "@/site-config";
 ---
 
-<BaseLayout title="Projects" description="List of projects that I am proud of">
+<BaseLayout
+  title={`Proyectos - ${siteConfig.author}`}
+  description="List of projects that I am proud of"
+>
   <div class="prose m-auto mb-8 text-center">
     <h1 class="mb-0 slide-enter-50">Proyectos</h1>
   </div>
