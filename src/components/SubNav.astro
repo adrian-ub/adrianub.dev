@@ -1,22 +1,24 @@
 ---
-import siteConfig from "@/site-config";
+import siteConfig from '@/site-config'
 
 function activeLink(pathname: string) {
-	return (
-		Astro.url.pathname.replace(/\/+/g, "/").replace(/\/$/, "") === pathname
-	);
+    return (
+        Astro.url.pathname
+        .replace(/\/+/g, '/')
+        .replace(/\/$/, '') === pathname
+    )
 }
 
-const inactiveStyle = "opacity-20 hover:opacity-50";
-const activeStyle = "opacity-100 underline";
+const inactiveStyle = 'opacity-20 hover:opacity-50'
+const activeStyle = 'opacity-100 underline';
 ---
 
 <div class="prose m-auto mb-8 select-none animate-none! op100!">
   <div mb-0 flex="~ col gap-1 sm:row sm:gap-3 wrap" text-3xl>
     {
-      siteConfig.page.blogLinks.map((nav) => (
+      siteConfig.page.blogLinks.map(nav => (
         <a
-          aria-current={activeLink(nav.href) ? "page" : undefined}
+          aria-current={activeLink(nav.href) ? 'page' : undefined}
           href={nav.href}
           class={`!border-none ${activeLink(nav.href) ? activeStyle : inactiveStyle}`}
         >

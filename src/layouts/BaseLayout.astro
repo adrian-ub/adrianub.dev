@@ -1,14 +1,13 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ViewTransitions } from 'astro:transitions'
 
-import "markdown-it-github-alerts/styles/github-colors-light.css";
-import "markdown-it-github-alerts/styles/github-colors-dark-class.css";
-import "markdown-it-github-alerts/styles/github-base.css";
+import 'markdown-it-github-alerts/styles/github-colors-light.css'
+import 'markdown-it-github-alerts/styles/github-colors-dark-class.css'
+import 'markdown-it-github-alerts/styles/github-base.css'
 
-import BaseHead from "@/components/BaseHead.astro";
-import Footer from "@/components/Footer.astro";
-import NavBar from "@/components/NavBar.astro";
-import ArtDots from "@/components/ArtDots.astro";
+import BaseHead from '@/components/BaseHead.astro'
+import Footer from '@/components/Footer.astro'
+import NavBar from '@/components/NavBar.astro'
 
 const { ...head } = Astro.props;
 ---
@@ -40,10 +39,9 @@ const { ...head } = Astro.props;
     <BaseHead {...head} />
     <ViewTransitions />
   </head>
-  <body class="font-sans text-gray-700 dark:text-gray-200 relative">
+  <body class="relative text-gray-700 font-sans dark:text-gray-200">
     <NavBar />
-    <main class="px-7 py-10 of-x-hidden">
-      <ArtDots />
+    <main class="of-x-hidden px-7 py-10">
       <slot />
       <Footer />
     </main>

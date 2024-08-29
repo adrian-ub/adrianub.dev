@@ -1,24 +1,24 @@
 ---
 interface Props {
-	type: "check" | "cross";
+    type: 'check' | 'cross'
 }
 
-const { type } = Astro.props;
+const { type } = Astro.props
 
 const className = {
-	check: "text-green-500",
-	cross: "text-red-500",
-}[type];
+    check: 'text-green-500',
+    cross: 'text-red-500',
+}[type]
 
 const icon = {
-	check: "i-carbon-checkmark",
-	cross: "i-carbon-close",
+    check: 'i-carbon-checkmark',
+    cross: 'i-carbon-close',
 }[type];
 ---
 
-<div class="flex max-w-2xl items-center space-x-4">
+<div class="max-w-2xl flex items-center space-x-4">
   <span class={className}>
-    <i class:list={["w-6 h-6", icon]}></i>
+    <i class:list={['w-6 h-6', icon]}></i>
   </span>
-  <span class="leading-normal prose-p:my-0"><slot /></span>
+  <span class="prose-p:my-0 leading-normal"><slot /></span>
 </div>

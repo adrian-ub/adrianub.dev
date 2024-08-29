@@ -1,11 +1,11 @@
 ---
-import { getImage } from "astro:assets";
+import { getImage } from 'astro:assets'
 
 export type Props = {
-  href: string;
-  iconUrl: string;
-};
-const { href, iconUrl } = Astro.props;
+  href: string
+  iconUrl: string
+}
+const { href, iconUrl } = Astro.props
 
 const icon = await getImage({
   src: iconUrl,

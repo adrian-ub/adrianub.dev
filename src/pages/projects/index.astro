@@ -1,7 +1,7 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { projectData } from "./data";
-import siteConfig from "@/site-config";
+import { projectData } from './data'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import siteConfig from '@/site-config';
 ---
 
 <BaseLayout
@@ -13,7 +13,7 @@ import siteConfig from "@/site-config";
   </div>
 
   <article>
-    <div class="max-w-300 mx-auto">
+    <div class="mx-auto max-w-300">
       <p text-center mt--6 mb5 op50 text-lg italic>
         Proyectos que creé o mantuve.
       </p>
@@ -21,7 +21,7 @@ import siteConfig from "@/site-config";
         projectData.map((data, index) => (
           <div slide-enter style={`--enter-stage: ${index + 1};`}>
             <div
-              id={data.title.toLowerCase().replace(/\s/g, "-")}
+              id={data.title.toLowerCase().replace(/\s/g, '-')}
               select-none
               relative
               h20
@@ -45,20 +45,20 @@ import siteConfig from "@/site-config";
                 {data.title}
               </span>
             </div>
-            <div class="project-grid py-2 max-w-500 w-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-2">
-              {data.projects.map((project) => (
+            <div class="project-grid grid grid-cols-1 mx-auto max-w-500 w-max gap-4 py-2 lg:grid-cols-2 md:grid-cols-2">
+              {data.projects.map(project => (
                 <a
                   class="item relative flex items-center"
                   href={project.href}
                   target="_blank"
                   title="Nuxt ESLint"
                 >
-                  <div class="pt-2 pr-5">
-                    <div class:list={["text-3xl opacity-50", project.icon]} />
+                  <div class="pr-5 pt-2">
+                    <div class:list={['text-3xl opacity-50', project.icon]} />
                   </div>
                   <div class="flex-auto">
                     <div class="text-normal">{project.text}</div>
-                    <div class="desc text-sm opacity-50 font-normal">
+                    <div class="desc text-sm font-normal opacity-50">
                       {project.description}
                     </div>
                   </div>
@@ -77,9 +77,9 @@ import siteConfig from "@/site-config";
         </div>
         <ul>
           {
-            projectData.map((data) => (
+            projectData.map(data => (
               <li>
-                <a href={`#${data.title.toLowerCase().replace(/\s/g, "-")}`}>
+                <a href={`#${data.title.toLowerCase().replace(/\s/g, '-')}`}>
                   {data.title}
                 </a>
               </li>

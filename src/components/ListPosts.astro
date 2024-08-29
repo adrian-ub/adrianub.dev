@@ -1,31 +1,33 @@
 ---
-import { formatDate } from "@/logics";
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content'
+import { formatDate } from '@/logics'
 
-type Post = CollectionEntry<"posts">;
+type Post = CollectionEntry<'posts'>
 
 export type Props = {
-  posts: CollectionEntry<"posts">[];
-};
+  posts: CollectionEntry<'posts'>[]
+}
 
-const getYear = (a: Date | string | number) => new Date(a).getFullYear();
-const isFuture = (a?: Date | string | number) => a && new Date(a) > new Date();
-const isSameYear = (a?: Date | string | number, b?: Date | string | number) =>
-  a && b && getYear(a) === getYear(b);
+const getYear = (a: Date | string | number) => new Date(a).getFullYear()
+const isFuture = (a?: Date | string | number) => a && new Date(a) > new Date()
+function isSameYear(a?: Date | string | number, b?: Date | string | number) {
+  return a && b && getYear(a) === getYear(b)
+}
 function isSameGroup(a: Post, b?: Post) {
   return (
-    isFuture(a.data.date) === isFuture(b?.data.date) &&
-    isSameYear(a.data.date, b?.data.date)
-  );
+    isFuture(a.data.date) === isFuture(b?.data.date)
+    && isSameYear(a.data.date, b?.data.date)
+  )
 }
 
 function getGroupName(p: Post) {
-  if (isFuture(p.data.date)) return "Upcoming";
-  return getYear(p.data.date);
+  if (isFuture(p.data.date))
+return 'Upcoming'
+  return getYear(p.data.date)
 }
 
 function getReadingTime(p: Post) {
-  return p.render().then((r) => `${r.remarkPluginFrontmatter.minutesRead} min`);
+  return p.render().then(r => `${r.remarkPluginFrontmatter.minutesRead} min`)
 }
 
 const { posts } = Astro.props;
@@ -35,7 +37,7 @@ const { posts } = Astro.props;
   {
     !posts.length && (
       <div py2 op50>
-        {"{ nothing here yet }"}
+        {'{ nothing here yet }'}
       </div>
     )
   }
@@ -71,14 +73,14 @@ const { posts } = Astro.props;
           class="slide-enter"
         >
           <a
-            href={post.data.redirect ?? "/posts/" + post.slug}
-            target={post.data.redirect ? "_blank" : undefined}
-            rel={post.data.redirect ? "noopener noreferrer" : undefined}
-            class="item block font-normal mb-6 mt-2 no-underline"
+            href={post.data.redirect ?? `/posts/${post.slug}`}
+            target={post.data.redirect ? '_blank' : undefined}
+            rel={post.data.redirect ? 'noopener noreferrer' : undefined}
+            class="item mb-6 mt-2 block font-normal no-underline"
           >
             <li class="no-underline" flex="~ col md:row gap-2 md:items-center">
               <div class="title text-lg leading-1.2em" flex="~ gap-2 wrap">
-                <span transition:name={"title" + post.slug}>
+                <span transition:name={`title${post.slug}`}>
                   {post.data.title}
                 </span>
                 {post.data.redirect && (
@@ -98,7 +100,7 @@ const { posts } = Astro.props;
                   text-sm
                   op50
                   ws-nowrap
-                  transition:name={"date" + post.slug}
+                  transition:name={`date${post.slug}`}
                 >
                   {formatDate(post.data.date, false)}
                 </span>
@@ -106,9 +108,9 @@ const { posts } = Astro.props;
                   text-sm
                   op40
                   ws-nowrap
-                  transition:name={"min" + post.slug}
+                  transition:name={`min${post.slug}`}
                 >
-                  · {getReadingTime(post).then((r) => r)}
+                  · {getReadingTime(post).then(r => r)}
                 </span>
               </div>
             </li>
