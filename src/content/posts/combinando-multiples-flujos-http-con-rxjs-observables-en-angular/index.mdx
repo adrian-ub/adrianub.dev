@@ -9,7 +9,7 @@ heroImage: ./assets/hero.png
 
 Una mejor práctica, de hecho, es mantener toda la lógica de manipulación del flujo dentro de nuestro servicio y devolver el Observable, que el controlador puede suscribir.
 
-A continuación, se muestra un ejemplo básico de servicio con una llamada `Http`:
+A continuación, se muestra un ejemplo básico de servicio con una llamada `HTTP`:
 
 ```angular-ts
 @Injectable()
@@ -52,7 +52,7 @@ Ok, ahora veamos algo más avanzado.
 
 ## Combinando Observables en paralelo
 
-Desde la versión 5.5 de RxJs, necesitamos usar la función `pipe` para combinar Observables. Acepta tantos operadores pipetables como necesitemos, separados por una coma.
+Desde la versión 5.5 de RxJS, necesitamos usar la función `pipe` para combinar Observables. Acepta tantos operadores pipetables como necesitemos, separados por una coma.
 
 Imagine que desea obtener los datos de un autor y sus libros, pero para obtener los libros debe llamar a un punto final diferente, como `/authors/1/books`. Debe realizar las dos llamadas y combinarlas en una sola respuesta.
 
