@@ -57,7 +57,7 @@ const ogImage = heroImage?.src || new URL('og.png', canonicalURL).toString();
 
   <article>
     <div class="prose slide-enter-content m-auto">
-      <p>
+      <section>
         <div class="table-of-contents">
           <div class="table-of-contents-anchor">
             <div class="i-ri-menu-2-fill"></div>
@@ -72,7 +72,7 @@ const ogImage = heroImage?.src || new URL('og.png', canonicalURL).toString();
             }
           </ul>
         </div>
-      </p>
+      </section>
       <Content {components} />
     </div>
   </article>
@@ -84,7 +84,8 @@ const ogImage = heroImage?.src || new URL('og.png', canonicalURL).toString();
     <a
       href={Astro.url.pathname.split('/').slice(0, -1).join('/') || '/'}
       class="font-mono op50 hover:op75"
-    >cd ..</a
     >
+      cd ..
+    </a>
   </div>
 </BaseLayout>
