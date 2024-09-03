@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 type Props = { post: CollectionEntry<'posts'> }
 
 const { post } = Astro.props
-const { title, description, heroImage } = post.data
+const { title, description } = post.data
 
 const {
   Content,
@@ -29,7 +29,7 @@ const {
 } = await post.render()
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
-const ogImage = heroImage?.src || new URL('og.png', canonicalURL).toString();
+const ogImage = new URL(`${canonicalURL.href}/og.png`).toString();
 ---
 
 <BaseLayout
