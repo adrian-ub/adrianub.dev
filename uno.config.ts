@@ -7,7 +7,7 @@ import {
 	transformerDirectives,
 } from "unocss";
 
-import { projectData } from "./src/pages/projects/data";
+import { projectData } from "./src/pages/projects/_data";
 
 export default defineConfig({
 	shortcuts: [
