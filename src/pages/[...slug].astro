@@ -1,8 +1,8 @@
 ---
-import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import { components } from '@/components/markdown'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
     const pages = await getCollection('pages')

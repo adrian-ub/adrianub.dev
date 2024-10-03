@@ -1,13 +1,13 @@
 ---
+import BaseHead from '@/components/BaseHead.astro'
+
+import Footer from '@/components/Footer.astro'
+import NavBar from '@/components/NavBar.astro'
 import { ViewTransitions } from 'astro:transitions'
 
 import 'markdown-it-github-alerts/styles/github-colors-light.css'
 import 'markdown-it-github-alerts/styles/github-colors-dark-class.css'
 import 'markdown-it-github-alerts/styles/github-base.css'
-
-import BaseHead from '@/components/BaseHead.astro'
-import Footer from '@/components/Footer.astro'
-import NavBar from '@/components/NavBar.astro'
 
 const { ...head } = Astro.props;
 ---

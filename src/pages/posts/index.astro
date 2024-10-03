@@ -1,10 +1,10 @@
 ---
 import ListPosts from '@/components/ListPosts.astro'
-import BaseLayout from '@/layouts/BaseLayout.astro'
-
 import SubNav from '@/components/SubNav.astro'
-import { getPosts } from '@/utils/posts'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
 import siteConfig from '@/site-config'
+import { getPosts } from '@/utils/posts'
 
 const posts = await getPosts();
 ---
