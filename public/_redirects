@@ -1,0 +1,7 @@
+/blog/* /posts/:splat 301
+/bordes-rellenables-con-tailwindcss /posts/bordes-rellenables-con-tailwindcss 301
+/combinando-multiples-flujos-http-con-rxjs-observables-en-angular /posts/combinando-multiples-flujos-http-con-rxjs-observables-en-angular 301
+/como-usar-tailwindcss-v2-en-laravel-8 /posts/como-usar-tailwindcss-v2-en-laravel-8 301
+/crear-controles-de-formulario-personalizados-usando-controlvalueaccessor-en-angular /posts/crear-controles-de-formulario-personalizados-usando-controlvalueaccessor-en-angular 301
+/desplegar-nestjs-en-detash /posts/desplegar-nestjs-en-detash 301
+/refactorizacion-guard-clauses /posts/refactorizacion-guard-clauses 301

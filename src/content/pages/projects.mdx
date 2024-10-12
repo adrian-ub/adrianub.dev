@@ -1,0 +1,39 @@
+---
+title: Projects - Adrián UB
+display: Projects
+description: List of projects that I am proud of
+wrapperClass: 'text-center'
+layoutFullWidth: true
+projects:
+  Astro:
+    - name: 'astro-vitesse'
+      link: 'https://github.com/adrian-ub/astro-vitesse'
+      desc: 'Build beautiful, accessible, high-performance blog websites with Astro'
+      icon: 'i-simple-icons-astro'
+    - name: 'astro-loader'
+      link: 'https://github.com/adrian-ub/astro-loader'
+      desc: 'Fetch data from API and use it in Astro collections'
+      icon: 'i-simple-icons-astro'
+
+  CLI:
+    - name: 'shadcn-ng'
+      link: 'https://github.com/adrian-ub/shadcn-ng'
+      desc: 'Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.'
+      icon: 'i-simple-icons-angular'
+---
+
+import ListProjects from 'astro-vitesse/components/ListProjects.astro'
+
+
+<div class="text-center mt--6 mb-5 op50 text-lg italic"> Proyectos que he creado o mantengo. </div>
+
+<ListProjects projects={frontmatter.projects} />
+
+
+<div class="prose pb5 mx-auto mt10 text-center flex flex-col items-center">
+
+<hr/>
+
+<SponsorButton />
+
+</div>

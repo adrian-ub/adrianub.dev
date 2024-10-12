@@ -1,51 +1,35 @@
 {
   "name": "adrianub.dev",
   "type": "module",
-  "version": "0.0.1",
-  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b",
-  "description": "A minimal, SEO-friendly portfolio and blog theme for Astro, supports UnoCSS.",
-  "author": "Adrián UB (https://github.com/adrian-ub/)",
-  "license": "MIT",
-  "keywords": [
-    "adrianub",
-    "astro",
-    "blog",
-    "starter",
-    "template"
-  ],
+  "version": "1.0.0",
+  "packageManager": "pnpm@9.12.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "start": "astro dev",
+    "build": "astro check && astro build",
     "preview": "astro preview",
-    "lint": "eslint ."
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.1.7",
-    "@astrojs/rss": "^4.0.7",
-    "@astrojs/sitemap": "^3.1.6",
-    "@unocss/reset": "^0.62.4",
-    "astro": "^4.15.10",
-    "astro-expressive-code": "^0.37.0",
-    "dayjs": "^1.11.13",
-    "hast": "^1.0.0",
-    "hast-util-from-html": "^2.0.3",
-    "hast-util-is-element": "^3.0.0",
-    "hast-util-to-text": "^4.0.2",
-    "markdown-it-github-alerts": "^0.3.0",
-    "nprogress": "^0.2.0",
-    "reading-time-estimator": "^1.11.0",
-    "sharp": "^0.33.5",
-    "unist-util-visit": "^5.0.0",
-    "unocss": "^0.62.4"
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/rss": "^4.0.8",
+    "@iconify/json": "^2.2.259",
+    "@unocss/reset": "^0.63.4",
+    "@vercel/og": "^0.6.3",
+    "astro": "^4.16.1",
+    "astro-auto-import": "^0.4.4",
+    "astro-vitesse": "^0.2.1",
+    "typescript": "^5.6.3",
+    "unocss": "0.62.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.6.2",
-    "@iconify/json": "^2.2.250",
-    "@types/hast": "^3.0.4",
-    "@types/nprogress": "^0.2.3",
-    "@unocss/eslint-plugin": "^0.62.4",
+    "@antfu/eslint-config": "^3.7.3",
+    "@prettier/plugin-xml": "^3.4.1",
+    "@unocss/eslint-plugin": "^0.63.4",
     "astro-eslint-parser": "^1.0.3",
-    "eslint": "^9.10.0",
-    "eslint-plugin-astro": "^1.2.4"
+    "eslint": "^9.12.0",
+    "eslint-plugin-astro": "^1.2.4",
+    "eslint-plugin-format": "^0.1.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

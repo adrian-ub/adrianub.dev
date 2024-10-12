@@ -1,0 +1,15 @@
+---
+import type { Props } from 'astro-vitesse/props'
+import Default from 'astro-vitesse/components/Head.astro'
+
+const { slug } = Astro.props
+
+const ogImageUrl = new URL(`${slug}.png`, Astro.site)
+---
+
+<!-- Render the default <Head/> component. -->
+<Default {...Astro.props}><slot /></Default>
+
+<!-- Render the <meta/> tags for the Open Graph images. -->
+<meta property="og:image" content={ogImageUrl} />
+<meta name="twitter:image" content={ogImageUrl} />
