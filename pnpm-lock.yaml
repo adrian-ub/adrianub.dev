@@ -24,14 +24,14 @@ importers:
         specifier: ^0.6.3
         version: 0.6.3
       astro:
-        specifier: ^4.16.1
-        version: 4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
+        specifier: ^4.16.2
+        version: 4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
       astro-auto-import:
         specifier: ^0.4.4
-        version: 0.4.4(astro@4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))
+        version: 0.4.4(astro@4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))
       astro-vitesse:
-        specifier: ^0.2.1
-        version: 0.2.1(@iconify/json@2.2.259)(@unocss/reset@0.63.4)(astro@4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))(unocss@0.62.0(postcss@8.4.47)(rollup@4.24.0)(vite@5.4.8(@types/node@18.19.54)))
+        specifier: ^0.2.2
+        version: 0.2.2(@iconify/json@2.2.259)(@unocss/reset@0.63.4)(astro@4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))(unocss@0.62.0(postcss@8.4.47)(rollup@4.24.0)(vite@5.4.8(@types/node@18.19.54)))
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -1404,16 +1404,16 @@ packages:
     resolution: {integrity: sha512-AGsGgcg7Jg9UpyCDgvl/EkdYpe1oMkFdmC2Zl+KWneoieLCtQIFjmcY8yt41gcNx4mby0w8BBJQcBmPuf8UAoQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  astro-vitesse@0.2.1:
-    resolution: {integrity: sha512-ZWaizhZ02g/wvVUv8mdex0FH5nedl323waN3NLIODutb6fODO7T6woNtZCiZdq2TK5sn44/3AOH/8zCOFD0Bnw==}
+  astro-vitesse@0.2.2:
+    resolution: {integrity: sha512-oObToLo8OKe/Kzk1oHg3SAJmZO0msGNjQ40EnXhHuQ82LmhbOb8YzkGjnSC/lsRpbz/MkVuPolrwWacU2Crn+g==}
     peerDependencies:
       '@iconify/json': ^2.2.256
       '@unocss/reset': ^0.63.2
       astro: ^4.15.0
       unocss: ^0.59.4
 
-  astro@4.16.1:
-    resolution: {integrity: sha512-ZeZd+L147HHgHmvoSkve7KM3EutV+hY0mOCa4PwARHEFAAh+omo4MUNoTWsFkfq7ozTgR0PCXQwslrZduoWHNg==}
+  astro@4.16.2:
+    resolution: {integrity: sha512-Dfkpyt6sA+nv6LnOJr+7bt+gQF5Qh02yqVgyes4c4SvcPScteq1bLX22/z/XW+VU0vlciJOMiM8GWtcDiF6gUQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3875,12 +3875,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@3.1.7(astro@4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))':
+  '@astrojs/mdx@3.1.7(astro@4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))':
     dependencies:
       '@astrojs/markdown-remark': 5.2.0
       '@mdx-js/mdx': 3.0.1
       acorn: 8.12.1
-      astro: 4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
+      astro: 4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       gray-matter: 4.0.3
@@ -5217,11 +5217,11 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-auto-import@0.4.4(astro@4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)):
+  astro-auto-import@0.4.4(astro@4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)):
     dependencies:
       '@types/node': 18.19.54
       acorn: 8.12.1
-      astro: 4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
+      astro: 4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
 
   astro-eslint-parser@1.0.3(typescript@5.6.3):
     dependencies:
@@ -5242,14 +5242,14 @@ snapshots:
       - supports-color
       - typescript
 
-  astro-vitesse@0.2.1(@iconify/json@2.2.259)(@unocss/reset@0.63.4)(astro@4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))(unocss@0.62.0(postcss@8.4.47)(rollup@4.24.0)(vite@5.4.8(@types/node@18.19.54))):
+  astro-vitesse@0.2.2(@iconify/json@2.2.259)(@unocss/reset@0.63.4)(astro@4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))(unocss@0.62.0(postcss@8.4.47)(rollup@4.24.0)(vite@5.4.8(@types/node@18.19.54))):
     dependencies:
       '@astrojs/markdown-remark': 5.3.0
-      '@astrojs/mdx': 3.1.7(astro@4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))
+      '@astrojs/mdx': 3.1.7(astro@4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3))
       '@astrojs/sitemap': 3.2.0
       '@iconify/json': 2.2.259
       '@unocss/reset': 0.63.4
-      astro: 4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
+      astro: 4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3)
       bcp-47: 2.1.0
       dayjs: 1.11.13
       fast-glob: 3.3.2
@@ -5262,7 +5262,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro@4.16.1(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3):
+  astro@4.16.2(@types/node@18.19.54)(rollup@4.24.0)(typescript@5.6.3):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.1

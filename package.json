@@ -16,9 +16,9 @@
     "@iconify/json": "^2.2.259",
     "@unocss/reset": "^0.63.4",
     "@vercel/og": "^0.6.3",
-    "astro": "^4.16.1",
+    "astro": "^4.16.2",
     "astro-auto-import": "^0.4.4",
-    "astro-vitesse": "^0.2.1",
+    "astro-vitesse": "^0.2.2",
     "typescript": "^5.6.3",
     "unocss": "0.62.0"
   },
