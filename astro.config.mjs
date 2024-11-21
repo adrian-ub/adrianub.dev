@@ -54,10 +54,10 @@ export default defineConfig({
           iconClass: 'md:hidden',
         },
         {
-          label: 'Twitter',
-          link: 'https://twitter.com/adrianub',
+          label: 'Bluesky',
+          link: 'https://bsky.app/profile/adrianub.dev',
           hideLabel: true,
-          icon: 'i-ri-twitter-x-fill',
+          icon: 'i-ri-bluesky-line',
           wrapperClass: 'lt-md:hidden',
           attrs: {
             target: '_blank',
