@@ -23,7 +23,7 @@
     "unocss": "0.63.6"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.7.3",
+    "@adrianub/eslint-config": "^0.0.3",
     "@prettier/plugin-xml": "^3.4.1",
     "@unocss/eslint-plugin": "^0.63.4",
     "astro-eslint-parser": "^1.0.3",

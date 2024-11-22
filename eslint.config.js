@@ -1,6 +1,6 @@
-import antfu from '@antfu/eslint-config'
+import adrianub from '@adrianub/eslint-config'
 
-export default antfu({
+export default adrianub({
   formatters: {
     astro: true,
     css: true,
