@@ -1,0 +1,50 @@
+---
+title: 'Usar constantes en lugar de enum'
+date: "2024-12-13"
+---
+
+`enum` es una forma poderosa de crear un conjunto de constantes con nombre, pero tiene algunas desventajas.
+
+## Enumeraciones
+
+Las enumeraciones son una forma de definir un conjunto de constantes con nombre. Por ejemplo, si queremos definir los días de la semana, podemos usar una enumeración.
+
+```ts
+enum Days {
+  MONDAY= 'Monday',
+  TUESDAY= 'Tuesday',
+  WEDNESDAY= 'Wednesday',
+  THURSDAY= 'Thursday',
+  FRIDAY= 'Friday',
+  SATURDAY= 'Saturday',
+  SUNDAY= 'Sunday',
+}
+```
+
+## Constantes
+
+En primer lugar, usemos la afirmación `as const`. Esto obliga a que un objeto se trate como de solo lectura e infiere tipos literales para sus propiedades:
+
+```ts
+const days = {
+  MONDAY: 'Monday',
+  TUESDAY: 'Tuesday',
+  WEDNESDAY: 'Wednesday',
+  THURSDAY: 'Thursday',
+  FRIDAY: 'Friday',
+  SATURDAY: 'Saturday',
+  SUNDAY: 'Sunday',
+} as const;
+```
+
+Ahora podemos derivar los tipos que necesitamos de albumTypes usando `keyof` y `typeof`. Por ejemplo, podemos obtener las claves usando `keyof`:
+
+```ts
+type Days = keyof typeof days; // 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY'
+```
+
+También podemos obtener los valores usando `Obj[keyof Obj]`:
+
+```ts
+type Days = typeof days[keyof typeof days]; // 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday'
+```
