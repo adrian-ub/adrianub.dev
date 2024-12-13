@@ -18,7 +18,7 @@
     "@vercel/og": "^0.6.4",
     "astro": "^5.0.5",
     "astro-auto-import": "^0.4.4",
-    "astro-vitesse": "^0.3.0",
+    "astro-vitesse": "^0.4.1",
     "typescript": "^5.7.2",
     "unocss": "0.63.6"
   },
