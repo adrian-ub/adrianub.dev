@@ -100,7 +100,6 @@ export default defineConfig({
       ],
       components: {
         Footer: './src/components/Footer.astro',
-        Head: './src/components/astro-vitesse/Head.astro',
       },
     }),
     autoImport({

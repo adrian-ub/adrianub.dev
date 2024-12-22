@@ -30,8 +30,11 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(astro@5.0.5(@types/node@18.19.54)(jiti@2.3.3)(rollup@4.24.0)(tsx@4.19.1)(typescript@5.7.2)(yaml@2.5.1))
       astro-vitesse:
-        specifier: ^0.4.1
-        version: 0.4.1(@iconify/json@2.2.282)(@unocss/reset@0.65.1)(astro@5.0.5(@types/node@18.19.54)(jiti@2.3.3)(rollup@4.24.0)(tsx@4.19.1)(typescript@5.7.2)(yaml@2.5.1))(unocss@0.63.6(postcss@8.4.49)(rollup@4.24.0)(typescript@5.7.2)(vite@6.0.3(@types/node@18.19.54)(jiti@2.3.3)(tsx@4.19.1)(yaml@2.5.1)))
+        specifier: ^0.5.2
+        version: 0.5.2(@iconify/json@2.2.282)(@unocss/reset@0.65.1)(astro@5.0.5(@types/node@18.19.54)(jiti@2.3.3)(rollup@4.24.0)(tsx@4.19.1)(typescript@5.7.2)(yaml@2.5.1))(unocss@0.63.6(postcss@8.4.49)(rollup@4.24.0)(typescript@5.7.2)(vite@6.0.3(@types/node@18.19.54)(jiti@2.3.3)(tsx@4.19.1)(yaml@2.5.1)))
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -1478,8 +1481,8 @@ packages:
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
 
-  astro-vitesse@0.4.1:
-    resolution: {integrity: sha512-WntLg0M5+NFrlDmZZ3IznPB8OvOEPcrHuKlsxVOYLUAjSpqT73eo0uMlWkJJCJ/bQS345AdqOFmEaPDMkOpYuQ==}
+  astro-vitesse@0.5.2:
+    resolution: {integrity: sha512-CZASj0DuosiCLabOofFLi6Ix//xXEzMKDgNUztO22BuDcohAPNhdXwNd+NiIKwBgI+xzqj0R5d9DqCnEEXd2HQ==}
     peerDependencies:
       '@iconify/json': ^2.2.256
       '@unocss/reset': ^0.63.2
@@ -3141,6 +3144,9 @@ packages:
 
   sass-formatter@0.7.9:
     resolution: {integrity: sha512-CWZ8XiSim+fJVG0cFLStwDvft1VI7uvXdCNJYXhDvowiv+DsbD1nXLiQ4zrE5UBvj5DWZJ93cwN0NX5PMsr1Pw==}
+
+  satori-html@0.3.2:
+    resolution: {integrity: sha512-wjTh14iqADFKDK80e51/98MplTGfxz2RmIzh0GqShlf4a67+BooLywF17TvJPD6phO0Hxm7Mf1N5LtRYvdkYRA==}
 
   satori@0.12.0:
     resolution: {integrity: sha512-e0e+qQyeFwEszujN7SpWpRtZgww7Nh8lSO3bUn2spHZ5JpqEl3zJ3P14/JlWruxEwdgREs35ZnavrPrWaRVFDg==}
@@ -5308,7 +5314,7 @@ snapshots:
       astro: 5.0.5(@types/node@18.19.54)(jiti@2.3.3)(rollup@4.24.0)(tsx@4.19.1)(typescript@5.7.2)(yaml@2.5.1)
       rehype-expressive-code: 0.38.3
 
-  astro-vitesse@0.4.1(@iconify/json@2.2.282)(@unocss/reset@0.65.1)(astro@5.0.5(@types/node@18.19.54)(jiti@2.3.3)(rollup@4.24.0)(tsx@4.19.1)(typescript@5.7.2)(yaml@2.5.1))(unocss@0.63.6(postcss@8.4.49)(rollup@4.24.0)(typescript@5.7.2)(vite@6.0.3(@types/node@18.19.54)(jiti@2.3.3)(tsx@4.19.1)(yaml@2.5.1))):
+  astro-vitesse@0.5.2(@iconify/json@2.2.282)(@unocss/reset@0.65.1)(astro@5.0.5(@types/node@18.19.54)(jiti@2.3.3)(rollup@4.24.0)(tsx@4.19.1)(typescript@5.7.2)(yaml@2.5.1))(unocss@0.63.6(postcss@8.4.49)(rollup@4.24.0)(typescript@5.7.2)(vite@6.0.3(@types/node@18.19.54)(jiti@2.3.3)(tsx@4.19.1)(yaml@2.5.1))):
     dependencies:
       '@astrojs/markdown-remark': 6.0.1
       '@astrojs/mdx': 4.0.2(astro@5.0.5(@types/node@18.19.54)(jiti@2.3.3)(rollup@4.24.0)(tsx@4.19.1)(typescript@5.7.2)(yaml@2.5.1))
@@ -5325,6 +5331,9 @@ snapshots:
       js-yaml: 4.1.0
       nprogress: 0.2.0
       rehype-autolink-headings: 7.1.0
+      satori: 0.12.0
+      satori-html: 0.3.2
+      sharp: 0.33.5
       unist-util-visit: 5.0.0
       unocss: 0.63.6(postcss@8.4.49)(rollup@4.24.0)(typescript@5.7.2)(vite@6.0.3(@types/node@18.19.54)(jiti@2.3.3)(tsx@4.19.1)(yaml@2.5.1))
     transitivePeerDependencies:
@@ -5572,13 +5581,11 @@ snapshots:
     dependencies:
       color-name: 1.1.4
       simple-swizzle: 0.2.2
-    optional: true
 
   color@4.2.3:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
-    optional: true
 
   colorette@2.0.20: {}
 
@@ -5656,8 +5663,7 @@ snapshots:
 
   destr@2.0.3: {}
 
-  detect-libc@2.0.3:
-    optional: true
+  detect-libc@2.0.3: {}
 
   deterministic-object-hash@2.0.2:
     dependencies:
@@ -6515,8 +6521,7 @@ snapshots:
 
   is-arrayish@0.2.1: {}
 
-  is-arrayish@0.3.2:
-    optional: true
+  is-arrayish@0.3.2: {}
 
   is-binary-path@2.1.0:
     dependencies:
@@ -7619,6 +7624,10 @@ snapshots:
     dependencies:
       suf-log: 2.5.3
 
+  satori-html@0.3.2:
+    dependencies:
+      ultrahtml: 1.5.3
+
   satori@0.12.0:
     dependencies:
       '@shuding/opentype.js': 1.4.0-beta.0
@@ -7670,7 +7679,6 @@ snapshots:
       '@img/sharp-wasm32': 0.33.5
       '@img/sharp-win32-ia32': 0.33.5
       '@img/sharp-win32-x64': 0.33.5
-    optional: true
 
   shebang-command@2.0.0:
     dependencies:
@@ -7693,7 +7701,6 @@ snapshots:
   simple-swizzle@0.2.2:
     dependencies:
       is-arrayish: 0.3.2
-    optional: true
 
   sirv@2.0.4:
     dependencies:
