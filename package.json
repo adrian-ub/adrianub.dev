@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/rss": "^4.0.10",
+    "@astrojs/rss": "^4.0.11",
     "@iconify/json": "^2.2.282",
     "@unocss/reset": "^0.65.1",
     "@vercel/og": "^0.6.4",
-    "astro": "^5.0.5",
+    "astro": "^5.8.0",
     "astro-auto-import": "^0.4.4",
     "astro-vitesse": "^0.5.2",
     "sharp": "^0.33.5",
