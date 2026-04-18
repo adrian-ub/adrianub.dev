@@ -1,3 +1,75 @@
+User-agent: GPTBot
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: OAI-SearchBot
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: Claude-Web
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: Google-Extended
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: Amazonbot
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: Bytespider
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: CCBot
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
 User-agent: *
 Allow: /
 Allow: /posts/
