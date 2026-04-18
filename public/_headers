@@ -1,0 +1,9 @@
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+  Link: </.well-known/api-catalog>; rel="service-desc"; type="application/linkset+json"; profile="https://www.rfc-editor.org/info/rfc9727"
+  Link: </posts/>; rel="service-doc"; type="text/html"
+  Link: </rss.xml>; rel="describedby"; type="application/rss+xml"
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"
+  Link: </.well-known/api-catalog>; rel="api-catalog"
