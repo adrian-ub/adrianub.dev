@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /posts/
+Allow: /notes/
+Allow: /projects/
+Disallow: /_astro/
+Disallow: /_redirects
+
+Sitemap: https://adrianub.dev/sitemap-index.xml
