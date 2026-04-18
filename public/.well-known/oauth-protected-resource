@@ -1,0 +1,11 @@
+{
+  "resource": "https://adrianub.dev/",
+  "authorization_servers": [
+    "https://adrianub.dev"
+  ],
+  "scopes_supported": [
+    "read:posts",
+    "read:notes",
+    "read:projects"
+  ]
+}

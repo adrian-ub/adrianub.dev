@@ -1,0 +1,4 @@
+{
+  "error": "not_implemented",
+  "error_description": "Token endpoint is not implemented on this static site deployment."
+}

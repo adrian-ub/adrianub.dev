@@ -1,0 +1,21 @@
+{
+  "serverInfo": {
+    "name": "adrianub-web-tools",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://adrianub.dev/mcp"
+  },
+  "capabilities": {
+    "tools": {
+      "supported": true
+    },
+    "resources": {
+      "supported": false
+    },
+    "prompts": {
+      "supported": false
+    }
+  }
+}

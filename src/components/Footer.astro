@@ -3,3 +3,133 @@
   2021-PRESENT © Adrián UB
 </span>
 <div class="flex-auto"></div>
+
+<script is:inline>
+  ;(() => {
+    const modelContext = navigator.modelContext
+    if (!modelContext || typeof modelContext.registerTool !== 'function') {
+      return
+    }
+
+    const abortController = new AbortController()
+
+    try {
+      modelContext.registerTool(
+        {
+          name: 'site.navigate',
+          title: 'Navigate Site',
+          description: 'Navigate to a key section of adrianub.dev.',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              section: {
+                type: 'string',
+                enum: ['home', 'posts', 'notes', 'projects', 'sponsors'],
+              },
+            },
+            required: ['section'],
+            additionalProperties: false,
+          },
+          execute: async (input) => {
+            const routes = {
+              home: '/',
+              posts: '/posts/',
+              notes: '/notes/',
+              projects: '/projects/',
+              sponsors: '/sponsors-list/',
+            }
+
+            const route = routes[input?.section] || '/'
+            window.location.assign(route)
+
+            return {
+              ok: true,
+              route,
+              message: `Navigating to ${route}`,
+            }
+          },
+          annotations: {
+            readOnlyHint: false,
+          },
+        },
+        { signal: abortController.signal },
+      )
+
+      modelContext.registerTool(
+        {
+          name: 'site.open_url',
+          title: 'Open URL',
+          description: 'Open an internal URL on adrianub.dev.',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              path: {
+                type: 'string',
+                minLength: 1,
+              },
+            },
+            required: ['path'],
+            additionalProperties: false,
+          },
+          execute: async (input) => {
+            const path = String(input?.path || '/').trim()
+            const nextUrl = new URL(path, window.location.origin)
+
+            if (nextUrl.origin !== window.location.origin) {
+              return {
+                ok: false,
+                error: 'Only same-origin URLs are allowed.',
+              }
+            }
+
+            window.location.assign(nextUrl.pathname + nextUrl.search + nextUrl.hash)
+
+            return {
+              ok: true,
+              url: nextUrl.toString(),
+              message: `Navigating to ${nextUrl.pathname}`,
+            }
+          },
+          annotations: {
+            readOnlyHint: false,
+          },
+        },
+        { signal: abortController.signal },
+      )
+
+      modelContext.registerTool(
+        {
+          name: 'site.discovery_endpoints',
+          title: 'List Discovery Endpoints',
+          description: 'List machine-readable discovery endpoints for this site.',
+          inputSchema: {
+            type: 'object',
+            additionalProperties: false,
+          },
+          execute: async () => {
+            return {
+              ok: true,
+              endpoints: [
+                '/.well-known/api-catalog',
+                '/.well-known/openid-configuration',
+                '/.well-known/oauth-authorization-server',
+                '/.well-known/oauth-protected-resource',
+                '/.well-known/mcp/server-card.json',
+                '/.well-known/agent-skills/index.json',
+                '/rss.xml',
+                '/robots.txt',
+              ],
+            }
+          },
+          annotations: {
+            readOnlyHint: true,
+          },
+        },
+        { signal: abortController.signal },
+      )
+    }
+ catch {
+      abortController.abort()
+    }
+  })()
+</script>

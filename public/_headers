@@ -11,3 +11,33 @@
 
 /.well-known/http-message-signatures-directory
   Content-Type: application/http-message-signatures-directory+json
+
+/.well-known/openid-configuration
+  Content-Type: application/json
+
+/.well-known/oauth-authorization-server
+  Content-Type: application/json
+
+/.well-known/oauth-protected-resource
+  Content-Type: application/json
+
+/.well-known/jwks.json
+  Content-Type: application/json
+
+/.well-known/mcp/server-card.json
+  Content-Type: application/json
+
+/.well-known/agent-skills/index.json
+  Content-Type: application/json
+
+/.well-known/agent-skills/*/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
+
+/oauth/authorize
+  Content-Type: application/json
+
+/oauth/token
+  Content-Type: application/json
+
+/mcp
+  Content-Type: application/json

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "site-navigation",
+      "type": "skill-md",
+      "description": "Navigate to key sections of adrianub.dev including posts, notes, and projects.",
+      "url": "/.well-known/agent-skills/site-navigation/SKILL.md",
+      "digest": "sha256:ecf17523b259c6f47e8e8deab8ce577ec73d1326cef76761e21d467259a25cc5"
+    },
+    {
+      "name": "content-discovery",
+      "type": "skill-md",
+      "description": "Discover content feeds and machine-readable metadata published by adrianub.dev.",
+      "url": "/.well-known/agent-skills/content-discovery/SKILL.md",
+      "digest": "sha256:80324693ab0c7f43d3a113daa81094f887f99e3af45f1f13633c9ec372d3cb4f"
+    },
+    {
+      "name": "reading-workflow",
+      "type": "skill-md",
+      "description": "Retrieve and summarize posts from adrianub.dev with links to source pages.",
+      "url": "/.well-known/agent-skills/reading-workflow/SKILL.md",
+      "digest": "sha256:cd3adea071bb6a107d0dc6cc3f5658fece6b266a39f4e83ce019582e74b3e995"
+    }
+  ]
+}

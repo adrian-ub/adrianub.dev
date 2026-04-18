@@ -1,0 +1,19 @@
+{
+  "issuer": "https://adrianub.dev",
+  "authorization_endpoint": "https://adrianub.dev/oauth/authorize",
+  "token_endpoint": "https://adrianub.dev/oauth/token",
+  "jwks_uri": "https://adrianub.dev/.well-known/jwks.json",
+  "grant_types_supported": [
+    "authorization_code",
+    "client_credentials",
+    "refresh_token"
+  ],
+  "response_types_supported": [
+    "code"
+  ],
+  "scopes_supported": [
+    "read:posts",
+    "read:notes",
+    "read:projects"
+  ]
+}
