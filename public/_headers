@@ -8,3 +8,6 @@
 /.well-known/api-catalog
   Content-Type: application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"
   Link: </.well-known/api-catalog>; rel="api-catalog"
+
+/.well-known/http-message-signatures-directory
+  Content-Type: application/http-message-signatures-directory+json
