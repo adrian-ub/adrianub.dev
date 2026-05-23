@@ -1,82 +1,17 @@
 User-agent: GPTBot
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: OAI-SearchBot
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: Claude-Web
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: Google-Extended
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: Amazonbot
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: anthropic-ai
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: Bytespider
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: CCBot
-Content-Signal: ai-train=no, search=yes, ai-input=no
-Allow: /
-Allow: /posts/
-Allow: /notes/
-Allow: /projects/
-Disallow: /_astro/
-Disallow: /_redirects
-
 User-agent: Applebot-Extended
 Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 Allow: /posts/
 Allow: /notes/
 Allow: /projects/
-Disallow: /_astro/
 Disallow: /_redirects
 
 User-agent: *
@@ -85,7 +20,6 @@ Allow: /
 Allow: /posts/
 Allow: /notes/
 Allow: /projects/
-Disallow: /_astro/
 Disallow: /_redirects
 
 Sitemap: https://adrianub.dev/sitemap-index.xml
