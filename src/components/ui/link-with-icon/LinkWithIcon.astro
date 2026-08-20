@@ -1,0 +1,39 @@
+---
+/**
+ * LinkWithIcon — an external link styled as a compact chip with a favicon.
+ *
+ *   <LinkWithIcon href="https://angular.dev" iconUrl="https://github.com/angular.png">Angular</LinkWithIcon>
+ *
+ * Design inspired by Antfu's VitePress setup: semi-transparent pill,
+ * icon as background-image, slight vertical offset.
+ * Fetches the favicon automatically when no iconUrl is provided.
+ */
+import { cn } from "~/lib/cn";
+
+interface Props {
+  href: string;
+  iconUrl?: string;
+  class?: string;
+}
+
+const { href, iconUrl, class: className } = Astro.props;
+
+// Auto-fetch favicon from Google's service when no icon is provided.
+const faviconUrl = iconUrl ?? `https://www.google.com/s2/favicons?domain=${new URL(href).hostname}&sz=32`;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={cn(
+    "inline-flex items-center gap-1 rounded bg-foreground/8 px-1.5 py-1 text-sm text-foreground/70 no-underline transition-colors translate-y-px hover:bg-foreground/12 hover:text-foreground border-0",
+    className,
+  )}
+>
+  <span
+    class="inline-block h-4 w-4 bg-contain bg-center bg-no-repeat flex-none"
+    style={`background-image: url("${faviconUrl}");`}
+  />
+  <slot />
+</a>

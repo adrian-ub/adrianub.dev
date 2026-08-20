@@ -1,0 +1,52 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Header from "~/components/Header.astro";
+import { Tabs, TabItem } from '~/components/ui/tabs'
+import Icon from "@cloudflare/nimbus-docs/components/Icon.astro";
+import SponsorsCircles from "~/components/SponsorsCircles.astro";
+import { config } from "virtual:nimbus/config";
+import sponsorsSvg from "~/assets/sponsors/sponsors.svg";
+import { Image } from "astro:assets";
+---
+
+<BaseLayout title={`Sponsors · ${config.title}`} description="Gracias a quienes apoyan mi trabajo open source.">
+  <div class="flex flex-col min-h-screen">
+    <Header />
+    <main class="flex-1 mx-auto max-w-2xl w-full px-6 py-16">
+      <h1
+        class="text-foreground leading-tight"
+        style="font-size: var(--nb-h1-size); font-weight: var(--nb-h1-weight); letter-spacing: var(--nb-h1-tracking);"
+      >
+        Patrocinadores
+      </h1>
+      <p class="mt-3 text-muted-foreground leading-relaxed">
+        Si disfrutas de mi trabajo y te resulta útil, considera <a href="https://github.com/sponsors/adrian-ub" class="text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors">patrocinar</a> para ayudarme a mantener el ecosistema open source sostenible. ¡Gracias!
+      </p>
+
+      <div class="mt-5 flex items-center justify-center gap-2">
+        <a
+          href="https://github.com/sponsors/adrian-ub"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground no-underline transition-colors hover:border-border-strong hover:bg-accent/50"
+        >
+          <Icon name="ph:heart" class="w-4 h-4 text-rose-500" />
+          Patrocinar
+        </a>
+      </div>
+
+      <Tabs>
+        <TabItem label="Sponsor Circles">
+          <SponsorsCircles />
+        </TabItem>
+
+        <TabItem label="Sponsor Tiers">
+          <Image
+            src={sponsorsSvg}
+            alt="Sponsors by tier"
+          />
+        </TabItem>
+      </Tabs>
+    </main>
+  </div>
+</BaseLayout>

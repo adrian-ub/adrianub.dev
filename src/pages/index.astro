@@ -1,0 +1,32 @@
+---
+import { config } from 'virtual:nimbus/config'
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import Header from '~/components/Header.astro'
+import { Card } from '~/components/ui/card'
+import Render from '~/components/Render.astro'
+---
+
+<BaseLayout title={config.title} description={config.description}>
+  <div class="flex flex-col min-h-screen">
+    <Header />
+    <main class="flex-1 mx-auto max-w-2xl w-full px-6 py-24">
+      <h1 class="mb-8 font-extrabold text-4xl">
+        {config.title}
+      </h1>
+      <div class="docs-content">
+        <Render file="pages/home" />
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <a href="/posts" class="block rounded-lg border border-border p-4 transition-colors hover:border-border-strong no-underline">
+          <div class="font-medium text-foreground">Blog</div>
+          <div class="mt-0.5 text-sm text-muted-foreground">Lee los últimos artículos</div>
+        </a>
+        <a href="/notes" class="block rounded-lg border border-border p-4 transition-colors hover:border-border-strong no-underline">
+          <div class="font-medium text-foreground">Notas</div>
+          <div class="mt-0.5 text-sm text-muted-foreground">Lee las últimas notas</div>
+        </a>
+      </div>
+    </main>
+  </div>
+</BaseLayout>

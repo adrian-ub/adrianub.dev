@@ -1,0 +1,30 @@
+---
+/**
+ * SocialLinks — a row of social profile links.
+ *
+ *   <SocialLinks />
+ */
+import Icon from "@cloudflare/nimbus-docs/components/Icon.astro";
+
+const links = [
+  { href: "https://github.com/adrian-ub", label: "GitHub", icon: "ph:github-logo" },
+  { href: "https://bsky.app/profile/adrianub.dev", label: "Bluesky", icon: "ph:butterfly" },
+  { href: "https://www.twitter.com/AdrianUB", label: "Twitter", icon: "ph:x-logo" },
+];
+---
+
+Encuéntrame en
+
+<p class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground mt-5!">
+  {links.map((link) => (
+    <a
+      href={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1.5 no-underline transition-colors hover:text-foreground"
+    >
+      <Icon name={link.icon} class="w-4 h-4 opacity-75" />
+      {link.label}
+    </a>
+  ))}
+</p>

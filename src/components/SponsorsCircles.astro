@@ -1,0 +1,70 @@
+---
+/**
+ * SponsorsCircles — bubble chart layout where each sponsor is a circle
+ * sized by their contribution amount. Mirrors antfu's SponsorsCircles.vue.
+ */
+import Icon from "@cloudflare/nimbus-docs/components/Icon.astro";
+import circlesData from "~/data/sponsors-circles.json";
+
+const sponsors = circlesData;
+---
+
+<div class="flex justify-center w-full" style={`height: 550px;`}>
+  <div
+    class="relative w-[500px] h-[500px] sponsors-circles"
+    style="flex-shrink: 0; transform-origin: center center;"
+  >
+    {sponsors.map((sponsor: any) => (
+      <a
+        href={sponsor.link}
+        target="_blank"
+        rel="noopener"
+        title={[sponsor.name, `@${sponsor.login}`].filter(Boolean).join(" ")}
+        class="transition-all duration-500 rounded-full overflow-hidden absolute hover:shadow-lg sponsors-circle"
+        style={`
+          width: ${sponsor.radius * 2}px;
+          height: ${sponsor.radius * 2}px;
+          left: ${sponsor.position.x - sponsor.radius}px;
+          top: ${sponsor.position.y - sponsor.radius}px;
+          ${sponsor.radius > 25 ? "border: 0.5px solid var(--nb-border);" : ""}
+        `}
+        data-radius={sponsor.radius}
+      >
+        {sponsor.avatar ? (
+          <img
+            src={sponsor.avatar}
+            alt={sponsor.name}
+            class="w-full h-full bg-background"
+            loading="lazy"
+          />
+        ) : (
+          <div class="w-full h-full bg-muted flex items-center justify-center opacity-75">
+            <Icon name="ph:user" class="w-1/2 h-1/2 text-muted-foreground" />
+          </div>
+        )}
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  function initCircles() {
+    const container = document.querySelector(".sponsors-circles") as HTMLElement;
+    if (!container) return;
+
+    const parent = container.parentElement;
+    if (!parent) return;
+
+    function updateScale() {
+      const width = parent!.clientWidth;
+      const scale = Math.min(2, (width - 80) / 500);
+      container.style.transform = `scale(${scale})`;
+      parent!.style.height = `${550 * scale}px`;
+    }
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+  }
+
+  document.addEventListener("astro:page-load", initCircles);
+</script>

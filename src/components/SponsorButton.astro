@@ -1,11 +1,26 @@
-<p>
-  Si te gusta mi trabajo y te resulta útil, considera patrocinarme para ayudar a que el código abierto sea sostenible.
-  ¡Gracias!
+---
+/**
+ * SponsorButton — a call-to-action to sponsor via GitHub Sponsors.
+ * Styled to match Antfu's btn-rose shortcut pattern.
+ *
+ *   <SponsorButton />
+ */
+import Icon from "@cloudflare/nimbus-docs/components/Icon.astro";
+---
+
+<p class="text-sm text-muted-foreground leading-relaxed mt-6">
+  Si disfrutas de mi trabajo y te resulta útil,
+  considera patrocinarme para ayudar a mantener el open source sostenible. ¡Gracias!
 </p>
 
-<p class="flex flex-wrap gap-2">
-  <a href="https://github.com/sponsors/adrian-ub" target="_blank" class="group inline-block btn-rose">
-    <span i-ph-heart-duotone group-hover="i-ph-heart-fill text-rose" transition-all duration-200 ease-out></span>
-    Patrocina para apoyar a Adrián
+<p class="mt-3!">
+  <a
+    href="https://github.com/sponsors/adrian-ub"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group inline-block rounded border border-border px-2.5 py-1 text-sm no-underline text-primary/50 transition-all duration-200 ease-out hover:opacity-100 hover:text-rose-500 hover:bg-rose-500/10"
+  >
+    <Icon name="ph:heart-duotone" class="inline w-4 h-4 align-text-bottom transition-all duration-200 ease-out group-hover:text-rose-500" />
+    {" "}Sponsor to support Adrián
   </a>
 </p>
