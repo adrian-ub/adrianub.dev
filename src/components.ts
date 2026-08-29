@@ -6,6 +6,8 @@
 
 import { Aside } from "./components/ui/aside";
 import { BaselineStatus } from "@astro-community/astro-embed-baseline-status";
+import { Button } from "./components/ui/button";
+import { Dialog, DialogClose, DialogContent } from "./components/ui/dialog";
 import Render from "./components/Render.astro";
 import { Card } from "./components/ui/card";
 import { CardGrid } from "./components/ui/card-grid";
@@ -21,8 +23,12 @@ import TilLanding from "./components/TilLanding.astro";
 export const components = {
   Aside,
   BaselineStatus,
+  Button,
   Card,
   CardGrid,
+  Dialog,
+  DialogClose,
+  DialogContent,
   LinkCard,
   LinkWithIcon,
   PackageManagers,

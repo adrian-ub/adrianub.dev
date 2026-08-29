@@ -1,0 +1,70 @@
+---
+title: Usar command y commandfor en lugar de addEventListener
+---
+
+import Showcase from "~/components/showcase/Showcase.astro";
+
+Abrir un diálogo solía exigir `addEventListener` + `showModal()`. Desde diciembre de 2025, HTML lo resuelve con dos atributos declarativos, sin una sola línea de JavaScript.
+
+<BaselineStatus id="invoker-commands" />
+
+## Preview
+
+<Showcase
+  lang="html"
+  code={`
+<button command="show-modal" commandfor="remove-item-dialog">
+    Remove item
+</button>
+
+<dialog id="remove-item-dialog">
+    <p>This will permanently delete the item.</p>
+    <button command="close" commandfor="remove-item-dialog">Keep item</button>
+</dialog>`}
+>
+  <Button variant="primary" command="show-modal" commandfor="remove-item-dialog">Remove item</Button>
+  <Dialog id="remove-item-dialog">
+    <DialogContent class="max-w-sm">
+      <div class="p-6">
+        <p class="m-0">This will permanently delete the item.</p>
+        <Button variant="secondary" class="mt-4" command="close" commandfor="remove-item-dialog">Keep item</Button>
+      </div>
+    </DialogContent>
+  </Dialog>
+</Showcase>
+
+## Qué son `command` y `commandfor`
+
+`command` se coloca en un elemento invocable (button, input, select, textarea o un custom element) y declara qué acción ejecutar. `commandfor` apunta al `id` del elemento sobre el que se ejecuta esa acción — un `<dialog>`, un popover, etc.
+
+En el ejemplo de arriba, el botón con `command="show-modal"` abre el diálogo referenciado por `commandfor="remove-item-dialog"`; el botón dentro del diálogo lo cierra con `command="close"`.
+
+## Antes vs. ahora
+
+Antes necesitabas JavaScript para abrir y cerrar el diálogo:
+
+```js
+const dialog = document.querySelector("#remove-item-dialog");
+document.querySelector("[data-remove]").addEventListener("click", () => {
+  dialog.showModal();
+});
+```
+
+Ahora los atributos hacen el trabajo y el navegador se encarga del resto:
+
+```html
+<button command="show-modal" commandfor="remove-item-dialog">Remove item</button>
+```
+
+## Valores de `command`
+
+| Comando | Efecto |
+|---|---|
+| `show-modal` | Abre el `<dialog>` como modal (`showModal()`) |
+| `show-popover` | Muestra un popover (`showPopover()`) |
+| `toggle-popover` | Alterna un popover (`togglePopover()`) |
+| `hide-popover` | Oculta un popover (`hidePopover()`) |
+| `close` | Cierra el diálogo o popover apuntado por `commandfor` |
+| `request-close` | Pide un cierre validado (con `cancel` event y `returnValue`) |
+
+El atributo `command` sin `commandfor` se aplica al elemento invocable mismo; con `commandfor`, al elemento referenciado.
