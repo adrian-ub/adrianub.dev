@@ -2,6 +2,7 @@
 import { Font } from 'astro:assets'
 import "../styles/globals.css";
 import "../styles/prose.css";
+import { ClientRouter } from "astro:transitions";
 import { config } from "virtual:nimbus/config";
 import { getCollectionLlmsUrl, getVersionStatus } from "@cloudflare/nimbus-docs";
 import AgentDirective from "~/components/AgentDirective.astro";
@@ -49,7 +50,7 @@ const llmsUrl = Astro.site
     <Font cssVariable="--font-inter" preload />
     <Font cssVariable="--font-geist-mono" preload />
 
-    <script>
+    <script is:inline>
       (() => {
         const KEY = "ui-mode";
         const media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -77,6 +78,9 @@ const llmsUrl = Astro.site
         };
 
         applyTheme();
+        // Re-apply after client-side navigation (ViewTransitions swaps the
+        // whole body, leaving flags applied by the old page's theme script).
+        document.addEventListener("astro:after-swap", applyTheme);
         media.addEventListener("change", () => {
           if (!readPref()) applyTheme();
         });
@@ -102,6 +106,7 @@ const llmsUrl = Astro.site
       collection={collection}
       entryId={entryId}
     />
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-background text-foreground antialiased">
     <a

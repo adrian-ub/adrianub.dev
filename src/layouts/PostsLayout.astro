@@ -55,15 +55,17 @@ const versionAlternates = collection && entryId
   : null;
 
 const pagefindAttrs: Record<string, string> = {};
+// The status filter rides its own element: an inline `name:value` filter
+// captures to the end of the string, so a second inline filter can't share
+// the attribute (it would corrupt the version value to "v1, status:deprecated").
+const pagefindDeprecated =
+  effectiveSearchable && !versionStatus?.isHidden && Boolean(versionStatus?.isDeprecated);
 if (!effectiveSearchable || versionStatus?.isHidden) {
   pagefindAttrs["data-pagefind-ignore"] = "";
 } else {
   pagefindAttrs["data-pagefind-body"] = "";
   if (versionStatus) {
     pagefindAttrs["data-pagefind-filter"] = `version:${versionStatus.version}`;
-    if (versionStatus.isDeprecated) {
-      pagefindAttrs["data-pagefind-filter"] += `, status:deprecated`;
-    }
   }
 }
 
@@ -77,11 +79,11 @@ const hasToc = headings !== false && headings.length > 0;
     {hasHeader ? <slot name="header" /> : <Header collection={collection} entryId={entryId} showSidebar={false} />}
 
     {isCustom ? (
-      <main id="main-content" class="flex-1">
+      <main id="main-content" tabindex="-1" transition:name="nb-content" class="flex-1">
         <slot />
       </main>
     ) : (
-      <main id="main-content" class="flex-1">
+      <main id="main-content" tabindex="-1" transition:name="nb-content" class="flex-1">
         <div class="flex mx-auto max-w-5xl w-full">
           <div class="flex-1 min-w-0 mx-auto max-w-(--nb-content-max) px-4 lg:px-6 py-12">
             {versionStatus?.isDeprecated && (
@@ -92,6 +94,7 @@ const hasToc = headings !== false && headings.length > 0;
             )}
             {banner && <Banner content={banner.content} variant={banner.type} dismissible={banner.dismissible} />}
             <div {...pagefindAttrs}>
+              {pagefindDeprecated && <span hidden data-pagefind-filter="status:deprecated"></span>}
               {hasHeader ? (
                 <slot name="page-title" />
               ) : (
