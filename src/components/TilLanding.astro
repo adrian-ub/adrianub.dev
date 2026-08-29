@@ -1,0 +1,67 @@
+---
+/**
+ * TilLanding — dynamic landing content for the /til index page.
+ * Derives categories (content folders) straight from the `til`
+ * collection, so the landing stays current as you add categories
+ * and entries — no manual editing.
+ */
+import { getCollection } from "astro:content";
+import { CardGrid } from "~/components/ui/card-grid";
+import { LinkCard } from "~/components/ui/link-card";
+
+const entries = await getCollection("til");
+
+interface Category {
+  label: string;
+  icon?: string;
+  indexHref: string;
+  count: number;
+}
+
+const iconBySlug: Record<string, string> = {
+  git: "simple-icons:git",
+  typescript: "simple-icons:typescript",
+  css: "simple-icons:css3",
+};
+
+const categories = new Map<string, Category>();
+for (const entry of entries) {
+  const slug = entry.id.split("/")[0];
+  if (!slug || slug === "index") continue;
+  let category = categories.get(slug);
+  if (!category) {
+    category = {
+      label: slug[0].toUpperCase() + slug.slice(1),
+      icon: iconBySlug[slug],
+      indexHref: `/til/${slug}`,
+      count: 0,
+    };
+    categories.set(slug, category);
+  }
+  // Count every entry except the category's own landing. In Astro 7 the
+  // landing id is the bare folder slug ("git"); older versions used "git/index".
+  if (entry.id !== slug && entry.id !== `${slug}/index`) category.count += 1;
+}
+
+const sortedCategories = [...categories.values()].sort((a, b) =>
+  a.label.localeCompare(b.label),
+);
+---
+
+{
+  sortedCategories.length > 0 && (
+    <section class="my-4">
+      <h2 class="m-0 text-lg font-semibold">Categorías</h2>
+      <CardGrid class="mt-2">
+        {sortedCategories.map((category) => (
+          <LinkCard
+            title={category.label}
+            description={`${category.count} ${category.count === 1 ? "aprendizaje" : "aprendizajes"}`}
+            href={category.indexHref}
+            icon={category.icon}
+          />
+        ))}
+      </CardGrid>
+    </section>
+  )
+}

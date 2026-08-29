@@ -1,6 +1,6 @@
 /**
- * Per-page /notes/<slug>/index.md — clean markdown alternate for every
- * indexable entry of the `notes` collection.
+ * Per-page /til/<slug>/index.md — clean markdown alternate for every
+ * indexable entry of the `til` collection.
  */
 
 import { getIndexedEntries, renderEntryAsMarkdown, type IndexedEntry } from "@cloudflare/nimbus-docs";
@@ -8,7 +8,7 @@ import { config } from "virtual:nimbus/config";
 
 export const prerender = true;
 
-const COLLECTION = "notes";
+const COLLECTION = "til";
 
 interface SlugProps {
   item: IndexedEntry;
@@ -19,7 +19,11 @@ export async function getStaticPaths() {
   return indexed
     .filter((item) => item.collection === COLLECTION)
     .map((item) => ({
-      params: { slug: item.entry.id },
+      // Same root-index shape as the primary `.md` alternate: `index` emits
+      // at /til/index.md, everything else at /til/<id>/index.md.
+      params: {
+        slug: item.entry.id === "index" ? undefined : item.entry.id,
+      },
       props: { item } as SlugProps,
     }));
 }

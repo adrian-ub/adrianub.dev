@@ -1,0 +1,125 @@
+---
+title: Preferir as const sobre enum
+---
+
+TypeScript tiene `enum`, una forma de definir constantes con nombre, pero su implementación tiene comportamientos sorprendentes que conviene conocer antes de usarlo.
+
+## El problema: el enum numérico
+
+TypeScript permite tres formas de enum — numérico, string e inferido — y las dos primeras se comportan distinto:
+
+```ts
+enum PackStatus {
+  Draft = 0,
+  Approved = 1,
+  Shipped = 2,
+}
+
+Object.keys(PackStatus);
+// ["0", "1", "2", "Draft", "Approved", "Shipped"] → ¡6 keys para 3 miembros!
+// Genera un mapeo bidireccional (key→value y value→key) que solo existe en los numéricos.
+```
+
+Con el string enum eso no pasa: `Object.keys` devuelve solo las 3 keys. Peor aún, el enum numérico acepta cualquier número en un lugar donde se espera el enum:
+
+```ts
+const logStatus = (status: PackStatus) => console.log(status);
+
+logStatus(PackStatus.Draft); // ok
+logStatus(0); // sin error... acepta números crudos, fuera del enum
+```
+
+## El problema: es nominal, no estructural
+
+Dos enums con exactamente los mismos valores NO son intercambiables:
+
+```ts
+enum PackStatus {
+  Draft = "Draft",
+  Approved = "Approved",
+  Shipped = "Shipped",
+}
+
+enum PackStatus2 {
+  Draft = "Draft",
+}
+
+logStatus(PackStatus2.Draft);
+// ❌ Type 'PackStatus2' is not assignable to parameter of type 'PackStatus'
+```
+
+Ni siquiera aunque el segundo enum referencie al primero:
+
+```ts
+enum PackStatus2 {
+  Draft = PackStatus.Draft,
+}
+
+logStatus(PackStatus2.Draft);
+// ❌ Mismo error, aunque el valor es idéntico
+```
+
+## El problema: hay que importarlo
+
+Para usar un enum hay que importarlo en cada módulo donde se vaya a usar:
+
+```ts
+import { PackStatus } from "./status";
+
+logStatus(PackStatus.Draft);
+```
+
+Con un objeto `as const` no hace falta: los valores son strings planos.
+
+## La alternativa: un objeto `as const` (POJO)
+
+En lugar de `enum`, declara un objeto plano y deriva los tipos con `keyof` y `typeof`:
+
+```ts
+const albumTypes = {
+  CD: "cd",
+  VINYL: "vinyl",
+  DIGITAL: "digital",
+} as const;
+
+type AlbumTypeKey = keyof typeof albumTypes; // "CD" | "VINYL" | "DIGITAL"
+type AlbumType = (typeof albumTypes)[keyof typeof albumTypes]; // "cd" | "vinyl" | "digital"
+
+function getAlbumType(type: AlbumType) {}
+
+getAlbumType(albumTypes.CD); // ok
+getAlbumType("vinyl"); // ok — strings planos, sin import
+getAlbumType("cassette"); // ❌ Argument of type '"cassette"' is not assignable to parameter of type 'AlbumType'
+```
+
+`as const` obliga a que el objeto sea solo lectura e infiere tipos literales para sus propiedades — una única fuente de verdad: si agregas un valor al objeto, el tipo derivado se actualiza solo.
+
+Y aquí es donde se nota la diferencia: al ser estructural, dos POJOs con los mismos valores SÍ son compatibles:
+
+```ts
+const mediaTypes = {
+  CD: "cd",
+  VINYL: "vinyl",
+  DIGITAL: "digital",
+} as const;
+
+getAlbumType(mediaTypes.CD); // ok — el valor es "cd" y a nadie le importa de dónde viene
+```
+
+## Bonus: variante con arrays
+
+```ts
+const programModes = ["group", "announcement", "1on1"] as const;
+type AllPrograms = (typeof programModes)[number]; // "group" | "announcement" | "1on1"
+```
+
+## El tradeoff honesto
+
+| | `enum` | `as const` |
+|---|---|---|
+| Tipado | Nominal — obliga a pasar el miembro del enum | Estructural — acepta strings planos válidos |
+| Runtime | Genera código extra (reverse mapping en numéricos) | Emite solo el objeto JS |
+| Import | Obligatorio en cada módulo | Ninguno |
+| Errores | Más explícito, más restrictivo | Menos explícito, refactorizar puede costar más |
+
+En resumen: el `enum` es más explícito y más restrictivo; el `as const` es más flexible y más cercano al JavaScript que ya escribes. Para un proyecto nuevo, `as const` suele dar menos fricción.

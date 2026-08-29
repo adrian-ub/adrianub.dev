@@ -1,5 +1,5 @@
 /**
- * Shared utilities for date-based collections (posts, notes, etc.).
+ * Shared utilities for date-based collections (posts, etc.).
  */
 
 export function readingTime(body: string | undefined): number {

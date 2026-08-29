@@ -2,7 +2,7 @@ import { getCollection } from "astro:content";
 import { OGImageRoute } from "astro-og-canvas";
 import { ogCardConfig } from "../_og-card-config";
 
-const entries = await getCollection("notes", (entry) => !entry.data.draft);
+const entries = await getCollection("til", (entry) => !entry.data.draft);
 
 const pages = Object.fromEntries(
   entries.map((entry) => [

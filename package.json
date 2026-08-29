@@ -20,6 +20,7 @@
   "dependencies": {
     "@cloudflare/nimbus-docs": "^0.10.0",
     "@iconify-json/ph": "^1.2.0",
+    "@iconify-json/simple-icons": "^1.2.0",
     "astro": "~7.0.9",
     "astro-og-canvas": "^0.13.0",
     "canvaskit-wasm": "^0.41.1",

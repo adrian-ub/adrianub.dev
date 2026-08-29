@@ -24,12 +24,11 @@ export const collections = {
       },
     }),
   ),
-  notes: defineCollection(
+  til: defineCollection(
     docsCollection({
-      base: "notes",
+      base: "til",
       schemaFields: {
         audience: z.literal("human").optional(),
-        publishedAt: z.coerce.date(),
       },
     }),
   ),

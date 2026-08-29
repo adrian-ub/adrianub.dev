@@ -12,7 +12,7 @@ const nimbusConfig = defineNimbusConfig({
   editPattern:
 		"https://github.com/adrian-ub/adrianub.dev/edit/main/{path}",
   socialImageAlt: "Portafolio de Adrián UB",
-  sidebar: {
+sidebar: {
     items: [
       {
         label: "Blog",
@@ -21,12 +21,15 @@ const nimbusConfig = defineNimbusConfig({
         }
       },
       {
-        label: "Notas",
+        label: "Hoy aprendí",
         autogenerate: {
-          collection: "notes",
+          collection: "til",
         }
       }
-    ]
+    ],
+    // Scope the rail to the current top-level section: on a /til page only
+    // the TIL group renders, while Blog stays in the header tabs.
+    scope: "section"
   },
   homeLabel: "Inicio",
 });
